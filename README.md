@@ -82,13 +82,13 @@ public static async Task Example() {
 And sometimes you can't, just `#if` all the way through for those cases, still better than writing it yourself, right?
 
 ```csharp
-public static TimeSpan GetProcessUptime() {
+public static void Example() {
 #if NETFRAMEWORK
-	return DateTime.UtcNow.Subtract(StaticHelpers.ProcessStartTime.ToUniversalTime());
+	if (!StaticHelpers.IsRunningOnMono) {
+		ServicePointManager.ReusePort = true;
+	}
 #else
-	using Process process = Process.GetCurrentProcess();
-
-	return DateTime.UtcNow.Subtract(process.StartTime.ToUniversalTime());
+	ServicePointManager.ReusePort = true;
 #endif
 }
 ```
