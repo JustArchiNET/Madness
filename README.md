@@ -18,6 +18,24 @@ using JustArchiNET.Madness;
 
 Voila, madness has embraced your project.
 
+```csharp
+#if NETFRAMEWORK
+using JustArchiNET.Madness;
+#endif
+using System.IO;
+using System.Threading.Tasks;
+
+namespace ArchiSteamFarm.Web.Responses {
+	public static class Madness {
+		public static async Task Test() {
+			MemoryStream stream = new MemoryStream();
+
+			// Wow, this compiles now, but .NET Framework doesn't even know crap about `IAsyncDisposable`!
+			// HOW IS THIS POSSIBLE, IS THIS MADNESS ☠️
+			await stream.DisposeAsync().ConfigureAwait(false);
+		}
+	}
+}
 ---
 
 ## FAQ
@@ -44,20 +62,39 @@ using File = System.IO.File;
 using File = JustArchiNET.Madness.File;
 ```
 
-### And if I need both?
+### And if I need to combine both?
 
-Pick the one you use more often and ifdef the rest.
+Sometimes, in particular when you refer only to selected methods and properties, you can simply point to `Madness` for .NET Framework, and built-in classes for the rest.
 
 ```csharp
+#if NETFRAMEWORK
+using JustArchiNET.Madness;
+#else
 using File = System.IO.File;
+#endif
 
 public static async Task Example() {
-#if NETFRAMEWORK
-	await JustArchiNET.Madness.File.WriteAllTextAsync("example.txt", "example").ConfigureAwait(false);
-#else
+	// This will nicely use Madness for .NET Framework and System.IO.File for other targets, nice!
 	await File.WriteAllTextAsync("example.txt", "example").ConfigureAwait(false);
+}
+```
+
+And sometimes you can't, just `#if` all the way through for those cases, still better than writing it yourself, right?
+
+```csharp
+public static TimeSpan GetProcessUptime() {
+#if NETFRAMEWORK
+	return DateTime.UtcNow.Subtract(StaticHelpers.ProcessStartTime.ToUniversalTime());
+#else
+	using Process process = Process.GetCurrentProcess();
+
+	return DateTime.UtcNow.Subtract(process.StartTime.ToUniversalTime());
 #endif
 }
 ```
 
-You **can** in theory call `Madness` parts exclusively, so the above is rather a "perfect" example for not affecting your other targets negatively. If you don't mind, you can call madness on both.
+You **can** in theory call `Madness` parts exclusively (since it's based on .NET Standard, not Framework per-se), so the above is rather a "perfect" example for not affecting your other targets negatively. If you don't mind, you can call madness on both, but chances are you don't want to pollute your runtime performance more than necessary. Choose your poison.
+
+### All of this is cool, but I'm missing `XYZ` for my needs...
+
+Send a **[PR](https://github.com/JustArchiNET/Madness/pulls)**, `Madness` by default includes parts that I require myself in **[ArchiSteamFarm](https://github.com/JustArchiNET/ArchiSteamFarm)** project and as you can guess, one-man army like me can't rewrite what thousands of developers did in .NET just to satisfy .NET Framework on its last leg. For best results include exact classes, methods, properties and everything else, so source code requirements to make use of it are close to minimum and hopefully only `using` clause will be required to embrace the `Madness`!
