@@ -22,7 +22,7 @@
 using System;
 using JetBrains.Annotations;
 
-namespace Madness {
+namespace JustArchiNET.Madness {
 	[AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Constructor | AttributeTargets.Enum | AttributeTargets.Event | AttributeTargets.Field | AttributeTargets.Method | AttributeTargets.Module | AttributeTargets.Property | AttributeTargets.Struct, AllowMultiple = true, Inherited = false)]
 	[PublicAPI]
 	public sealed class SupportedOSPlatformAttribute : Attribute {

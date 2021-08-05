@@ -30,7 +30,7 @@ using System.Threading.Tasks;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Hosting;
 
-namespace Madness {
+namespace JustArchiNET.Madness {
 	[PublicAPI]
 	public static class StaticHelpers {
 		public static bool IsRunningOnMono => Type.GetType("Mono.Runtime") != null;

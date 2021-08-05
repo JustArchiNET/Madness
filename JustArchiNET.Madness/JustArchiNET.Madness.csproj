@@ -1,7 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-		<PackageId>JustArchiNET.Madness</PackageId>
+		<PackageIcon>Madness.png</PackageIcon>
+		<PackageReleaseNotes>https://github.com/JustArchiNET/Madness/releases</PackageReleaseNotes>
 		<Title>$(PackageId)</Title>
 	</PropertyGroup>
 
@@ -10,6 +11,10 @@
 		<PackageReference Include="JetBrains.Annotations" />
 		<PackageReference Include="Microsoft.AspNetCore.Hosting" />
 		<PackageReference Include="Microsoft.Bcl.AsyncInterfaces" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="..\resources\Madness.png" Pack="true" PackagePath="\"/>
 	</ItemGroup>
 
 </Project>
