@@ -25,13 +25,13 @@ using JustArchiNET.Madness;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace ArchiSteamFarm.Web.Responses {
-	public static class Madness {
-		public static async Task Test() {
+namespace ThisIsMadness {
+	public static class ThisIsSparta {
+		public static async Task Scream() {
 			MemoryStream stream = new MemoryStream();
 
-			// Wow, this compiles now, but .NET Framework doesn't even know crap about `IAsyncDisposable`!
-			// HOW IS THIS POSSIBLE, IS THIS MADNESS ☠️
+			// Wow, this compiles now, but .NET Framework doesn't can't into `IAsyncDisposable`!
+			// HOW IS THIS POSSIBLE, THIS IS MADNESS ☠️
 			await stream.DisposeAsync().ConfigureAwait(false);
 		}
 	}
