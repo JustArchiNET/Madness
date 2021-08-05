@@ -6,7 +6,7 @@ Madness embraces your project by including compatibility layer for selected APIs
 
 ## How to use it
 
-Add **[nuget package](https://www.nuget.org/packages/protobuf-net/)** to .NET Framework project of your choice. We support `netstandard2.0`, so .NET Framework 4.6.1 and newer.
+Add **[nuget package](https://www.nuget.org/packages/JustArchiNET.Madness)** to .NET Framework project of your choice. We support `netstandard2.0`, so .NET Framework 4.6.1 and newer.
 
 Afterwards, in all files where you require assistance, include the reference:
 
