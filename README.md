@@ -36,7 +36,7 @@ namespace ArchiSteamFarm.Web.Responses {
 		}
 	}
 }
----
+```
 
 ## FAQ
 
