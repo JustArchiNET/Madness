@@ -4,6 +4,12 @@ Madness embraces your project by including compatibility layer for selected APIs
 
 ---
 
+# WORK IN PROGRESS NOTE
+
+A lot of stuff is still work-in-progress, please bear with me while I'm adding documentation, CIs and everything else.
+
+---
+
 ## How to use it
 
 Add **[nuget package](https://www.nuget.org/packages/JustArchiNET.Madness)** to .NET Framework project of your choice. We support `netstandard2.0`, so .NET Framework 4.6.1 and newer.
