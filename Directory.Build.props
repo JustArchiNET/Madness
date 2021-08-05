@@ -1,0 +1,43 @@
+<Project>
+	<PropertyGroup>
+		<Version>0.1.0.0</Version>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<AnalysisMode>AllEnabledByDefault</AnalysisMode>
+		<Authors>JustArchi</Authors>
+		<Company>JustArchiNET</Company>
+		<Copyright>Copyright © 202021-$([System.DateTime]::UtcNow.Year) JustArchiNET</Copyright>
+		<Description>TODO.</Description>
+		<Deterministic>true</Deterministic>
+		<ErrorReport>none</ErrorReport>
+		<LangVersion>latest</LangVersion>
+		<ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+		<NeutralLanguage>en</NeutralLanguage>
+		<NoWarn>1591</NoWarn>
+		<Nullable>enable</Nullable>
+		<PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/JustArchiNET/Madness</PackageProjectUrl>
+		<RepositoryType>Git</RepositoryType>
+		<RepositoryUrl>https://github.com/JustArchiNET/Madness.git</RepositoryUrl>
+		<TargetFramework>netstandard2.0</TargetFramework>
+	</PropertyGroup>
+
+	<!-- Default configuration for release builds -->
+	<PropertyGroup Condition="'$(Configuration)' == 'Release'">
+		<AssemblyOriginatorKeyFile>../resources/Madness.snk.pub</AssemblyOriginatorKeyFile>
+		<DebugSymbols>false</DebugSymbols>
+		<DebugType>none</DebugType>
+		<PublicSign>true</PublicSign>
+		<SignAssembly>true</SignAssembly>
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+		<WarningsAsErrors />
+		<WarningsNotAsErrors>CS8002</WarningsNotAsErrors>
+	</PropertyGroup>
+
+	<!-- Private SNK signing -->
+	<PropertyGroup Condition="'$(Configuration)' == 'Release' AND EXISTS('resources/Madness.snk')">
+		<AssemblyOriginatorKeyFile>../resources/Madness.snk</AssemblyOriginatorKeyFile>
+		<PublicSign>false</PublicSign>
+	</PropertyGroup>
+</Project>
