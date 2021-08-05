@@ -32,7 +32,6 @@
 		<SignAssembly>true</SignAssembly>
 		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 		<WarningsAsErrors />
-		<WarningsNotAsErrors>CS8002</WarningsNotAsErrors>
 	</PropertyGroup>
 
 	<!-- Private SNK signing -->
