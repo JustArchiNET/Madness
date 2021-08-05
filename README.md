@@ -30,7 +30,7 @@ namespace ThisIsMadness {
 		public static async Task Scream() {
 			MemoryStream stream = new MemoryStream();
 
-			// Wow, this compiles now, but .NET Framework doesn't can't into `IAsyncDisposable`!
+			// Wow, this compiles now, but .NET Framework can't into `IAsyncDisposable`!
 			// HOW IS THIS POSSIBLE, THIS IS MADNESS ☠️
 			await stream.DisposeAsync().ConfigureAwait(false);
 		}
