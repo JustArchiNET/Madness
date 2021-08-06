@@ -1,0 +1,11 @@
+{
+  "extends": [
+    "config:base",
+    ":assignee(JustArchi)",
+    ":automergeBranch",
+    ":automergeDigest",
+    ":automergeMinor",
+    ":disableRateLimiting",
+    ":label(🤖 Automatic)"
+  ]
+}
