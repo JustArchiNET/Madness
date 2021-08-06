@@ -21,34 +21,18 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Net.WebSockets;
 using System.Security.Cryptography;
 using System.Threading;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
+using JustArchiNET.Madness.Internal;
 using Microsoft.AspNetCore.Hosting;
 
 namespace JustArchiNET.Madness {
 	[PublicAPI]
-	public static class StaticHelpers {
-		public static bool IsRunningOnMono => Type.GetType("Mono.Runtime") != null;
-
-		public static DateTime ProcessStartTime {
-			get {
-				if (IsRunningOnMono) {
-					return SavedProcessStartTime;
-				}
-
-				using Process process = Process.GetCurrentProcess();
-
-				return process.StartTime;
-			}
-		}
-
-		private static readonly DateTime SavedProcessStartTime = DateTime.UtcNow;
-
+	public static class StaticExtensions {
 		public static Task<byte[]> ComputeHashAsync(this HashAlgorithm hashAlgorithm, Stream inputStream) {
 			if (hashAlgorithm == null) {
 				throw new ArgumentNullException(nameof(hashAlgorithm));

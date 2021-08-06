@@ -19,19 +19,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
-using System.Threading.Tasks;
+using JetBrains.Annotations;
 
-namespace JustArchiNET.Madness {
-	internal sealed class AsyncDisposableWrapper : IAsyncDisposable {
-		private readonly IDisposable Disposable;
-
-		internal AsyncDisposableWrapper(IDisposable disposable) => Disposable = disposable ?? throw new ArgumentNullException(nameof(disposable));
-
-		public ValueTask DisposeAsync() {
-			Disposable.Dispose();
-
-			return default(ValueTask);
-		}
+namespace JustArchiNET.Madness.HashCode {
+	[PublicAPI]
+	public static class HashCode {
+		public static int Combine<T1, T2, T3>(T1 value1, T2 value2, T3 value3) => (value1, value2, value3).GetHashCode();
 	}
 }

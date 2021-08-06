@@ -23,7 +23,7 @@ using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-namespace JustArchiNET.Madness {
+namespace JustArchiNET.Madness.Internal {
 	internal static class PathInternalNetCore {
 		private const string ExtendedDevicePathPrefix = @"\\?\";
 		private const string UncExtendedPathPrefix = @"\\?\UNC\";

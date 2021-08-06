@@ -14,7 +14,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Include="..\resources\Madness.png" Pack="true" PackagePath="\"/>
+		<None Include="..\resources\Madness.png" Pack="true" PackagePath="\" />
 	</ItemGroup>
 
 </Project>

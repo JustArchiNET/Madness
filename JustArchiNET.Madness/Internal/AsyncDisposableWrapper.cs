@@ -19,34 +19,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
 using System.Threading.Tasks;
-using JetBrains.Annotations;
 
-namespace JustArchiNET.Madness {
-	[PublicAPI]
-	public static class File {
-		public static Task AppendAllTextAsync(string path, string contents) {
-			System.IO.File.AppendAllText(path, contents);
+namespace JustArchiNET.Madness.Internal {
+	internal sealed class AsyncDisposableWrapper : IAsyncDisposable {
+		private readonly IDisposable Disposable;
 
-			return Task.CompletedTask;
-		}
+		internal AsyncDisposableWrapper(IDisposable disposable) => Disposable = disposable ?? throw new ArgumentNullException(nameof(disposable));
 
-		public static void Move(string sourceFileName, string destFileName, bool overwrite) {
-			if (overwrite && System.IO.File.Exists(destFileName)) {
-				System.IO.File.Delete(destFileName);
-			}
+		public ValueTask DisposeAsync() {
+			Disposable.Dispose();
 
-			System.IO.File.Move(sourceFileName, destFileName);
-		}
-
-		public static Task<byte[]> ReadAllBytesAsync(string path) => Task.FromResult(System.IO.File.ReadAllBytes(path));
-
-		public static Task<string> ReadAllTextAsync(string path) => Task.FromResult(System.IO.File.ReadAllText(path));
-
-		public static Task WriteAllTextAsync(string path, string contents) {
-			System.IO.File.WriteAllText(path, contents);
-
-			return Task.CompletedTask;
+			return default(ValueTask);
 		}
 	}
 }
