@@ -1,0 +1,178 @@
+name: Madness-publish
+
+on: [push, pull_request]
+
+env:
+  MADNESS_PRIVATE_SNK: ${{ secrets.MADNESS_PRIVATE_SNK }}
+  CONFIGURATION: Release
+  DOTNET_CLI_TELEMETRY_OPTOUT: 1
+  DOTNET_NOLOGO: 1
+  DOTNET_SDK_VERSION: 5.0.x
+
+jobs:
+  publish:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2.3.4
+      with:
+        submodules: recursive
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1.8.1
+      with:
+        dotnet-version: ${{ env.DOTNET_SDK_VERSION }}
+
+    - name: Verify .NET Core
+      run: dotnet --info
+
+    - name: Prepare private key for signing on Unix
+      if: startsWith(matrix.os, 'macos-') || startsWith(matrix.os, 'ubuntu-')
+      shell: sh
+      run: |
+        set -eu
+
+        if [ -n "${MADNESS_PRIVATE_SNK-}" ]; then
+            echo "$MADNESS_PRIVATE_SNK" | base64 -d > "resources/Madness.snk"
+        fi
+
+    - name: Prepare private key for signing on Windows
+      if: startsWith(matrix.os, 'windows-')
+      shell: pwsh
+      run: |
+        Set-StrictMode -Version Latest
+        $ErrorActionPreference = 'Stop'
+        $ProgressPreference = 'SilentlyContinue'
+
+        if ((Test-Path env:MADNESS_PRIVATE_SNK) -and ($env:MADNESS_PRIVATE_SNK)) {
+            echo "$env:MADNESS_PRIVATE_SNK" > "resources\Madness.snk"
+
+            certutil -f -decode "resources\Madness.snk" "resources\Madness.snk"
+
+            if ($LastExitCode -ne 0) {
+                throw "Last command failed."
+            }
+        }
+
+    - name: Publish Madness
+      run: dotnet pack JustArchiNET.Madness -c "${{ env.CONFIGURATION }}" -o "out" -p:ContinuousIntegrationBuild=true --nologo
+
+    - name: Rename Madness on Unix
+      if: startsWith(matrix.os, 'macos-') || startsWith(matrix.os, 'ubuntu-')
+      shell: sh
+      run: |
+        set -eu
+
+        mv out/JustArchiNET.Madness.*.nupkg "out/JustArchiNET.Madness.nupkg"
+
+    - name: Rename Madness on Windows
+      if: startsWith(matrix.os, 'windows-')
+      shell: pwsh
+      run: |
+        Set-StrictMode -Version Latest
+        $ErrorActionPreference = 'Stop'
+        $ProgressPreference = 'SilentlyContinue'
+
+        Move-Item -Path out\JustArchiNET.Madness.*.nupkg "out\JustArchiNET.Madness.nupkg"
+
+    - name: Upload Madness
+      continue-on-error: true
+      uses: actions/upload-artifact@v2.2.4
+      with:
+        name: ${{ matrix.os }}_Madness
+        path: out/JustArchiNET.Madness.nupkg
+
+  release:
+    if: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags/') }}
+    needs: publish
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2.3.4
+      with:
+        submodules: recursive
+
+    - name: Download Madness artifact from windows-latest
+      uses: actions/download-artifact@v2.0.10
+      with:
+        name: windows-latest_Madness
+        path: out
+
+    - name: Import GPG key for signing
+      uses: crazy-max/ghaction-import-gpg@v3.1.0
+      with:
+        gpg-private-key: ${{ secrets.ARCHIBOT_GPG_PRIVATE_KEY }}
+
+    - name: Generate SHA-512 checksums and signature
+      shell: sh
+      run: |
+        set -eu
+
+        (
+            cd "out"
+
+            sha512sum *.nupkg > SHA512SUMS
+            gpg -a -b -o SHA512SUMS.sign SHA512SUMS
+        )
+
+    - name: Upload SHA512SUMS
+      continue-on-error: true
+      uses: actions/upload-artifact@v2.2.4
+      with:
+        name: SHA512SUMS
+        path: out/SHA512SUMS
+
+    - name: Upload SHA512SUMS.sign
+      continue-on-error: true
+      uses: actions/upload-artifact@v2.2.4
+      with:
+        name: SHA512SUMS.sign
+        path: out/SHA512SUMS.sign
+
+    - name: Create Madness GitHub release
+      id: github_release
+      uses: actions/create-release@v1.1.4
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Madness V${{ github.ref }}
+        body_path: .github/RELEASE_TEMPLATE.md
+        prerelease: true
+
+    - name: Upload Madness to GitHub release
+      uses: actions/upload-release-asset@v1.0.2
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.github_release.outputs.upload_url }}
+        asset_path: out/JustArchiNET.Madness.nupkg
+        asset_name: JustArchiNET.Madness.nupkg
+        asset_content_type: application/zip
+
+    - name: Upload SHA512SUMS to GitHub release
+      uses: actions/upload-release-asset@v1.0.2
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.github_release.outputs.upload_url }}
+        asset_path: out/SHA512SUMS
+        asset_name: SHA512SUMS
+        asset_content_type: text/plain
+
+    - name: Upload SHA512SUMS.sign to GitHub release
+      uses: actions/upload-release-asset@v1.0.2
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.github_release.outputs.upload_url }}
+        asset_path: out/SHA512SUMS.sign
+        asset_name: SHA512SUMS.sign
+        asset_content_type: text/plain
