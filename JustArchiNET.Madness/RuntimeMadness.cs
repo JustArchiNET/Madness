@@ -1,4 +1,4 @@
-//                             _         __  __
+﻿//                             _         __  __
 //  ___  ___   ___  _ __    __| |  __ _ |  \/  |
 // / __|/ __| / _ \| '_ \  / _` | / _` || |\/| |
 // \__ \\__ \|  __/| | | || (_| || (_| || |  | |
@@ -19,11 +19,27 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
+using System.Diagnostics;
 using JetBrains.Annotations;
 
-namespace JustArchiNET.Madness.HashCode {
+namespace JustArchiNET.Madness {
 	[PublicAPI]
-	public static class HashCode {
-		public static int Combine<T1, T2, T3>(T1 value1, T2 value2, T3 value3) => (value1, value2, value3).GetHashCode();
+	public static class RuntimeMadness {
+		public static bool IsRunningOnMono => Type.GetType("Mono.Runtime") != null;
+
+		public static DateTime ProcessStartTime {
+			get {
+				if (IsRunningOnMono) {
+					return SavedProcessStartTime;
+				}
+
+				using Process process = Process.GetCurrentProcess();
+
+				return process.StartTime;
+			}
+		}
+
+		private static readonly DateTime SavedProcessStartTime = DateTime.UtcNow;
 	}
 }

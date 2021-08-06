@@ -24,7 +24,7 @@ using System.Text;
 using JetBrains.Annotations;
 using JustArchiNET.Madness.Internal;
 
-namespace JustArchiNET.Madness.Path {
+namespace JustArchiNET.Madness.PathMadness {
 	[PublicAPI]
 	public static class Path {
 		public static string GetRelativePath(string relativeTo, string path) {
