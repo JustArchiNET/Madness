@@ -2,7 +2,8 @@
 	<ItemGroup>
 		<PackageVersion Include="JetBrains.Annotations" Version="2021.2.0" />
 		<PackageVersion Include="IndexRange" Version="1.0.0" />
-		<PackageVersion Include="Microsoft.AspNetCore.Hosting" Version="2.2.7" />
-		<PackageVersion Include="Microsoft.Bcl.AsyncInterfaces" Version="5.0.0" />
+		<PackageVersion Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="1.0.0" />
+		<PackageVersion Include="Microsoft.Bcl.AsyncInterfaces" Version="1.0.0" />
+		<PackageVersion Include="System.Memory" Version="4.5.0" />
 	</ItemGroup>
 </Project>

@@ -8,9 +8,10 @@
 
 	<ItemGroup>
 		<PackageReference Include="IndexRange" />
-		<PackageReference Include="JetBrains.Annotations" />
-		<PackageReference Include="Microsoft.AspNetCore.Hosting" />
+		<PackageReference Include="JetBrains.Annotations" PrivateAssets="All" />
+		<PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" />
 		<PackageReference Include="Microsoft.Bcl.AsyncInterfaces" />
+		<PackageReference Include="System.Memory" />
 	</ItemGroup>
 
 	<ItemGroup>
