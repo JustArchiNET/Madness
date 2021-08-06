@@ -176,3 +176,6 @@ jobs:
         asset_path: out/SHA512SUMS.sign
         asset_name: SHA512SUMS.sign
         asset_content_type: text/plain
+
+    - name: Create Madness NuGet release
+      run: dotnet nuget push "out/JustArchiNET.Madness.nupkg" -k "${{ secrets.MADNESS_NUGET_API_KEY }}" -s "https://api.nuget.org/v3/index.json"
