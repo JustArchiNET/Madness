@@ -26,6 +26,13 @@
 			<Pack>true</Pack>
 			<PackagePath />
 		</Content>
+		<Content Include="..\resources\ATTRIBUTION.md">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+			<Link>%(RecursiveDir)%(Filename)%(Extension)</Link>
+			<Pack>true</Pack>
+			<PackagePath />
+		</Content>
 		<Content Include="..\resources\Madness.png">
 			<Link>%(RecursiveDir)%(Filename)%(Extension)</Link>
 			<Pack>true</Pack>
