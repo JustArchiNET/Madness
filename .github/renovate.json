@@ -7,12 +7,14 @@
   ],
   "packageRules": [
     {
+      "matchManagers": ["nuget"],
       "matchPackagePatterns": [
         "*"
       ],
       "rangeStrategy": "widen"
     },
     {
+      "matchManagers": ["nuget"],
       "matchPackageNames": [
         "JetBrains.Annotations"
       ],
