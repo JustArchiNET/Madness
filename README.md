@@ -1,28 +1,34 @@
-# ☠️ Madness 
+# ☠️ Madness
 
 Madness embraces your project by including compatibility layer for selected APIs normally not available on .NET Framework target.
 
 ---
 
-# WORK IN PROGRESS NOTE
+## Installation
 
-A lot of stuff is still work-in-progress, please bear with me while I'm adding documentation, CIs and everything else.
+We support `netstandard2.0`, so .NET Framework 4.6.1 and newer.
 
----
-
-## How to use it
-
-Add **[nuget package](https://www.nuget.org/packages/JustArchiNET.Madness)** to .NET Framework project of your choice. We support `netstandard2.0`, so .NET Framework 4.6.1 and newer.
-
-Afterwards, in all files where you require assistance, include the reference:
-
-```csharp
-#if NETFRAMEWORK
-using JustArchiNET.Madness;
-#endif
+```
+dotnet add package JustArchiNET.Madness
 ```
 
-Voila, madness has embraced your project.
+If you're targetting multiple frameworks out of which only one is .NET Framework (e.g. `net5.0` and `net48`), it's *usually* a good idea to not pull it for the others.
+
+```csproj
+<ItemGroup Condition="'$(TargetFramework)' == 'net48'">
+	<PackageReference Include="JustArchiNET.Madness" />
+</ItemGroup>
+```
+
+## Usage
+
+Usage depends on where you need to go *mad*. It'll require from you to add appropriate `using` clause in the affected source file.
+
+### Static extensions
+
+Static extensions include useful stuff that you'll usually stumble upon with newer language syntax and/or .NET platform.
+
+Examples include native deconstruction (for all types), `DisposeAsync()` as well as support for `await using { }` blocks, or methods working with `ReadOnlyMemory`.
 
 ```csharp
 #if NETFRAMEWORK
@@ -44,63 +50,152 @@ namespace ThisIsMadness {
 }
 ```
 
-## FAQ
+### File extensions
 
-### Do I need that `#if NETFRAMEWORK` clause?
-
-If you're building only for .NET Framework exclusively, no, it's not required and actually useless for you.
-
-However, if you're targetting multiple frameworks out of which only one is .NET Framework (e.g. `net5.0` and `net48`), then `#if` clause guarantees that madness won't embrace your other targets.
-
-You don't want madness to embrace your other targets, do you?
-
-### Including madness embraced stuff I didn't want to, like `File` or `Path`, what to do?
-
-If you don't require madness in those aspects, tell C# compiler to use built-in classes in those places.
+File extensions include mostly `Async` overloads for selected methods.
 
 ```csharp
-using File = System.IO.File;
+#if NETFRAMEWORK
+using File = JustArchiNET.Madness.FileMadness.File;
+#else
+using System.IO;
+#endif
+using System.Threading.Tasks;
+
+namespace ThisIsMadness {
+	public static class ThisIsSparta {
+		public static async Task Scream() {
+			// This compiles for both .NET Framework and other targets without more #if clauses, nice
+			await File.WriteAllTextAsync("example.txt", "example").ConfigureAwait(false);
+		}
+	}
+}
 ```
 
-### And what if I do?
+### Path extensions
+
+Path extensions include full backported implementation of `Path.GetRelativePath()`, including more complex scenarios than below.
 
 ```csharp
-using File = JustArchiNET.Madness.File;
+#if NETFRAMEWORK
+using Path = JustArchiNET.Madness.PathMadness.Path;
+#else
+using System.IO;
+#endif
+
+namespace ThisIsMadness {
+	public static class ThisIsSparta {
+		public static void Scream() {
+			// This compiles for both .NET Framework and other targets without more #if clauses, nice
+			string example = Path.GetRelativePath("/tmp", "/tmp/example/example.txt");
+		}
+	}
+}
 ```
 
-### And if I need to combine both?
+### HashCode extensions
 
-Sometimes, in particular when you refer only to selected methods and properties, you can simply point to `Madness` for .NET Framework, and built-in classes for the rest.
+HashCode extensions include implementation of `Combine<T1, T2...>()`.
+
+```csharp
+#if NETFRAMEWORK
+using HashCode = JustArchiNET.Madness.HashCodeMadness.HashCode;
+#else
+using System;
+#endif
+
+namespace ThisIsMadness {
+	public static class ThisIsSparta {
+		public static void Scream() {
+			int example = HashCode.Combine("test", "test2", "test3");
+		}
+	}
+}
+```
+
+### Other
+
+Root `JustArchiNET.Madness` namespace also includes selected classes normally not available on .NET Framework, for example `SupportedOSPlatform`.
 
 ```csharp
 #if NETFRAMEWORK
 using JustArchiNET.Madness;
 #else
-using File = System.IO.File;
+using System.Runtime.Versioning;
 #endif
 
-public static async Task Example() {
-	// This will nicely use Madness for .NET Framework and System.IO.File for other targets, nice!
-	await File.WriteAllTextAsync("example.txt", "example").ConfigureAwait(false);
+namespace ThisIsMadness {
+	public static class ThisIsSparta {
+		[SupportedOSPlatform("Windows")]
+		public static void Scream() {
+			// Obviously this doesn't have the effect you expect from your IDE, but at least you don't have to hide it behind #if
+			// Besides, if you're targetting something else like net5.0 then it'll work as designed warning you about calls from other platforms.
+		}
+	}
 }
 ```
 
-And sometimes you can't, just `#if` all the way through for those cases, still better than writing it yourself, right?
+---
+
+## FAQ
+
+### Do I need that `#if NETFRAMEWORK` clause?
+
+If you're building only for .NET Framework exclusively, no, it's not required and actually quite useless code verbosity for you.
+
+However, if you're targetting multiple frameworks out of which only one is .NET Framework (e.g. `net5.0` and `net48`), then `#if` clause guarantees that madness won't embrace your other targets.
+
+You don't want madness to embrace your other targets, do you?
+
+It also becomes mandatory if you're building for multiple targets and you've followed our advice and conditionally including `<PackageReference>` only for .NET Framework. Other targets won't know about this namespace, so hiding the usage behind `#if` becomes obligatory. On the other hand, it's perfect, because it ensures you don't use our `using` where you don't intend to.
+
+### And what happens if I use Madness for other frameworks?
+
+Nothing bad, if you ignore increased likelihood for compatibility issues, degraded performance, potential source code conflicts with original classes and all other mess that you really don't want to get into. Don't go deeper than you have to. We've been there before you, it's not pleasant.
+
+### What if I need to combine Madness parts with .NET ones?
+
+We've hidden our static classes deeper in our namespace for a reason - to decrease chance that you run into this issue. Usually it's enough for one `#if` on the top, as in our **[file extensions](#file-extensions) example above.
+
+However, sometimes you can't help it, and you'll have to `#if` all the way through for those cases, still better than writing it yourself, right?
 
 ```csharp
-public static void Example() {
 #if NETFRAMEWORK
-	if (!StaticHelpers.IsRunningOnMono) {
-		ServicePointManager.ReusePort = true;
-	}
+using JustArchiNET.Madness;
 #else
-	ServicePointManager.ReusePort = true;
+using System.Diagnostics;
 #endif
+using System;
+
+namespace ThisIsMadness {
+	public static class ThisIsSparta {
+		internal static DateTime ProcessStartTime {
+#if NETFRAMEWORK
+			get => RuntimeMadness.ProcessStartTime.ToUniversalTime();
+#else
+			get {
+				using Process process = Process.GetCurrentProcess();
+
+				return process.StartTime.ToUniversalTime();
+			}
+#endif
+		}
+	}
 }
 ```
 
-You **can** in theory call `Madness` parts exclusively (since it's based on .NET Standard, not Framework per-se), so the above is rather a "perfect" example for not affecting your other targets negatively. If you don't mind, you can call madness on both, but chances are you don't want to pollute your runtime performance more than necessary. Choose your poison.
+If all else fails, you **can** in theory call `Madness` parts exclusively (since it's based on .NET Standard, not Framework per-se), so the above is rather a "perfect" example for not affecting your other targets negatively. You have to decide yourself between affecting code readability or compatibility and performance. Choose your poison. We recommend to keep `Madness` contained in .NET Framework exclusively, like in all our examples.
 
 ### All of this is cool, but I'm missing `XYZ` for my needs...
 
-Send a **[PR](https://github.com/JustArchiNET/Madness/pulls)**, `Madness` by default includes parts that I require myself in **[ArchiSteamFarm](https://github.com/JustArchiNET/ArchiSteamFarm)** project and as you can guess, one-man army like me can't rewrite what thousands of developers did in .NET just to satisfy .NET Framework on its last leg. For best results include exact classes, methods, properties and everything else, so source code requirements to make use of it are close to minimum and hopefully only `using` clause will be required to embrace the `Madness`!
+Send a **[PR](https://github.com/JustArchiNET/Madness/pulls)**, `Madness` by default includes parts that we require ourselves in **[ArchiSteamFarm](https://github.com/JustArchiNET/ArchiSteamFarm)** project and as you can guess, we can't rewrite everything that was made by thousands of developers in newer versions of .NET just to satisfy .NET Framework on its last leg.
+
+For best results you should include exact classes, methods, properties and everything else, so source code requirements to make use of it are close to minimum and hopefully only initial `using` clause will be required to embrace the `Madness`.
+
+We're also open for so-called "proxy" features in static classes that we already provide, to decrease burden of putting `#if` clauses everywhere. We've included all of those we require ourselves, such as:
+
+```csharp
+public static bool Exists(string? path) => System.IO.File.Exists(path);
+```
+
+Feel free to send a PR for those as well. If it helps you in any way to increase code quality and sanity for your original projects, `Madness` doesn't mind to take a hit for justified reason ☠️.
