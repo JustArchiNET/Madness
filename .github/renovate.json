@@ -8,17 +8,13 @@
   "packageRules": [
     {
       "matchManagers": ["nuget"],
-      "matchPackagePatterns": [
-        "*"
+      "matchPackageNames": [
+        "IndexRange",
+        "Microsoft.AspNetCore.Hosting.Abstractions",
+        "Microsoft.Bcl.AsyncInterfaces",
+        "System.Memory"
       ],
       "enabled": false
-    },
-    {
-      "matchManagers": ["nuget"],
-      "matchPackageNames": [
-        "JetBrains.Annotations"
-      ],
-      "rangeStrategy": "pin"
     }
   ]
 }
