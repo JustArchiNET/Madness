@@ -22,7 +22,7 @@ If you're targetting multiple frameworks out of which only one is .NET Framework
 
 ## Usage
 
-Usage depends on where you need to go *mad*. It'll require from you to add appropriate `using` clause in the affected source file.
+Usage depends on where you need to go *mad*. It'll require from you to add appropriate `using` clause in the affected source files.
 
 ### Static extensions
 
