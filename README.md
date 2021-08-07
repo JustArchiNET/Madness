@@ -1,5 +1,20 @@
 # ☠️ Madness
 
+[![Build status (GitHub)](https://img.shields.io/github/workflow/status/JustArchiNET/Madness/Madness-ci/main?label=GitHub&logo=github&cacheSeconds=600)](https://github.com/JustArchiNET/Madness/actions?query=workflow%3AMadness-ci+branch%3Amain)
+[![Github last commit date](https://img.shields.io/github/last-commit/JustArchiNET/Madness.svg?label=Updated&logo=github&cacheSeconds=600)](https://github.com/JustArchiNET/Madness/commits)
+[![Total downloads](https://img.shields.io/github/downloads/JustArchiNET/Madness/total.svg?label=Downloads&logo=github&cacheSeconds=600)](https://github.com/JustArchiNET/Madness/releases)
+[![Total downloads](https://img.shields.io/nuget/dt/JustArchiNET.Madness.svg?label=Downloads&logo=nuget&cacheSeconds=600)](https://www.nuget.org/packages/JustArchiNET.Madness)
+[![License](https://img.shields.io/github/license/JustArchiNET/Madness.svg?label=License&logo=apache&cacheSeconds=2592000)](https://github.com/JustArchiNET/Madness/blob/main/LICENSE-2.0.txt)
+
+[![GitHub sponsor](https://img.shields.io/badge/GitHub-sponsor-ea4aaa.svg?logo=github-sponsors)](https://github.com/sponsors/JustArchi)
+[![Patreon support](https://img.shields.io/badge/Patreon-support-f96854.svg?logo=patreon)](https://www.patreon.com/JustArchi)
+
+[![Crypto donate](https://img.shields.io/badge/Crypto-donate-f7931a.svg?logo=bitcoin)](https://commerce.coinbase.com/checkout/0c23b844-c51b-45f4-9135-8db7c6fcf98e)
+[![PayPal.me donate](https://img.shields.io/badge/PayPal.me-donate-00457c.svg?logo=paypal)](https://paypal.me/JustArchi)
+[![PayPal donate](https://img.shields.io/badge/PayPal-donate-00457c.svg?logo=paypal)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HD2P2P3WGS5Y4)
+[![Revolut donate](https://img.shields.io/badge/Revolut-donate-0075eb.svg?logo=revolut)](https://pay.revolut.com/profile/ukaszyxm)
+[![Steam donate](https://img.shields.io/badge/Steam-donate-000000.svg?logo=steam)](https://steamcommunity.com/tradeoffer/new/?partner=46697991&token=0ix2Ruv_)
+
 Madness embraces your project by including compatibility layer for selected APIs normally not available on .NET Framework target.
 
 ---
