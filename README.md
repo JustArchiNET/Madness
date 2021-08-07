@@ -74,7 +74,7 @@ namespace ThisIsMadness {
 
 ### Path extensions
 
-Path extensions include full backported implementation of `Path.GetRelativePath()`, including more complex scenarios than below.
+Path extensions include fully backported implementation of `Path.GetRelativePath()`, including more complex scenarios than below.
 
 ```csharp
 #if NETFRAMEWORK
