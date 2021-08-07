@@ -151,11 +151,11 @@ It also becomes mandatory if you're building for multiple targets and you've fol
 
 ### And what happens if I use Madness for other frameworks?
 
-Nothing bad, if you ignore increased likelihood for compatibility issues, degraded performance, potential source code conflicts with original classes and all other mess that you really don't want to get into. Don't go deeper than you have to. We've been there before you, it's not pleasant.
+Nothing bad, if you ignore increased likelihood for compatibility issues, degraded performance, potential source code conflicts with original classes and all other mess that you really don't want to get into. Don't go deeper than you have to. We've been there before you, it's not pleasant. It's best to keep it sane for other targets, but we don't judge you, `Madness` supports `netstandard2.0` and above, include it wherever you want to.
 
 ### What if I need to combine Madness parts with .NET ones?
 
-We've hidden our static classes deeper in our namespace for a reason - to decrease chance that you run into this issue. Usually it's enough for one `#if` on the top, as in our **[file extensions](#file-extensions) example above.
+We've hidden our static classes deeper in our namespace for a reason - to decrease chance that you run into this issue. Usually it's enough for one `#if` on the top, as in our **[file extensions](#file-extensions)** example above.
 
 However, sometimes you can't help it, and you'll have to `#if` all the way through for those cases, still better than writing it yourself, right?
 
