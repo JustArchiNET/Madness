@@ -4,5 +4,19 @@
     ":assignee(JustArchi)",
     ":disableRateLimiting",
     ":label(🤖 Automatic)"
+  ],
+  "packageRules": [
+    {
+      "matchPackagePatterns": [
+        "*"
+      ],
+      "rangeStrategy": "widen"
+    },
+    {
+      "matchPackageNames": [
+        "JetBrains.Annotations"
+      ],
+      "rangeStrategy": "pin"
+    }
   ]
 }
