@@ -232,3 +232,9 @@ public static bool Exists(string? path) => System.IO.File.Exists(path);
 ```
 
 Feel free to send a PR for those as well. If it helps you in any way to increase code quality and sanity for your original projects, `Madness` doesn't mind to take a hit for justified reason ☠️.
+
+---
+
+## Attribution
+
+Skull icon made by **[Freepik](https://www.freepik.com)** from **[Flaticon](https://www.flaticon.com)**.
