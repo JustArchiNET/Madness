@@ -65,6 +65,24 @@ namespace ThisIsMadness {
 }
 ```
 
+### IndexRange
+
+This library includes a dependency on awesome **[IndexRange](https://www.nuget.org/packages/IndexRange)** project, which allows you to use `System.Index` and `System.Range` on .NET Framework.
+
+```csharp
+namespace ThisIsMadness {
+	public static class ThisIsSparta {
+		public static void Scream() {
+			const string text = "Madness?";
+
+			string? subString = text[1..^1];
+		}
+	}
+}
+```
+
+Check **[IndexRange](https://github.com/bgrainger/IndexRange)** project for more details.
+
 ### File extensions
 
 File extensions include mostly `Async` overloads for selected methods.
