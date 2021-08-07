@@ -147,7 +147,7 @@ However, if you're targetting multiple frameworks out of which only one is .NET 
 
 You don't want madness to embrace your other targets, do you?
 
-It also becomes mandatory if you're building for multiple targets and you've followed our advice and conditionally including `<PackageReference>` only for .NET Framework. Other targets won't know about this namespace, so hiding the usage behind `#if` becomes obligatory. On the other hand, it's perfect, because it ensures you don't use our `using` where you don't intend to.
+It also becomes mandatory if you're building for multiple targets and you've followed our advice and conditionally included `<PackageReference>` only for .NET Framework. Other targets won't know about this namespace, so hiding the usage behind `#if` becomes obligatory. On the other hand, it's perfect, because it ensures you don't use our `using` where you don't intend to.
 
 ### And what happens if I use Madness for other frameworks?
 
