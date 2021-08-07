@@ -22,6 +22,7 @@
 		<PackageProjectUrl>https://github.com/JustArchiNET/Madness</PackageProjectUrl>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageReleaseNotes>https://github.com/JustArchiNET/Madness/releases</PackageReleaseNotes>
+		<PackageTags>.NET;Framework;Standard;Compatibility;API</PackageTags>
 		<RepositoryBranch>main</RepositoryBranch>
 		<RepositoryType>Git</RepositoryType>
 		<RepositoryUrl>https://github.com/JustArchiNET/Madness.git</RepositoryUrl>
