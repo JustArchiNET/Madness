@@ -1,6 +1,6 @@
 ### Notice
 
-**Pre-releases are experimental versions that often contain unpatched bugs, work-in-progress features or rewritten implementations. If you don't consider yourself advanced user, please download **[latest stable release](https://github.com/JustArchiNET/Madness/releases/latest)** instead.
+**Pre-releases are experimental versions that often contain unpatched bugs, work-in-progress features or rewritten implementations. If you don't consider yourself advanced user, please download **[latest stable release](https://github.com/JustArchiNET/Madness/releases/latest)** instead.**
 
 ---
 
