@@ -1,9 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-		<PackageIcon>Madness.png</PackageIcon>
-		<PackageReleaseNotes>https://github.com/JustArchiNET/Madness/releases</PackageReleaseNotes>
-		<Title>$(PackageId)</Title>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -15,7 +12,24 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Include="..\resources\Madness.png" Pack="true" PackagePath="\" />
+		<Content Include="..\LICENSE-2.0.txt">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+			<Link>%(RecursiveDir)%(Filename)%(Extension)</Link>
+			<Pack>true</Pack>
+			<PackagePath />
+		</Content>
+		<Content Include="..\README.md">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+			<Link>%(RecursiveDir)%(Filename)%(Extension)</Link>
+			<Pack>true</Pack>
+			<PackagePath />
+		</Content>
+		<Content Include="..\resources\Madness.png">
+			<Link>%(RecursiveDir)%(Filename)%(Extension)</Link>
+			<Pack>true</Pack>
+			<PackagePath />
+		</Content>
 	</ItemGroup>
-
 </Project>

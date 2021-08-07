@@ -17,8 +17,12 @@
 		<NeutralLanguage>en</NeutralLanguage>
 		<NoWarn>1591</NoWarn>
 		<Nullable>enable</Nullable>
+		<PackageIcon>Madness.png</PackageIcon>
 		<PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
 		<PackageProjectUrl>https://github.com/JustArchiNET/Madness</PackageProjectUrl>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageReleaseNotes>https://github.com/JustArchiNET/Madness/releases</PackageReleaseNotes>
+		<RepositoryBranch>main</RepositoryBranch>
 		<RepositoryType>Git</RepositoryType>
 		<RepositoryUrl>https://github.com/JustArchiNET/Madness.git</RepositoryUrl>
 		<TargetFramework>netstandard2.0</TargetFramework>
