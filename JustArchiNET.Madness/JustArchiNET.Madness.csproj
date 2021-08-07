@@ -8,8 +8,23 @@
 		<PackageReference Include="JetBrains.Annotations" PrivateAssets="All" />
 		<PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" />
 		<PackageReference Include="Microsoft.Bcl.AsyncInterfaces" />
+		<PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
 		<PackageReference Include="System.Memory" />
 	</ItemGroup>
+
+	<!-- SourceLink support -->
+	<PropertyGroup>
+		<!-- TODO: Shouldn't be needed anymore when IncludeSymbols happens -->
+		<DebugType>embedded</DebugType>
+
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+
+		<!-- TODO: Disabled due to https://github.com/NuGet/Home/issues/10791
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		-->
+	</PropertyGroup>
 
 	<ItemGroup>
 		<Content Include="..\LICENSE-2.0.txt">
