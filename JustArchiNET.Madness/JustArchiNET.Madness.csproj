@@ -5,10 +5,10 @@
 
 	<ItemGroup>
 		<PackageReference Include="IndexRange" />
-		<PackageReference Include="JetBrains.Annotations" PrivateAssets="All" />
+		<PackageReference Include="JetBrains.Annotations" PrivateAssets="all" />
 		<PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" />
 		<PackageReference Include="Microsoft.Bcl.AsyncInterfaces" />
-		<PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
+		<PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="all" />
 		<PackageReference Include="System.Memory" />
 	</ItemGroup>
 
