@@ -24,10 +24,28 @@ using System.Diagnostics;
 using JetBrains.Annotations;
 
 namespace JustArchiNET.Madness {
+	/// <summary>
+	///     Static Madness-specific class used for basic runtime-related operations.
+	/// </summary>
 	[PublicAPI]
 	public static class RuntimeMadness {
+		/// <summary>
+		///     Boolean value that can be used for determining whether or not the assembly is being executed by the Mono runtime.
+		/// </summary>
+		/// <remarks>
+		///     This is implemented based on the existence of Mono.Runtime type, which might result in false-positives if there is any dependency declaring that type.
+		/// </remarks>
+		/// <returns>
+		///     True if the assembly is executed on Mono runtime (as opposed to Windows-specific .NET Framework one), otherwise false.
+		/// </returns>
 		public static bool IsRunningOnMono => Type.GetType("Mono.Runtime") != null;
 
+		/// <summary>
+		///     <see cref="Process.StartTime" /> of current process, patched for compatibility with Mono.
+		/// </summary>
+		/// <returns>
+		///     <see cref="DateTime" /> containing current process starting time.
+		/// </returns>
 		public static DateTime ProcessStartTime {
 			get {
 				if (IsRunningOnMono) {

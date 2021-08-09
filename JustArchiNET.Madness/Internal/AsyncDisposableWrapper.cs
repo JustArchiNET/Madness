@@ -20,12 +20,14 @@
 // limitations under the License.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 
 namespace JustArchiNET.Madness.Internal {
 	internal sealed class AsyncDisposableWrapper : IAsyncDisposable {
 		private readonly IDisposable Disposable;
 
+		[SuppressMessage("ReSharper", "UnusedParameter.Local")]
 		internal AsyncDisposableWrapper(IDisposable disposable, bool _) => Disposable = disposable ?? throw new ArgumentNullException(nameof(disposable));
 
 		public ValueTask DisposeAsync() {
