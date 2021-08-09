@@ -105,6 +105,26 @@ namespace ThisIsMadness {
 }
 ```
 
+### HashCode extensions
+
+HashCode extensions include implementation of `Combine<T1, T2...>()`.
+
+```csharp
+#if NETFRAMEWORK
+using HashCode = JustArchiNET.Madness.HashCodeMadness.HashCode;
+#else
+using System;
+#endif
+
+namespace ThisIsMadness {
+	public static class ThisIsSparta {
+		public static void Scream() {
+			int example = HashCode.Combine("test", "test2", "test3");
+		}
+	}
+}
+```
+
 ### Path extensions
 
 Path extensions include fully backported implementation of `Path.GetRelativePath()`, including more complex scenarios than below.
@@ -126,21 +146,26 @@ namespace ThisIsMadness {
 }
 ```
 
-### HashCode extensions
+### OperatingSystem extensions
 
-HashCode extensions include implementation of `Combine<T1, T2...>()`.
+OperatingSystem extensions include implementation of `IsFreeBSD()`, `IsLinux()`, `IsMacOS()`, `IsOSPlatform()`, `IsWindows()` and alike.
+
+Those functions *should* be compatible with platforms supported by **[Mono](https://www.mono-project.com/docs/about-mono/supported-platforms)**, for checking against Mono-specific platforms use `IsOSPlatform(string platform)`, the exact names to check against can be found **[here](https://github.com/mono/mono/blob/main/mcs/class/corlib/System.Runtime.InteropServices.RuntimeInformation/RuntimeInformation.cs)**.
 
 ```csharp
 #if NETFRAMEWORK
-using HashCode = JustArchiNET.Madness.HashCodeMadness.HashCode;
-#else
-using System;
+using OperatingSystem = JustArchiNET.Madness.OperatingSystemMadness.OperatingSystem;
 #endif
+using System;
 
 namespace ThisIsMadness {
 	public static class ThisIsSparta {
 		public static void Scream() {
-			int example = HashCode.Combine("test", "test2", "test3");
+			if (OperatingSystem.IsWindows()) {
+				// Windows logic
+			} else {
+				// Non-windows logic
+			}
 		}
 	}
 }
