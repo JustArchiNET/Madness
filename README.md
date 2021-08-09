@@ -150,7 +150,7 @@ namespace ThisIsMadness {
 
 OperatingSystem extensions include implementation of `IsFreeBSD()`, `IsLinux()`, `IsMacOS()`, `IsOSPlatform()`, `IsWindows()` and alike.
 
-Those functions *should* be compatible with platforms supported by **[Mono](https://www.mono-project.com/docs/about-mono/supported-platforms)**, for checking against Mono-specific platforms use `IsOSPlatform(string platform)`, the exact names to check against can be found **[here](https://github.com/mono/mono/blob/main/mcs/class/corlib/System.Runtime.InteropServices.RuntimeInformation/RuntimeInformation.cs)**.
+Those functions *should* be compatible with platforms supported by **[Mono](https://www.mono-project.com/docs/about-mono/supported-platforms)**, for checking against Mono-specific platforms use `IsOSPlatform(string platform)`, the exact names to check against can be found **[here](https://github.com/mono/mono/blob/a65055dbdf280004c56036a5d6dde6bec9e42436/mcs/class/corlib/System.Runtime.InteropServices.RuntimeInformation/RuntimeInformation.cs#L82-L121)**.
 
 ```csharp
 #if NETFRAMEWORK
