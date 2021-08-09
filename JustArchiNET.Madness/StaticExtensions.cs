@@ -41,14 +41,40 @@ namespace JustArchiNET.Madness {
 			return Task.FromResult(hashAlgorithm.ComputeHash(inputStream));
 		}
 
-		public static IAsyncDisposable ConfigureAwait(this IDisposable source, bool _) {
+		public static IAsyncDisposable ConfigureAwait(this IDisposable source, bool continueOnCapturedContext) {
 			if (source == null) {
 				throw new ArgumentNullException(nameof(source));
 			}
 
-			return new AsyncDisposableWrapper(source);
+			return new AsyncDisposableWrapper(source, continueOnCapturedContext);
 		}
 
+		/// <summary>
+		///     Configures a <see cref="IWebHostBuilder" /> with defaults for hosting a web app.
+		/// </summary>
+		/// <remarks>
+		///     The following defaults are applied to the <see cref="IWebHostBuilder" />:
+		///     <list type="bullet">
+		///         <item>
+		///             <description>use Kestrel as the web server and configure it using the application's configuration providers</description>
+		///         </item>
+		///         <item>
+		///             <description>configure <see cref="IHostingEnvironment.WebRootFileProvider" /> to include static web assets from projects referenced by the entry assembly during development</description>
+		///         </item>
+		///         <item>
+		///             <description>adds the HostFiltering middleware</description>
+		///         </item>
+		///         <item>
+		///             <description>adds the ForwardedHeaders middleware if ASPNETCORE_FORWARDEDHEADERS_ENABLED=true,</description>
+		///         </item>
+		///         <item>
+		///             <description>enable IIS integration</description>
+		///         </item>
+		///     </list>
+		/// </remarks>
+		/// <param name="builder">The <see cref="IWebHostBuilder" /> instance to configure.</param>
+		/// <param name="configure">The configure callback</param>
+		/// <returns>A reference to the <paramref name="builder" /> after the operation has completed.</returns>
 		public static IWebHostBuilder ConfigureWebHostDefaults(this IWebHostBuilder builder, Action<IWebHostBuilder> configure) {
 			if (configure == null) {
 				throw new ArgumentNullException(nameof(configure));
@@ -162,6 +188,16 @@ namespace JustArchiNET.Madness {
 			return text.Split(new[] { separator }, options);
 		}
 
+		/// <summary>
+		///     Sets the capacity of this dictionary to what it would be if it had been originally initialized with all its entries
+		/// </summary>
+		/// <remarks>
+		///     This method can be used to minimize the memory overhead
+		///     once it is known that no new elements will be added.
+		///     To allocate minimum size storage array, execute the following statements:
+		///     dictionary.Clear();
+		///     dictionary.TrimExcess();
+		/// </remarks>
 		public static void TrimExcess<TKey, TValue>(this Dictionary<TKey, TValue> _) { } // no-op
 
 		public static async Task WriteAsync(this Stream stream, ReadOnlyMemory<byte> buffer) {

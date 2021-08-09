@@ -26,7 +26,7 @@ namespace JustArchiNET.Madness.Internal {
 	internal sealed class AsyncDisposableWrapper : IAsyncDisposable {
 		private readonly IDisposable Disposable;
 
-		internal AsyncDisposableWrapper(IDisposable disposable) => Disposable = disposable ?? throw new ArgumentNullException(nameof(disposable));
+		internal AsyncDisposableWrapper(IDisposable disposable, bool _) => Disposable = disposable ?? throw new ArgumentNullException(nameof(disposable));
 
 		public ValueTask DisposeAsync() {
 			Disposable.Dispose();

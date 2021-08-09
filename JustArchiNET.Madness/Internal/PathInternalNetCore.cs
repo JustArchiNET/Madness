@@ -20,6 +20,7 @@
 // limitations under the License.
 
 using System;
+using System.IO;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -86,7 +87,7 @@ namespace JustArchiNET.Madness.Internal {
 		///     True if the given character is a directory separator.
 		/// </summary>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		internal static bool IsDirectorySeparator(char c) => (c == System.IO.Path.DirectorySeparatorChar) || (c == System.IO.Path.AltDirectorySeparatorChar);
+		internal static bool IsDirectorySeparator(char c) => (c == Path.DirectorySeparatorChar) || (c == Path.AltDirectorySeparatorChar);
 
 		/// <summary>
 		///     Gets the count of common characters from the left optionally ignoring case
@@ -155,7 +156,7 @@ namespace JustArchiNET.Madness.Internal {
 					}
 				}
 			} else if ((path.Length >= volumeSeparatorLength) &&
-				(path[volumeSeparatorLength - 1] == System.IO.Path.VolumeSeparatorChar)) {
+				(path[volumeSeparatorLength - 1] == Path.VolumeSeparatorChar)) {
 				// Path is at least longer than where we expect a colon, and has a colon (\\?\A:, A:)
 				// If the colon is followed by a directory separator, move past it
 				i = volumeSeparatorLength;
