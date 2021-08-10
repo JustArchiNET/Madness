@@ -5,11 +5,11 @@
 [![NuGet Total downloads](https://img.shields.io/nuget/dt/JustArchiNET.Madness.svg?label=Downloads&logo=nuget&cacheSeconds=600)](https://www.nuget.org/packages/JustArchiNET.Madness)
 [![License](https://img.shields.io/github/license/JustArchiNET/Madness.svg?label=License&logo=apache&cacheSeconds=2592000)](https://github.com/JustArchiNET/Madness/blob/main/LICENSE-2.0.txt)
 
-[![GitHub stable release version](https://img.shields.io/github/release/JustArchiNET/Madness.svg?label=Stable&logo=github&cacheSeconds=600)](https://github.com/JustArchiNET/Madness/releases/latest)
+[![GitHub stable release version](https://img.shields.io/github/v/release/JustArchiNET/Madness.svg?label=Stable&logo=github&cacheSeconds=600)](https://github.com/JustArchiNET/Madness/releases/latest)
 [![NuGet stable release version](https://img.shields.io/nuget/v/JustArchiNET.Madness?label=Stable&logo=nuget&cacheSeconds=600)](https://www.nuget.org/packages/JustArchiNET.Madness/latest)
 [![GitHub stable release date](https://img.shields.io/github/release-date/JustArchiNET/Madness.svg?label=Released&logo=github&cacheSeconds=600)](https://github.com/JustArchiNET/Madness/releases/latest)
 
-[![GitHub experimental release version](https://img.shields.io/github/release/JustArchiNET/Madness/all.svg?label=Experimental&logo=github&cacheSeconds=600)](https://github.com/JustArchiNET/Madness/releases)
+[![GitHub experimental release version](https://img.shields.io/github/v/release/JustArchiNET/Madness/all.svg?label=Experimental&logo=github&cacheSeconds=600)](https://github.com/JustArchiNET/Madness/releases)
 [![NuGet experimental release version](https://img.shields.io/nuget/vpre/JustArchiNET.Madness?label=Experimental&logo=nuget&cacheSeconds=600)](https://www.nuget.org/packages/JustArchiNET.Madness)
 [![GitHub experimental release date](https://img.shields.io/github/release-date-pre/JustArchiNET/Madness.svg?label=Released&logo=github&cacheSeconds=600)](https://github.com/JustArchiNET/Madness/releases)
 
