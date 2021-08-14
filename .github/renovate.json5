@@ -1,0 +1,24 @@
+{
+	"extends": [
+		"config:base",
+		":assignee(JustArchi)",
+		":automergeBranch",
+		":automergeDigest",
+		":automergeMinor",
+		":disableRateLimiting",
+		":label(🤖 Automatic)"
+	],
+	"packageRules": [
+		{
+			// Runtime dependencies that we intentionally want to include in the lowest possible versions
+			"matchManagers": ["nuget"],
+			"matchPackageNames": [
+				"IndexRange",
+				"Microsoft.AspNetCore.Hosting.Abstractions",
+				"Microsoft.Bcl.AsyncInterfaces",
+				"System.Memory"
+			],
+			"enabled": false
+		}
+	]
+}
