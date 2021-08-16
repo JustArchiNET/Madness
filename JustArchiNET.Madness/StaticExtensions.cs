@@ -85,6 +85,22 @@ namespace JustArchiNET.Madness {
 			return builder;
 		}
 
+		public static bool Contains(this string input, char value) {
+			if (input == null) {
+				throw new ArgumentNullException(nameof(input));
+			}
+
+			return input.IndexOf(value) >= 0;
+		}
+
+		public static bool Contains(this string input, char value, StringComparison comparisonType) {
+			if (input == null) {
+				throw new ArgumentNullException(nameof(input));
+			}
+
+			return input.IndexOf(value, comparisonType) >= 0;
+		}
+
 		public static bool Contains(this string input, string value, StringComparison comparisonType) {
 			if (input == null) {
 				throw new ArgumentNullException(nameof(input));
