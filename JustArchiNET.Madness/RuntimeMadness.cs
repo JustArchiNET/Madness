@@ -22,11 +22,13 @@
 using System;
 using System.Diagnostics;
 using JetBrains.Annotations;
+using JustArchiNET.Madness.Helpers;
 
 namespace JustArchiNET.Madness {
 	/// <summary>
 	///     Static Madness-specific class used for basic runtime-related operations.
 	/// </summary>
+	[MadnessType(EMadnessType.Extension)]
 	[PublicAPI]
 	public static class RuntimeMadness {
 		/// <summary>
@@ -38,6 +40,7 @@ namespace JustArchiNET.Madness {
 		/// <returns>
 		///     True if the assembly is executed on Mono runtime (as opposed to Windows-specific .NET Framework one), otherwise false.
 		/// </returns>
+		[MadnessType(EMadnessType.Extension)]
 		public static bool IsRunningOnMono => Type.GetType("Mono.Runtime") != null;
 
 		/// <summary>
@@ -46,6 +49,7 @@ namespace JustArchiNET.Madness {
 		/// <returns>
 		///     <see cref="DateTime" /> containing current process starting time.
 		/// </returns>
+		[MadnessType(EMadnessType.Extension)]
 		public static DateTime ProcessStartTime {
 			get {
 				if (IsRunningOnMono) {

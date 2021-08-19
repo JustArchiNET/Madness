@@ -1,4 +1,4 @@
-//                             _         __  __
+﻿//                             _         __  __
 //  ___  ___   ___  _ __    __| |  __ _ |  \/  |
 // / __|/ __| / _ \| '_ \  / _` | / _` || |\/| |
 // \__ \\__ \|  __/| | | || (_| || (_| || |  | |
@@ -19,20 +19,29 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
+using System.ComponentModel;
 using JetBrains.Annotations;
-using JustArchiNET.Madness.Helpers;
 
-namespace JustArchiNET.Madness.HashCodeMadness {
-	[MadnessType(EMadnessType.Implementation)]
+namespace JustArchiNET.Madness.Helpers {
+	/// <inheritdoc />
+	/// <summary>
+	///     Madness type attribute, which annotates what kind of the functionality is provided.
+	/// </summary>
+	[AttributeUsage(AttributeTargets.Class | AttributeTargets.Constructor | AttributeTargets.Field | AttributeTargets.Method | AttributeTargets.Property)]
 	[PublicAPI]
-	public static class HashCode {
-		[MadnessType(EMadnessType.Implementation)]
-		public static int Combine<T1, T2>(T1 value1, T2 value2) => (value1, value2).GetHashCode();
+	public sealed class MadnessTypeAttribute : Attribute {
+		/// <summary>
+		///     Type of the provided functionality.
+		/// </summary>
+		public EMadnessType Type { get; }
 
-		[MadnessType(EMadnessType.Implementation)]
-		public static int Combine<T1, T2, T3>(T1 value1, T2 value2, T3 value3) => (value1, value2, value3).GetHashCode();
+		internal MadnessTypeAttribute(EMadnessType type) {
+			if (!Enum.IsDefined(typeof(EMadnessType), type)) {
+				throw new InvalidEnumArgumentException(nameof(type), (int) type, typeof(EMadnessType));
+			}
 
-		[MadnessType(EMadnessType.Implementation)]
-		public static int Combine<T1, T2, T3, T4>(T1 value1, T2 value2, T3 value3, T4 value4) => (value1, value2, value3, value4).GetHashCode();
+			Type = type;
+		}
 	}
 }

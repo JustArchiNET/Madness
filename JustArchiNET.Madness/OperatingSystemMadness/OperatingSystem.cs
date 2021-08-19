@@ -22,39 +22,47 @@
 using System;
 using System.Runtime.InteropServices;
 using JetBrains.Annotations;
+using JustArchiNET.Madness.Helpers;
 
 namespace JustArchiNET.Madness.OperatingSystemMadness {
+	[MadnessType(EMadnessType.Implementation)]
 	[PublicAPI]
 	public static class OperatingSystem {
 		/// <summary>
 		///     Indicates whether the current application is running on FreeBSD.
 		/// </summary>
+		[MadnessType(EMadnessType.Implementation)]
 		public static bool IsFreeBSD() => RuntimeInformation.IsOSPlatform(OSPlatform.Create("FREEBSD"));
 
 		/// <summary>
 		///     Check for the FreeBSD version (returned by 'uname') with a >= version comparison. Used to guard APIs that were added in the given FreeBSD release.
 		/// </summary>
+		[MadnessType(EMadnessType.Implementation)]
 		public static bool IsFreeBSDVersionAtLeast(int major, int minor = 0, int build = 0, int revision = 0) => IsFreeBSD() && IsOSVersionAtLeast(major, minor, build, revision);
 
 		/// <summary>
 		///     Indicates whether the current application is running on Linux.
 		/// </summary>
+		[MadnessType(EMadnessType.Implementation)]
 		public static bool IsLinux() => RuntimeInformation.IsOSPlatform(OSPlatform.Linux);
 
 		/// <summary>
 		///     Indicates whether the current application is running on macOS.
 		/// </summary>
+		[MadnessType(EMadnessType.Implementation)]
 		public static bool IsMacOS() => RuntimeInformation.IsOSPlatform(OSPlatform.OSX);
 
 		/// <summary>
 		///     Check for the macOS version (returned by 'libobjc.get_operatingSystemVersion') with a >= version comparison. Used to guard APIs that were added in the given macOS release.
 		/// </summary>
+		[MadnessType(EMadnessType.Implementation)]
 		public static bool IsMacOSVersionAtLeast(int major, int minor = 0, int build = 0) => IsMacOS() && IsOSVersionAtLeast(major, minor, build, 0);
 
 		/// <summary>
 		///     Indicates whether the current application is running on the specified platform.
 		/// </summary>
 		/// <param name="platform">Case-insensitive platform name. Examples: Browser, Linux, FreeBSD, Android, iOS, macOS, tvOS, watchOS, Windows.</param>
+		[MadnessType(EMadnessType.Implementation)]
 		public static bool IsOSPlatform(string platform) {
 			if (platform == null) {
 				throw new ArgumentNullException(nameof(platform));
@@ -75,11 +83,13 @@ namespace JustArchiNET.Madness.OperatingSystemMadness {
 		/// <summary>
 		///     Indicates whether the current application is running on Windows.
 		/// </summary>
+		[MadnessType(EMadnessType.Implementation)]
 		public static bool IsWindows() => RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
 
 		/// <summary>
 		///     Check for the Windows version (returned by 'RtlGetVersion') with a >= version comparison. Used to guard APIs that were added in the given Windows release.
 		/// </summary>
+		[MadnessType(EMadnessType.Implementation)]
 		public static bool IsWindowsVersionAtLeast(int major, int minor = 0, int build = 0, int revision = 0) => IsWindows() && IsOSVersionAtLeast(major, minor, build, revision);
 
 		private static bool IsOSVersionAtLeast(int major, int minor, int build, int revision) {

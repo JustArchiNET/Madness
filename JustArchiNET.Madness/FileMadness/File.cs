@@ -22,24 +22,32 @@
 using System.IO;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
+using JustArchiNET.Madness.Helpers;
 
 namespace JustArchiNET.Madness.FileMadness {
+	[MadnessType(EMadnessType.Replacement)]
 	[PublicAPI]
 	public static class File {
+		[MadnessType(EMadnessType.Proxy)]
 		public static void AppendAllText(string path, string? contents) => System.IO.File.AppendAllText(path, contents);
 
+		[MadnessType(EMadnessType.Implementation)]
 		public static Task AppendAllTextAsync(string path, string? contents) {
 			AppendAllText(path, contents);
 
 			return Task.CompletedTask;
 		}
 
+		[MadnessType(EMadnessType.Proxy)]
 		public static void Delete(string path) => System.IO.File.Delete(path);
 
+		[MadnessType(EMadnessType.Proxy)]
 		public static bool Exists(string? path) => System.IO.File.Exists(path);
 
+		[MadnessType(EMadnessType.Proxy)]
 		public static void Move(string sourceFileName, string destFileName) => System.IO.File.Move(sourceFileName, destFileName);
 
+		[MadnessType(EMadnessType.Implementation)]
 		public static void Move(string sourceFileName, string destFileName, bool overwrite) {
 			if (overwrite && Exists(destFileName)) {
 				Delete(destFileName);
@@ -48,20 +56,28 @@ namespace JustArchiNET.Madness.FileMadness {
 			Move(sourceFileName, destFileName);
 		}
 
+		[MadnessType(EMadnessType.Proxy)]
 		public static FileStream Open(string path, FileMode mode, FileAccess access) => System.IO.File.Open(path, mode, access);
 
+		[MadnessType(EMadnessType.Proxy)]
 		public static byte[] ReadAllBytes(string path) => System.IO.File.ReadAllBytes(path);
 
+		[MadnessType(EMadnessType.Implementation)]
 		public static Task<byte[]> ReadAllBytesAsync(string path) => Task.FromResult(ReadAllBytes(path));
 
+		[MadnessType(EMadnessType.Proxy)]
 		public static string ReadAllText(string path) => System.IO.File.ReadAllText(path);
 
+		[MadnessType(EMadnessType.Implementation)]
 		public static Task<string> ReadAllTextAsync(string path) => Task.FromResult(ReadAllText(path));
 
+		[MadnessType(EMadnessType.Proxy)]
 		public static void Replace(string sourceFileName, string destinationFileName, string? destinationBackupFileName) => System.IO.File.Replace(sourceFileName, destinationFileName, destinationBackupFileName);
 
+		[MadnessType(EMadnessType.Proxy)]
 		public static void WriteAllText(string path, string? contents) => System.IO.File.WriteAllText(path, contents);
 
+		[MadnessType(EMadnessType.Implementation)]
 		public static Task WriteAllTextAsync(string path, string? contents) {
 			WriteAllText(path, contents);
 

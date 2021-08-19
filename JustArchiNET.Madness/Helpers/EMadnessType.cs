@@ -1,4 +1,4 @@
-//                             _         __  __
+﻿//                             _         __  __
 //  ___  ___   ___  _ __    __| |  __ _ |  \/  |
 // / __|/ __| / _ \| '_ \  / _` | / _` || |\/| |
 // \__ \\__ \|  __/| | | || (_| || (_| || |  | |
@@ -19,20 +19,29 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using JetBrains.Annotations;
-using JustArchiNET.Madness.Helpers;
+namespace JustArchiNET.Madness.Helpers {
+	/// <summary>
+	///     Madness type specifying provided functionality.
+	/// </summary>
+	public enum EMadnessType : byte {
+		/// <summary>
+		///     Proxy functionality that executes original code with no changes in the logic.
+		/// </summary>
+		Proxy = 1,
 
-namespace JustArchiNET.Madness.HashCodeMadness {
-	[MadnessType(EMadnessType.Implementation)]
-	[PublicAPI]
-	public static class HashCode {
-		[MadnessType(EMadnessType.Implementation)]
-		public static int Combine<T1, T2>(T1 value1, T2 value2) => (value1, value2).GetHashCode();
+		/// <summary>
+		///     Replacement functionality that provides drop-in replacement of the original code.
+		/// </summary>
+		Replacement = 2,
 
-		[MadnessType(EMadnessType.Implementation)]
-		public static int Combine<T1, T2, T3>(T1 value1, T2 value2, T3 value3) => (value1, value2, value3).GetHashCode();
+		/// <summary>
+		///     Implementation functionality that provides features missing in the original code.
+		/// </summary>
+		Implementation = 3,
 
-		[MadnessType(EMadnessType.Implementation)]
-		public static int Combine<T1, T2, T3, T4>(T1 value1, T2 value2, T3 value3, T4 value4) => (value1, value2, value3, value4).GetHashCode();
+		/// <summary>
+		///     Extension functionality, that Madness provides as a helper for you on its own.
+		/// </summary>
+		Extension = 4
 	}
 }

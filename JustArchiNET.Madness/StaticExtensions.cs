@@ -27,12 +27,15 @@ using System.Security.Cryptography;
 using System.Threading;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
+using JustArchiNET.Madness.Helpers;
 using JustArchiNET.Madness.Internal;
 using Microsoft.AspNetCore.Hosting;
 
 namespace JustArchiNET.Madness {
+	[MadnessType(EMadnessType.Extension)]
 	[PublicAPI]
 	public static class StaticExtensions {
+		[MadnessType(EMadnessType.Implementation)]
 		public static Task<byte[]> ComputeHashAsync(this HashAlgorithm hashAlgorithm, Stream inputStream) {
 			if (hashAlgorithm == null) {
 				throw new ArgumentNullException(nameof(hashAlgorithm));
@@ -41,6 +44,7 @@ namespace JustArchiNET.Madness {
 			return Task.FromResult(hashAlgorithm.ComputeHash(inputStream));
 		}
 
+		[MadnessType(EMadnessType.Implementation)]
 		public static IAsyncDisposable ConfigureAwait(this IDisposable source, bool continueOnCapturedContext) {
 			if (source == null) {
 				throw new ArgumentNullException(nameof(source));
@@ -75,6 +79,7 @@ namespace JustArchiNET.Madness {
 		/// <param name="builder">The <see cref="IWebHostBuilder" /> instance to configure.</param>
 		/// <param name="configure">The configure callback</param>
 		/// <returns>A reference to the <paramref name="builder" /> after the operation has completed.</returns>
+		[MadnessType(EMadnessType.Implementation)]
 		public static IWebHostBuilder ConfigureWebHostDefaults(this IWebHostBuilder builder, Action<IWebHostBuilder> configure) {
 			if (configure == null) {
 				throw new ArgumentNullException(nameof(configure));
@@ -85,6 +90,7 @@ namespace JustArchiNET.Madness {
 			return builder;
 		}
 
+		[MadnessType(EMadnessType.Implementation)]
 		public static bool Contains(this string input, char value) {
 			if (input == null) {
 				throw new ArgumentNullException(nameof(input));
@@ -93,6 +99,7 @@ namespace JustArchiNET.Madness {
 			return input.IndexOf(value) >= 0;
 		}
 
+		[MadnessType(EMadnessType.Implementation)]
 		public static bool Contains(this string input, char value, StringComparison comparisonType) {
 			if (input == null) {
 				throw new ArgumentNullException(nameof(input));
@@ -101,6 +108,7 @@ namespace JustArchiNET.Madness {
 			return input.IndexOf(value, comparisonType) >= 0;
 		}
 
+		[MadnessType(EMadnessType.Implementation)]
 		public static bool Contains(this string input, string value, StringComparison comparisonType) {
 			if (input == null) {
 				throw new ArgumentNullException(nameof(input));
@@ -110,11 +118,13 @@ namespace JustArchiNET.Madness {
 		}
 
 		// ReSharper disable once UseDeconstructionOnParameter - we actually implement deconstruction here
+		[MadnessType(EMadnessType.Implementation)]
 		public static void Deconstruct<TKey, TValue>(this KeyValuePair<TKey, TValue> kv, out TKey key, out TValue value) {
 			key = kv.Key;
 			value = kv.Value;
 		}
 
+		[MadnessType(EMadnessType.Implementation)]
 		public static ValueTask DisposeAsync(this IDisposable disposable) {
 			if (disposable == null) {
 				throw new ArgumentNullException(nameof(disposable));
@@ -125,6 +135,7 @@ namespace JustArchiNET.Madness {
 			return default(ValueTask);
 		}
 
+		[MadnessType(EMadnessType.Implementation)]
 		public static int IndexOf(this string source, char value, StringComparison comparisonType) {
 			if (source == null) {
 				throw new ArgumentNullException(nameof(source));
@@ -133,6 +144,7 @@ namespace JustArchiNET.Madness {
 			return source.IndexOf(value.ToString(), comparisonType);
 		}
 
+		[MadnessType(EMadnessType.Implementation)]
 		public static async Task<int> ReadAsync(this Stream stream, ReadOnlyMemory<byte> buffer) {
 			if (stream == null) {
 				throw new ArgumentNullException(nameof(stream));
@@ -143,6 +155,7 @@ namespace JustArchiNET.Madness {
 			return await stream.ReadAsync(byteArray, 0, byteArray.Length).ConfigureAwait(false);
 		}
 
+		[MadnessType(EMadnessType.Implementation)]
 		public static async Task<WebSocketReceiveResult> ReceiveAsync(this WebSocket webSocket, byte[] buffer, CancellationToken cancellationToken) {
 			if (webSocket == null) {
 				throw new ArgumentNullException(nameof(webSocket));
@@ -151,6 +164,7 @@ namespace JustArchiNET.Madness {
 			return await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), cancellationToken).ConfigureAwait(false);
 		}
 
+		[MadnessType(EMadnessType.Implementation)]
 		public static string Replace(this string source, string oldValue, string? newValue, StringComparison comparisonType) {
 			if (source == null) {
 				throw new ArgumentNullException(nameof(source));
@@ -188,6 +202,7 @@ namespace JustArchiNET.Madness {
 			}
 		}
 
+		[MadnessType(EMadnessType.Implementation)]
 		public static async Task SendAsync(this WebSocket webSocket, byte[] buffer, WebSocketMessageType messageType, bool endOfMessage, CancellationToken cancellationToken) {
 			if (webSocket == null) {
 				throw new ArgumentNullException(nameof(webSocket));
@@ -196,6 +211,7 @@ namespace JustArchiNET.Madness {
 			await webSocket.SendAsync(new ArraySegment<byte>(buffer), messageType, endOfMessage, cancellationToken).ConfigureAwait(false);
 		}
 
+		[MadnessType(EMadnessType.Implementation)]
 		public static string[] Split(this string text, char separator, StringSplitOptions options = StringSplitOptions.None) {
 			if (text == null) {
 				throw new ArgumentNullException(nameof(text));
@@ -214,8 +230,10 @@ namespace JustArchiNET.Madness {
 		///     dictionary.Clear();
 		///     dictionary.TrimExcess();
 		/// </remarks>
+		[MadnessType(EMadnessType.Implementation)]
 		public static void TrimExcess<TKey, TValue>(this Dictionary<TKey, TValue> _) { } // no-op
 
+		[MadnessType(EMadnessType.Implementation)]
 		public static async Task WriteAsync(this Stream stream, ReadOnlyMemory<byte> buffer) {
 			if (stream == null) {
 				throw new ArgumentNullException(nameof(stream));

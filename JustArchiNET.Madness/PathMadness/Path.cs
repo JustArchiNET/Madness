@@ -22,25 +22,35 @@
 using System;
 using System.Text;
 using JetBrains.Annotations;
+using JustArchiNET.Madness.Helpers;
 using JustArchiNET.Madness.Internal;
 
 namespace JustArchiNET.Madness.PathMadness {
+	[MadnessType(EMadnessType.Replacement)]
 	[PublicAPI]
 	public static class Path {
+		[MadnessType(EMadnessType.Proxy)]
 		public static char DirectorySeparatorChar => System.IO.Path.DirectorySeparatorChar;
 
+		[MadnessType(EMadnessType.Proxy)]
 		public static string Combine(params string[] paths) => System.IO.Path.Combine(paths);
 
+		[MadnessType(EMadnessType.Proxy)]
 		public static string? GetDirectoryName(string? path) => System.IO.Path.GetDirectoryName(path);
 
+		[MadnessType(EMadnessType.Proxy)]
 		public static string GetExtension(string? path) => System.IO.Path.GetExtension(path);
 
+		[MadnessType(EMadnessType.Proxy)]
 		public static string GetFileName(string? path) => System.IO.Path.GetFileName(path);
 
+		[MadnessType(EMadnessType.Proxy)]
 		public static string GetFileNameWithoutExtension(string? path) => System.IO.Path.GetFileNameWithoutExtension(path);
 
+		[MadnessType(EMadnessType.Proxy)]
 		public static string GetFullPath(string path) => System.IO.Path.GetFullPath(path);
 
+		[MadnessType(EMadnessType.Implementation)]
 		public static string GetRelativePath(string relativeTo, string path) {
 			if (string.IsNullOrEmpty(relativeTo)) {
 				throw new ArgumentNullException(nameof(relativeTo));

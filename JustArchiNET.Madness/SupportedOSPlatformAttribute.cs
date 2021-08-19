@@ -21,6 +21,7 @@
 
 using System;
 using JetBrains.Annotations;
+using JustArchiNET.Madness.Helpers;
 
 namespace JustArchiNET.Madness {
 	/// <inheritdoc />
@@ -34,10 +35,13 @@ namespace JustArchiNET.Madness {
 	///     A given platform should only be specified once.
 	/// </remarks>
 	[AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Constructor | AttributeTargets.Enum | AttributeTargets.Event | AttributeTargets.Field | AttributeTargets.Method | AttributeTargets.Module | AttributeTargets.Property | AttributeTargets.Struct, AllowMultiple = true, Inherited = false)]
+	[MadnessType(EMadnessType.Implementation)]
 	[PublicAPI]
 	public sealed class SupportedOSPlatformAttribute : Attribute {
+		[MadnessType(EMadnessType.Implementation)]
 		public string PlatformName { get; }
 
+		[MadnessType(EMadnessType.Implementation)]
 		public SupportedOSPlatformAttribute(string platformName) => PlatformName = platformName;
 	}
 }
