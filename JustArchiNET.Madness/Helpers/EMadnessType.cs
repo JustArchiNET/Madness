@@ -27,26 +27,26 @@ namespace JustArchiNET.Madness.Helpers {
 		/// <summary>
 		///     Unknown functionality, a default value that isn't normally used.
 		/// </summary>
-		Unknown = 0,
+		Unknown,
 
 		/// <summary>
 		///     Proxy functionality that executes original code with no changes in the logic.
 		/// </summary>
-		Proxy = 1,
+		Proxy,
 
 		/// <summary>
 		///     Replacement functionality that provides drop-in replacement of the original code.
 		/// </summary>
-		Replacement = 2,
+		Replacement,
 
 		/// <summary>
 		///     Implementation functionality that provides features missing in the original code.
 		/// </summary>
-		Implementation = 3,
+		Implementation,
 
 		/// <summary>
 		///     Extension functionality, that Madness provides as a helper for you on its own.
 		/// </summary>
-		Extension = 4
+		Extension
 	}
 }
