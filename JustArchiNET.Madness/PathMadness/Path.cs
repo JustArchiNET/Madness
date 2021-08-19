@@ -27,6 +27,8 @@ using JustArchiNET.Madness.Internal;
 namespace JustArchiNET.Madness.PathMadness {
 	[PublicAPI]
 	public static class Path {
+		public static char DirectorySeparatorChar => System.IO.Path.DirectorySeparatorChar;
+
 		public static string Combine(params string[] paths) => System.IO.Path.Combine(paths);
 
 		public static string? GetDirectoryName(string? path) => System.IO.Path.GetDirectoryName(path);
@@ -50,8 +52,8 @@ namespace JustArchiNET.Madness.PathMadness {
 
 			StringComparison comparisonType = PathInternalNetCore.StringComparison;
 
-			relativeTo = System.IO.Path.GetFullPath(relativeTo);
-			path = System.IO.Path.GetFullPath(path);
+			relativeTo = GetFullPath(relativeTo);
+			path = GetFullPath(path);
 
 			// Need to check if the roots are different- if they are we need to return the "to" path.
 			if (!PathInternalNetCore.AreRootsEqual(relativeTo, path, comparisonType)) {
@@ -105,7 +107,7 @@ namespace JustArchiNET.Madness.PathMadness {
 
 				for (int i = commonLength + 1; i < relativeToLength; i++) {
 					if (PathInternalNetCore.IsDirectorySeparator(relativeTo[i])) {
-						sb.Append(System.IO.Path.DirectorySeparatorChar);
+						sb.Append(DirectorySeparatorChar);
 						sb.Append("..");
 					}
 				}
@@ -124,7 +126,7 @@ namespace JustArchiNET.Madness.PathMadness {
 
 			if (differenceLength > 0) {
 				if (sb.Length > 0) {
-					sb.Append(System.IO.Path.DirectorySeparatorChar);
+					sb.Append(DirectorySeparatorChar);
 				}
 
 				sb.Append(path, commonLength, differenceLength);

@@ -26,8 +26,10 @@ using JetBrains.Annotations;
 namespace JustArchiNET.Madness.FileMadness {
 	[PublicAPI]
 	public static class File {
+		public static void AppendAllText(string path, string? contents) => System.IO.File.AppendAllText(path, contents);
+
 		public static Task AppendAllTextAsync(string path, string? contents) {
-			System.IO.File.AppendAllText(path, contents);
+			AppendAllText(path, contents);
 
 			return Task.CompletedTask;
 		}
@@ -39,23 +41,29 @@ namespace JustArchiNET.Madness.FileMadness {
 		public static void Move(string sourceFileName, string destFileName) => System.IO.File.Move(sourceFileName, destFileName);
 
 		public static void Move(string sourceFileName, string destFileName, bool overwrite) {
-			if (overwrite && System.IO.File.Exists(destFileName)) {
-				System.IO.File.Delete(destFileName);
+			if (overwrite && Exists(destFileName)) {
+				Delete(destFileName);
 			}
 
-			System.IO.File.Move(sourceFileName, destFileName);
+			Move(sourceFileName, destFileName);
 		}
 
 		public static FileStream Open(string path, FileMode mode, FileAccess access) => System.IO.File.Open(path, mode, access);
 
-		public static Task<byte[]> ReadAllBytesAsync(string path) => Task.FromResult(System.IO.File.ReadAllBytes(path));
+		public static byte[] ReadAllBytes(string path) => System.IO.File.ReadAllBytes(path);
 
-		public static Task<string> ReadAllTextAsync(string path) => Task.FromResult(System.IO.File.ReadAllText(path));
+		public static Task<byte[]> ReadAllBytesAsync(string path) => Task.FromResult(ReadAllBytes(path));
+
+		public static string ReadAllText(string path) => System.IO.File.ReadAllText(path);
+
+		public static Task<string> ReadAllTextAsync(string path) => Task.FromResult(ReadAllText(path));
 
 		public static void Replace(string sourceFileName, string destinationFileName, string? destinationBackupFileName) => System.IO.File.Replace(sourceFileName, destinationFileName, destinationBackupFileName);
 
+		public static void WriteAllText(string path, string? contents) => System.IO.File.WriteAllText(path, contents);
+
 		public static Task WriteAllTextAsync(string path, string? contents) {
-			System.IO.File.WriteAllText(path, contents);
+			WriteAllText(path, contents);
 
 			return Task.CompletedTask;
 		}
