@@ -22,14 +22,14 @@
 using System;
 using System.IO;
 using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
+using OperatingSystem = JustArchiNET.Madness.OperatingSystemMadness.OperatingSystem;
 
 namespace JustArchiNET.Madness.Internal {
 	internal static class PathInternalNetCore {
 		private const string ExtendedDevicePathPrefix = @"\\?\";
 		private const string UncExtendedPathPrefix = @"\\?\UNC\";
 
-		internal static StringComparison StringComparison => RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal;
+		internal static StringComparison StringComparison => OperatingSystem.IsWindows() ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal;
 
 		/// <summary>
 		///     Returns true if the two paths have the same root
