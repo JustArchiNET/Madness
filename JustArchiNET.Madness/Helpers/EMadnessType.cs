@@ -25,6 +25,11 @@ namespace JustArchiNET.Madness.Helpers {
 	/// </summary>
 	public enum EMadnessType : byte {
 		/// <summary>
+		///     Unknown functionality, a default value that isn't normally used.
+		/// </summary>
+		Unknown = 0,
+
+		/// <summary>
 		///     Proxy functionality that executes original code with no changes in the logic.
 		/// </summary>
 		Proxy = 1,

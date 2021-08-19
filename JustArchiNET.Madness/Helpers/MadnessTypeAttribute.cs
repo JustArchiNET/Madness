@@ -37,7 +37,7 @@ namespace JustArchiNET.Madness.Helpers {
 		public EMadnessType Type { get; }
 
 		internal MadnessTypeAttribute(EMadnessType type) {
-			if (!Enum.IsDefined(typeof(EMadnessType), type)) {
+			if ((type == EMadnessType.Unknown) || !Enum.IsDefined(typeof(EMadnessType), type)) {
 				throw new InvalidEnumArgumentException(nameof(type), (int) type, typeof(EMadnessType));
 			}
 
