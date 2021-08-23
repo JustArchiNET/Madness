@@ -64,7 +64,6 @@ namespace JustArchiNET.Madness {
 		[MadnessType(EMadnessType.Proxy)]
 		public Task Task => BackingTaskCompletionSource.Task;
 
-		[MadnessType(EMadnessType.Proxy)]
 		private readonly TaskCompletionSource<bool> BackingTaskCompletionSource;
 
 		/// <summary>Creates a <see cref="TaskCompletionSource" />.</summary>
