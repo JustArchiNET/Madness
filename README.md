@@ -180,7 +180,7 @@ namespace ThisIsMadness {
 
 ### Other
 
-Root `JustArchiNET.Madness` namespace also includes selected classes normally not available on .NET Framework, for example `SupportedOSPlatform`.
+Root `JustArchiNET.Madness` namespace also includes selected classes normally not available on .NET Framework, for example `SupportedOSPlatform` or non-generic `TaskCompletionSource`.
 
 ```csharp
 #if NETFRAMEWORK
