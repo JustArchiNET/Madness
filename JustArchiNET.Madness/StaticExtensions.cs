@@ -145,14 +145,19 @@ namespace JustArchiNET.Madness {
 		}
 
 		[MadnessType(EMadnessType.Implementation)]
-		public static async Task<int> ReadAsync(this Stream stream, ReadOnlyMemory<byte> buffer) {
+		public static async Task<int> ReadAsync(this Stream stream, Memory<byte> buffer) {
 			if (stream == null) {
 				throw new ArgumentNullException(nameof(stream));
 			}
 
-			byte[] byteArray = buffer.ToArray();
+			byte[] byteArray = new byte[buffer.Length];
 
-			return await stream.ReadAsync(byteArray, 0, byteArray.Length).ConfigureAwait(false);
+			int result = await stream.ReadAsync(byteArray, 0, byteArray.Length).ConfigureAwait(false);
+
+			// Since byteArray.Length == buffer.Length, we can do it like this
+			byteArray.CopyTo(buffer);
+
+			return result;
 		}
 
 		[MadnessType(EMadnessType.Implementation)]
