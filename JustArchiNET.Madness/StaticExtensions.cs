@@ -21,7 +21,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Net.WebSockets;
 using System.Security.Cryptography;
@@ -140,12 +139,34 @@ namespace JustArchiNET.Madness {
 		}
 
 		[MadnessType(EMadnessType.Implementation)]
-		public static ValueTask DisposeAsync(this IDisposable disposable) {
-			if (disposable == null) {
-				throw new ArgumentNullException(nameof(disposable));
+		public static ValueTask DisposeAsync(this Stream stream) {
+			if (stream == null) {
+				throw new ArgumentNullException(nameof(stream));
 			}
 
-			disposable.Dispose();
+			stream.Dispose();
+
+			return default(ValueTask);
+		}
+
+		[MadnessType(EMadnessType.Implementation)]
+		public static ValueTask DisposeAsync(this TextWriter textWriter) {
+			if (textWriter == null) {
+				throw new ArgumentNullException(nameof(textWriter));
+			}
+
+			textWriter.Dispose();
+
+			return default(ValueTask);
+		}
+
+		[MadnessType(EMadnessType.Implementation)]
+		public static ValueTask DisposeAsync(this Timer timer) {
+			if (timer == null) {
+				throw new ArgumentNullException(nameof(timer));
+			}
+
+			timer.Dispose();
 
 			return default(ValueTask);
 		}
