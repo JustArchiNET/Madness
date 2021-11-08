@@ -139,13 +139,13 @@ namespace JustArchiNET.Madness {
 		}
 
 		[MadnessType(EMadnessType.Implementation)]
-		public static ValueTask DisposeAsync(this Stream stream) => FakeDisposeAsync(stream);
+		public static ValueTask DisposeAsync(this Stream disposable) => FakeDisposeAsync(disposable);
 
 		[MadnessType(EMadnessType.Implementation)]
-		public static ValueTask DisposeAsync(this TextWriter textWriter) => FakeDisposeAsync(textWriter);
+		public static ValueTask DisposeAsync(this TextWriter disposable) => FakeDisposeAsync(disposable);
 
 		[MadnessType(EMadnessType.Implementation)]
-		public static ValueTask DisposeAsync(this Timer timer) => FakeDisposeAsync(timer);
+		public static ValueTask DisposeAsync(this Timer disposable) => FakeDisposeAsync(disposable);
 
 		[MadnessType(EMadnessType.Implementation)]
 		public static int IndexOf(this string source, char value, StringComparison comparisonType) {
