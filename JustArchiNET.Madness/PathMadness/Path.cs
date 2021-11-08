@@ -30,6 +30,9 @@ namespace JustArchiNET.Madness.PathMadness {
 	[PublicAPI]
 	public static class Path {
 		[MadnessType(EMadnessType.Proxy)]
+		public static char AltDirectorySeparatorChar => System.IO.Path.AltDirectorySeparatorChar;
+
+		[MadnessType(EMadnessType.Proxy)]
 		public static char DirectorySeparatorChar => System.IO.Path.DirectorySeparatorChar;
 
 		[MadnessType(EMadnessType.Proxy)]
@@ -144,5 +147,8 @@ namespace JustArchiNET.Madness.PathMadness {
 
 			return sb.ToString(); //StringBuilderCache.GetStringAndRelease(sb);
 		}
+
+		[MadnessType(EMadnessType.Proxy)]
+		public static string GetTempPath() => System.IO.Path.GetTempPath();
 	}
 }
