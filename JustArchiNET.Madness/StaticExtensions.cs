@@ -21,9 +21,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Net.WebSockets;
 using System.Security.Cryptography;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
@@ -35,6 +37,19 @@ namespace JustArchiNET.Madness {
 	[MadnessType(EMadnessType.Extension)]
 	[PublicAPI]
 	public static class StaticExtensions {
+		[MadnessType(EMadnessType.Implementation)]
+		public static StringBuilder Append(this StringBuilder stringBuilder, IFormatProvider? provider, string text) {
+			if (stringBuilder == null) {
+				throw new ArgumentNullException(nameof(stringBuilder));
+			}
+
+			if (text == null) {
+				throw new ArgumentNullException(nameof(text));
+			}
+
+			return stringBuilder.Append(text.ToString(provider));
+		}
+
 		[MadnessType(EMadnessType.Implementation)]
 		public static Task<byte[]> ComputeHashAsync(this HashAlgorithm hashAlgorithm, Stream inputStream) {
 			if (hashAlgorithm == null) {
