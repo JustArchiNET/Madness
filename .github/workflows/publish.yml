@@ -96,7 +96,7 @@ jobs:
         path: out/JustArchiNET.Madness.snupkg
 
   release:
-    if: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags/') }}
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
     needs: publish
     runs-on: ubuntu-latest
 
@@ -164,7 +164,7 @@ jobs:
         tag_name: ${{ github.ref }}
         release_name: Madness V${{ github.ref }}
         body_path: .github/RELEASE_TEMPLATE.md
-        prerelease: true
+        prerelease: ${{ contains(github.ref, '-') }}
 
     - name: Upload Madness.nupkg to GitHub release
       uses: actions/upload-release-asset@v1.0.2
