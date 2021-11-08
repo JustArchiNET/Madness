@@ -15,16 +15,10 @@
 
 	<!-- SourceLink support -->
 	<PropertyGroup>
-		<!-- TODO: Shouldn't be needed anymore when IncludeSymbols happens -->
-		<DebugType>embedded</DebugType>
-
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
-		<PublishRepositoryUrl>true</PublishRepositoryUrl>
-
-		<!-- TODO: Disabled due to https://github.com/NuGet/Home/issues/10791
 		<IncludeSymbols>true</IncludeSymbols>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
-		-->
 	</PropertyGroup>
 
 	<ItemGroup>
