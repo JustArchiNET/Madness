@@ -159,7 +159,7 @@ jobs:
       id: github_release
       uses: actions/create-release@v1.1.4
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.ARCHIBOT_GITHUB_TOKEN }}
       with:
         tag_name: ${{ github.ref }}
         release_name: Madness V${{ github.ref }}
