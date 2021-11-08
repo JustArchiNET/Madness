@@ -106,9 +106,7 @@ namespace JustArchiNET.Madness.Internal {
 				char* leftEnd = l + first.Length;
 				char* rightEnd = r + second.Length;
 
-				while ((l != leftEnd) && (r != rightEnd)
-					&& ((*l == *r) || (ignoreCase &&
-						(char.ToUpperInvariant(*l) == char.ToUpperInvariant(*r))))) {
+				while ((l != leftEnd) && (r != rightEnd) && ((*l == *r) || (ignoreCase && (char.ToUpperInvariant(*l) == char.ToUpperInvariant(*r))))) {
 					commonChars++;
 					l++;
 					r++;
@@ -155,8 +153,7 @@ namespace JustArchiNET.Madness.Internal {
 						i++;
 					}
 				}
-			} else if ((path.Length >= volumeSeparatorLength) &&
-				(path[volumeSeparatorLength - 1] == Path.VolumeSeparatorChar)) {
+			} else if ((path.Length >= volumeSeparatorLength) && (path[volumeSeparatorLength - 1] == Path.VolumeSeparatorChar)) {
 				// Path is at least longer than where we expect a colon, and has a colon (\\?\A:, A:)
 				// If the colon is followed by a directory separator, move past it
 				i = volumeSeparatorLength;

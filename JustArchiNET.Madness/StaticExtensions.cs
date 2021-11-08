@@ -139,37 +139,13 @@ namespace JustArchiNET.Madness {
 		}
 
 		[MadnessType(EMadnessType.Implementation)]
-		public static ValueTask DisposeAsync(this Stream stream) {
-			if (stream == null) {
-				throw new ArgumentNullException(nameof(stream));
-			}
-
-			stream.Dispose();
-
-			return default(ValueTask);
-		}
+		public static ValueTask DisposeAsync(this Stream stream) => FakeDisposeAsync(stream);
 
 		[MadnessType(EMadnessType.Implementation)]
-		public static ValueTask DisposeAsync(this TextWriter textWriter) {
-			if (textWriter == null) {
-				throw new ArgumentNullException(nameof(textWriter));
-			}
-
-			textWriter.Dispose();
-
-			return default(ValueTask);
-		}
+		public static ValueTask DisposeAsync(this TextWriter textWriter) => FakeDisposeAsync(textWriter);
 
 		[MadnessType(EMadnessType.Implementation)]
-		public static ValueTask DisposeAsync(this Timer timer) {
-			if (timer == null) {
-				throw new ArgumentNullException(nameof(timer));
-			}
-
-			timer.Dispose();
-
-			return default(ValueTask);
-		}
+		public static ValueTask DisposeAsync(this Timer timer) => FakeDisposeAsync(timer);
 
 		[MadnessType(EMadnessType.Implementation)]
 		public static int IndexOf(this string source, char value, StringComparison comparisonType) {
@@ -283,6 +259,16 @@ namespace JustArchiNET.Madness {
 			byte[] byteArray = buffer.ToArray();
 
 			await stream.WriteAsync(byteArray, 0, byteArray.Length).ConfigureAwait(false);
+		}
+
+		private static ValueTask FakeDisposeAsync(IDisposable? disposable) {
+			if (disposable == null) {
+				throw new ArgumentNullException(nameof(disposable));
+			}
+
+			disposable.Dispose();
+
+			return default(ValueTask);
 		}
 	}
 }
