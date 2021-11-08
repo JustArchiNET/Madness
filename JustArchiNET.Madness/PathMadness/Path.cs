@@ -30,7 +30,7 @@ namespace JustArchiNET.Madness.PathMadness {
 	[PublicAPI]
 	public static class Path {
 		[MadnessType(EMadnessType.Proxy)]
-		public static readonly char AltDirectorySeparatorChar = System.IO.Path.AltDirectorySeparatorChar;
+		public static char AltDirectorySeparatorChar => System.IO.Path.AltDirectorySeparatorChar;
 
 		[MadnessType(EMadnessType.Proxy)]
 		public static char DirectorySeparatorChar => System.IO.Path.DirectorySeparatorChar;
