@@ -2,10 +2,10 @@
 	<ItemGroup>
 		<PackageVersion Include="JetBrains.Annotations" Version="2021.3.0" />
 		<PackageVersion Include="IndexRange" Version="1.0.0" />
-		<PackageVersion Include="Microsoft.AspNetCore.Localization" Version="2.2.0" />
-		<PackageVersion Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+		<PackageVersion Include="Microsoft.AspNetCore.Localization" Version="1.0.0" />
+		<PackageVersion Include="Microsoft.AspNetCore.Mvc.Core" Version="1.0.0" />
 		<PackageVersion Include="Microsoft.Bcl.AsyncInterfaces" Version="1.0.0" />
 		<PackageVersion Include="Microsoft.SourceLink.GitHub" Version="1.1.0" />
-		<PackageVersion Include="System.Memory" Version="4.5.1" />
+		<PackageVersion Include="System.Memory" Version="4.5.0" />
 	</ItemGroup>
 </Project>

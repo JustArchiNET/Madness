@@ -16,7 +16,8 @@
 			"matchManagers": ["nuget"],
 			"matchPackageNames": [
 				"IndexRange",
-				"Microsoft.AspNetCore.Hosting.Abstractions",
+				"Microsoft.AspNetCore.Localization",
+				"Microsoft.AspNetCore.Mvc.Core",
 				"Microsoft.Bcl.AsyncInterfaces",
 				"System.Memory"
 			],
