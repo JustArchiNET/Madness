@@ -30,7 +30,9 @@ using System.Threading.Tasks;
 using JetBrains.Annotations;
 using JustArchiNET.Madness.Helpers;
 using JustArchiNET.Madness.Internal;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace JustArchiNET.Madness {
 	[MadnessType(EMadnessType.Extension)]
@@ -259,6 +261,24 @@ namespace JustArchiNET.Madness {
 			byte[] byteArray = buffer.ToArray();
 
 			await stream.WriteAsync(byteArray, 0, byteArray.Length).ConfigureAwait(false);
+		}
+
+		[MadnessType(EMadnessType.Implementation)]
+		internal static IMvcCoreBuilder AddControllers(this IServiceCollection services) {
+			if (services == null) {
+				throw new ArgumentNullException(nameof(services));
+			}
+
+			return services.AddMvcCore();
+		}
+
+		[MadnessType(EMadnessType.Implementation)]
+		internal static IServiceCollection AddRequestLocalization(this IServiceCollection services, Action<RequestLocalizationOptions> action) {
+			if (services == null) {
+				throw new ArgumentNullException(nameof(services));
+			}
+
+			return services.Configure(action);
 		}
 
 		private static ValueTask FakeDisposeAsync(IDisposable? disposable) {
