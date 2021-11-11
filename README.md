@@ -22,9 +22,15 @@
 [![Revolut donate](https://img.shields.io/badge/Revolut-donate-0075eb.svg?logo=revolut)](https://pay.revolut.com/profile/ukaszyxm)
 [![Steam donate](https://img.shields.io/badge/Steam-donate-000000.svg?logo=steam)](https://steamcommunity.com/tradeoffer/new/?partner=46697991&token=0ix2Ruv_)
 
-Madness embraces your project by including compatibility layer for selected APIs normally not available on .NET Framework target.
+---
+
+[![Repobeats analytics image](https://repobeats.axiom.co/api/embed/505fe2dc194a0219138dfc2e3c2076f0d4e64a5b.svg "Repobeats analytics image")](https://github.com/JustArchiNET/Madness/pulse)
 
 ---
+
+## Description
+
+Madness embraces your project by including compatibility layer for selected APIs normally not available on .NET Framework target.
 
 ## Installation
 
