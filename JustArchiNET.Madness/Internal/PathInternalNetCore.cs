@@ -24,146 +24,146 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using OperatingSystem = JustArchiNET.Madness.OperatingSystemMadness.OperatingSystem;
 
-namespace JustArchiNET.Madness.Internal {
-	internal static class PathInternalNetCore {
-		private const string ExtendedDevicePathPrefix = @"\\?\";
-		private const string UncExtendedPathPrefix = @"\\?\UNC\";
+namespace JustArchiNET.Madness.Internal;
 
-		internal static StringComparison StringComparison => OperatingSystem.IsWindows() ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal;
+internal static class PathInternalNetCore {
+	private const string ExtendedDevicePathPrefix = @"\\?\";
+	private const string UncExtendedPathPrefix = @"\\?\UNC\";
 
-		/// <summary>
-		///     Returns true if the two paths have the same root
-		/// </summary>
-		internal static bool AreRootsEqual(string first, string second, StringComparison comparisonType) {
-			int firstRootLength = GetRootLength(first);
-			int secondRootLength = GetRootLength(second);
+	internal static StringComparison StringComparison => OperatingSystem.IsWindows() ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal;
 
-			return (firstRootLength == secondRootLength)
-				&& (string.Compare(
-					first,
-					0,
-					second,
-					0,
-					firstRootLength,
-					comparisonType
-				) == 0);
-		}
+	/// <summary>
+	///     Returns true if the two paths have the same root
+	/// </summary>
+	internal static bool AreRootsEqual(string first, string second, StringComparison comparisonType) {
+		int firstRootLength = GetRootLength(first);
+		int secondRootLength = GetRootLength(second);
 
-		/// <summary>
-		///     Returns true if the path ends in a directory separator.
-		/// </summary>
-		internal static bool EndsInDirectorySeparator(string path) => (path.Length > 0) && IsDirectorySeparator(path[^1]);
+		return (firstRootLength == secondRootLength)
+			&& (string.Compare(
+				first,
+				0,
+				second,
+				0,
+				firstRootLength,
+				comparisonType
+			) == 0);
+	}
 
-		/// <summary>
-		///     Get the common path length from the start of the string.
-		/// </summary>
-		internal static int GetCommonPathLength(string first, string second, bool ignoreCase) {
-			int commonChars = EqualStartingCharacterCount(first, second, ignoreCase);
+	/// <summary>
+	///     Returns true if the path ends in a directory separator.
+	/// </summary>
+	internal static bool EndsInDirectorySeparator(string path) => (path.Length > 0) && IsDirectorySeparator(path[^1]);
 
-			// If nothing matches
-			if (commonChars == 0) {
-				return commonChars;
-			}
+	/// <summary>
+	///     Get the common path length from the start of the string.
+	/// </summary>
+	internal static int GetCommonPathLength(string first, string second, bool ignoreCase) {
+		int commonChars = EqualStartingCharacterCount(first, second, ignoreCase);
 
-			// Or we're a full string and equal length or match to a separator
-			if ((commonChars == first.Length)
-				&& ((commonChars == second.Length) || IsDirectorySeparator(second[commonChars]))) {
-				return commonChars;
-			}
-
-			if ((commonChars == second.Length) && IsDirectorySeparator(first[commonChars])) {
-				return commonChars;
-			}
-
-			// It's possible we matched somewhere in the middle of a segment e.g. C:\Foodie and C:\Foobar.
-			while ((commonChars > 0) && !IsDirectorySeparator(first[commonChars - 1])) {
-				commonChars--;
-			}
-
+		// If nothing matches
+		if (commonChars == 0) {
 			return commonChars;
 		}
 
-		/// <summary>
-		///     True if the given character is a directory separator.
-		/// </summary>
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		internal static bool IsDirectorySeparator(char c) => (c == Path.DirectorySeparatorChar) || (c == Path.AltDirectorySeparatorChar);
-
-		/// <summary>
-		///     Gets the count of common characters from the left optionally ignoring case
-		/// </summary>
-		private static unsafe int EqualStartingCharacterCount(string first, string second, bool ignoreCase) {
-			if (string.IsNullOrEmpty(first) || string.IsNullOrEmpty(second)) {
-				return 0;
-			}
-
-			int commonChars = 0;
-
-			fixed (char* f = first)
-			fixed (char* s = second) {
-				char* l = f;
-				char* r = s;
-				char* leftEnd = l + first.Length;
-				char* rightEnd = r + second.Length;
-
-				while ((l != leftEnd) && (r != rightEnd) && ((*l == *r) || (ignoreCase && (char.ToUpperInvariant(*l) == char.ToUpperInvariant(*r))))) {
-					commonChars++;
-					l++;
-					r++;
-				}
-			}
-
+		// Or we're a full string and equal length or match to a separator
+		if ((commonChars == first.Length)
+			&& ((commonChars == second.Length) || IsDirectorySeparator(second[commonChars]))) {
 			return commonChars;
 		}
 
-		/// <summary>
-		///     Gets the length of the root of the path (drive, share, etc.).
-		/// </summary>
-		private static int GetRootLength(string path) {
-			int i = 0;
-			int volumeSeparatorLength = 2; // Length to the colon "C:"
-			int uncRootLength = 2; // Length to the start of the server name "\\"
+		if ((commonChars == second.Length) && IsDirectorySeparator(first[commonChars])) {
+			return commonChars;
+		}
 
-			bool extendedSyntax = path.StartsWith(ExtendedDevicePathPrefix, StringComparison.Ordinal);
-			bool extendedUncSyntax = path.StartsWith(UncExtendedPathPrefix, StringComparison.Ordinal);
+		// It's possible we matched somewhere in the middle of a segment e.g. C:\Foodie and C:\Foobar.
+		while ((commonChars > 0) && !IsDirectorySeparator(first[commonChars - 1])) {
+			commonChars--;
+		}
 
-			if (extendedSyntax) {
-				// Shift the position we look for the root from to account for the extended prefix
-				if (extendedUncSyntax) {
-					// "\\" -> "\\?\UNC\"
-					uncRootLength = UncExtendedPathPrefix.Length;
-				} else {
-					// "C:" -> "\\?\C:"
-					volumeSeparatorLength += ExtendedDevicePathPrefix.Length;
-				}
+		return commonChars;
+	}
+
+	/// <summary>
+	///     True if the given character is a directory separator.
+	/// </summary>
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	internal static bool IsDirectorySeparator(char c) => (c == Path.DirectorySeparatorChar) || (c == Path.AltDirectorySeparatorChar);
+
+	/// <summary>
+	///     Gets the count of common characters from the left optionally ignoring case
+	/// </summary>
+	private static unsafe int EqualStartingCharacterCount(string first, string second, bool ignoreCase) {
+		if (string.IsNullOrEmpty(first) || string.IsNullOrEmpty(second)) {
+			return 0;
+		}
+
+		int commonChars = 0;
+
+		fixed (char* f = first)
+		fixed (char* s = second) {
+			char* l = f;
+			char* r = s;
+			char* leftEnd = l + first.Length;
+			char* rightEnd = r + second.Length;
+
+			while ((l != leftEnd) && (r != rightEnd) && ((*l == *r) || (ignoreCase && (char.ToUpperInvariant(*l) == char.ToUpperInvariant(*r))))) {
+				commonChars++;
+				l++;
+				r++;
 			}
+		}
 
-			if ((!extendedSyntax || extendedUncSyntax) && (path.Length > 0) && IsDirectorySeparator(path[0])) {
-				// UNC or simple rooted path (e.g. "\foo", NOT "\\?\C:\foo")
+		return commonChars;
+	}
 
-				i = 1; //  Drive rooted (\foo) is one character
+	/// <summary>
+	///     Gets the length of the root of the path (drive, share, etc.).
+	/// </summary>
+	private static int GetRootLength(string path) {
+		int i = 0;
+		int volumeSeparatorLength = 2; // Length to the colon "C:"
+		int uncRootLength = 2; // Length to the start of the server name "\\"
 
-				if (extendedUncSyntax || ((path.Length > 1) && IsDirectorySeparator(path[1]))) {
-					// UNC (\\?\UNC\ or \\), scan past the next two directory separators at most
-					// (e.g. to \\?\UNC\Server\Share or \\Server\Share\)
-					i = uncRootLength;
-					int n = 2; // Maximum separators to skip
+		bool extendedSyntax = path.StartsWith(ExtendedDevicePathPrefix, StringComparison.Ordinal);
+		bool extendedUncSyntax = path.StartsWith(UncExtendedPathPrefix, StringComparison.Ordinal);
 
-					while ((i < path.Length) && (!IsDirectorySeparator(path[i]) || (--n > 0))) {
-						i++;
-					}
-				}
-			} else if ((path.Length >= volumeSeparatorLength) && (path[volumeSeparatorLength - 1] == Path.VolumeSeparatorChar)) {
-				// Path is at least longer than where we expect a colon, and has a colon (\\?\A:, A:)
-				// If the colon is followed by a directory separator, move past it
-				i = volumeSeparatorLength;
+		if (extendedSyntax) {
+			// Shift the position we look for the root from to account for the extended prefix
+			if (extendedUncSyntax) {
+				// "\\" -> "\\?\UNC\"
+				uncRootLength = UncExtendedPathPrefix.Length;
+			} else {
+				// "C:" -> "\\?\C:"
+				volumeSeparatorLength += ExtendedDevicePathPrefix.Length;
+			}
+		}
 
-				if ((path.Length >= volumeSeparatorLength + 1) && IsDirectorySeparator(path[volumeSeparatorLength])) {
+		if ((!extendedSyntax || extendedUncSyntax) && (path.Length > 0) && IsDirectorySeparator(path[0])) {
+			// UNC or simple rooted path (e.g. "\foo", NOT "\\?\C:\foo")
+
+			i = 1; //  Drive rooted (\foo) is one character
+
+			if (extendedUncSyntax || ((path.Length > 1) && IsDirectorySeparator(path[1]))) {
+				// UNC (\\?\UNC\ or \\), scan past the next two directory separators at most
+				// (e.g. to \\?\UNC\Server\Share or \\Server\Share\)
+				i = uncRootLength;
+				int n = 2; // Maximum separators to skip
+
+				while ((i < path.Length) && (!IsDirectorySeparator(path[i]) || (--n > 0))) {
 					i++;
 				}
 			}
+		} else if ((path.Length >= volumeSeparatorLength) && (path[volumeSeparatorLength - 1] == Path.VolumeSeparatorChar)) {
+			// Path is at least longer than where we expect a colon, and has a colon (\\?\A:, A:)
+			// If the colon is followed by a directory separator, move past it
+			i = volumeSeparatorLength;
 
-			return i;
+			if ((path.Length >= volumeSeparatorLength + 1) && IsDirectorySeparator(path[volumeSeparatorLength])) {
+				i++;
+			}
 		}
+
+		return i;
 	}
 }

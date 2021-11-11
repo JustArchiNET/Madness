@@ -23,25 +23,25 @@ using System;
 using System.ComponentModel;
 using JetBrains.Annotations;
 
-namespace JustArchiNET.Madness.Helpers {
-	/// <inheritdoc />
+namespace JustArchiNET.Madness.Helpers;
+
+/// <inheritdoc />
+/// <summary>
+///     Madness type attribute, which annotates what kind of the functionality is provided.
+/// </summary>
+[AttributeUsage(AttributeTargets.Class | AttributeTargets.Constructor | AttributeTargets.Delegate | AttributeTargets.Event | AttributeTargets.Field | AttributeTargets.Method | AttributeTargets.Property)]
+[PublicAPI]
+public sealed class MadnessTypeAttribute : Attribute {
 	/// <summary>
-	///     Madness type attribute, which annotates what kind of the functionality is provided.
+	///     Type of the provided functionality.
 	/// </summary>
-	[AttributeUsage(AttributeTargets.Class | AttributeTargets.Constructor | AttributeTargets.Delegate | AttributeTargets.Event | AttributeTargets.Field | AttributeTargets.Method | AttributeTargets.Property)]
-	[PublicAPI]
-	public sealed class MadnessTypeAttribute : Attribute {
-		/// <summary>
-		///     Type of the provided functionality.
-		/// </summary>
-		public EMadnessType Type { get; }
+	public EMadnessType Type { get; }
 
-		internal MadnessTypeAttribute(EMadnessType type) {
-			if ((type == EMadnessType.Unknown) || !Enum.IsDefined(typeof(EMadnessType), type)) {
-				throw new InvalidEnumArgumentException(nameof(type), (int) type, typeof(EMadnessType));
-			}
-
-			Type = type;
+	internal MadnessTypeAttribute(EMadnessType type) {
+		if ((type == EMadnessType.Unknown) || !Enum.IsDefined(typeof(EMadnessType), type)) {
+			throw new InvalidEnumArgumentException(nameof(type), (int) type, typeof(EMadnessType));
 		}
+
+		Type = type;
 	}
 }

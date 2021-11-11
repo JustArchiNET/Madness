@@ -23,17 +23,17 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 
-namespace JustArchiNET.Madness.Internal {
-	internal sealed class AsyncDisposableWrapper : IAsyncDisposable {
-		private readonly IDisposable Disposable;
+namespace JustArchiNET.Madness.Internal;
 
-		[SuppressMessage("ReSharper", "UnusedParameter.Local")]
-		internal AsyncDisposableWrapper(IDisposable disposable, bool _) => Disposable = disposable ?? throw new ArgumentNullException(nameof(disposable));
+internal sealed class AsyncDisposableWrapper : IAsyncDisposable {
+	private readonly IDisposable Disposable;
 
-		public ValueTask DisposeAsync() {
-			Disposable.Dispose();
+	[SuppressMessage("ReSharper", "UnusedParameter.Local")]
+	internal AsyncDisposableWrapper(IDisposable disposable, bool _) => Disposable = disposable ?? throw new ArgumentNullException(nameof(disposable));
 
-			return default(ValueTask);
-		}
+	public ValueTask DisposeAsync() {
+		Disposable.Dispose();
+
+		return default(ValueTask);
 	}
 }

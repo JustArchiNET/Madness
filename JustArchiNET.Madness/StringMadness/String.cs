@@ -23,39 +23,39 @@ using System;
 using JetBrains.Annotations;
 using JustArchiNET.Madness.Helpers;
 
-namespace JustArchiNET.Madness.StringMadness {
+namespace JustArchiNET.Madness.StringMadness;
+
 #pragma warning disable CA1716, CA1720 // That's exactly our intention
-	[MadnessType(EMadnessType.Replacement)]
-	[PublicAPI]
-	public static class String {
-		[MadnessType(EMadnessType.Implementation)]
-		public delegate void SpanAction<T, in TArg>(Span<T> span, TArg arg);
+[MadnessType(EMadnessType.Replacement)]
+[PublicAPI]
+public static class String {
+	[MadnessType(EMadnessType.Implementation)]
+	public delegate void SpanAction<T, in TArg>(Span<T> span, TArg arg);
 
-		[MadnessType(EMadnessType.Implementation)]
-		public static string Create<TState>(int length, TState state, SpanAction<char, TState> action) {
-			if (action == null) {
-				throw new ArgumentNullException(nameof(action));
-			}
-
-			if (length <= 0) {
-				if (length == 0) {
-					return "";
-				}
-
-				throw new ArgumentOutOfRangeException(nameof(length));
-			}
-
-			char[] buffer = new char[length];
-			action(buffer.AsSpan(), state);
-
-			return new string(buffer);
+	[MadnessType(EMadnessType.Implementation)]
+	public static string Create<TState>(int length, TState state, SpanAction<char, TState> action) {
+		if (action == null) {
+			throw new ArgumentNullException(nameof(action));
 		}
 
-		[MadnessType(EMadnessType.Proxy)]
-		public static bool IsNullOrEmpty(string value) => string.IsNullOrEmpty(value);
+		if (length <= 0) {
+			if (length == 0) {
+				return "";
+			}
 
-		[MadnessType(EMadnessType.Proxy)]
-		public static bool IsNullOrWhiteSpace(string value) => string.IsNullOrWhiteSpace(value);
+			throw new ArgumentOutOfRangeException(nameof(length));
+		}
+
+		char[] buffer = new char[length];
+		action(buffer.AsSpan(), state);
+
+		return new string(buffer);
 	}
-#pragma warning restore CA1716, CA1720 // That's exactly our intention
+
+	[MadnessType(EMadnessType.Proxy)]
+	public static bool IsNullOrEmpty(string value) => string.IsNullOrEmpty(value);
+
+	[MadnessType(EMadnessType.Proxy)]
+	public static bool IsNullOrWhiteSpace(string value) => string.IsNullOrWhiteSpace(value);
 }
+#pragma warning restore CA1716, CA1720 // That's exactly our intention

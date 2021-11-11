@@ -22,17 +22,17 @@
 using JetBrains.Annotations;
 using JustArchiNET.Madness.Helpers;
 
-namespace JustArchiNET.Madness.HashCodeMadness {
+namespace JustArchiNET.Madness.HashCodeMadness;
+
+[MadnessType(EMadnessType.Implementation)]
+[PublicAPI]
+public static class HashCode {
 	[MadnessType(EMadnessType.Implementation)]
-	[PublicAPI]
-	public static class HashCode {
-		[MadnessType(EMadnessType.Implementation)]
-		public static int Combine<T1, T2>(T1 value1, T2 value2) => (value1, value2).GetHashCode();
+	public static int Combine<T1, T2>(T1 value1, T2 value2) => (value1, value2).GetHashCode();
 
-		[MadnessType(EMadnessType.Implementation)]
-		public static int Combine<T1, T2, T3>(T1 value1, T2 value2, T3 value3) => (value1, value2, value3).GetHashCode();
+	[MadnessType(EMadnessType.Implementation)]
+	public static int Combine<T1, T2, T3>(T1 value1, T2 value2, T3 value3) => (value1, value2, value3).GetHashCode();
 
-		[MadnessType(EMadnessType.Implementation)]
-		public static int Combine<T1, T2, T3, T4>(T1 value1, T2 value2, T3 value3, T4 value4) => (value1, value2, value3, value4).GetHashCode();
-	}
+	[MadnessType(EMadnessType.Implementation)]
+	public static int Combine<T1, T2, T3, T4>(T1 value1, T2 value2, T3 value3, T4 value4) => (value1, value2, value3, value4).GetHashCode();
 }

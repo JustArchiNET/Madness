@@ -24,44 +24,44 @@ using System.Diagnostics;
 using JetBrains.Annotations;
 using JustArchiNET.Madness.Helpers;
 
-namespace JustArchiNET.Madness {
+namespace JustArchiNET.Madness;
+
+/// <summary>
+///     Static Madness-specific class used for basic runtime-related operations.
+/// </summary>
+[MadnessType(EMadnessType.Extension)]
+[PublicAPI]
+public static class RuntimeMadness {
 	/// <summary>
-	///     Static Madness-specific class used for basic runtime-related operations.
+	///     Boolean value that can be used for determining whether or not the assembly is being executed by the Mono runtime.
 	/// </summary>
+	/// <remarks>
+	///     This is implemented based on the existence of Mono.Runtime type, which might result in false-positives if there is any dependency declaring that type.
+	/// </remarks>
+	/// <returns>
+	///     True if the assembly is executed on Mono runtime (as opposed to Windows-specific .NET Framework one), otherwise false.
+	/// </returns>
 	[MadnessType(EMadnessType.Extension)]
-	[PublicAPI]
-	public static class RuntimeMadness {
-		/// <summary>
-		///     Boolean value that can be used for determining whether or not the assembly is being executed by the Mono runtime.
-		/// </summary>
-		/// <remarks>
-		///     This is implemented based on the existence of Mono.Runtime type, which might result in false-positives if there is any dependency declaring that type.
-		/// </remarks>
-		/// <returns>
-		///     True if the assembly is executed on Mono runtime (as opposed to Windows-specific .NET Framework one), otherwise false.
-		/// </returns>
-		[MadnessType(EMadnessType.Extension)]
-		public static bool IsRunningOnMono => Type.GetType("Mono.Runtime") != null;
+	public static bool IsRunningOnMono => Type.GetType("Mono.Runtime") != null;
 
-		/// <summary>
-		///     <see cref="Process.StartTime" /> of current process, patched for compatibility with Mono.
-		/// </summary>
-		/// <returns>
-		///     <see cref="DateTime" /> containing current process starting time.
-		/// </returns>
-		[MadnessType(EMadnessType.Extension)]
-		public static DateTime ProcessStartTime {
-			get {
-				if (IsRunningOnMono) {
-					return SavedProcessStartTime;
-				}
-
-				using Process process = Process.GetCurrentProcess();
-
-				return process.StartTime;
+	/// <summary>
+	///     <see cref="Process.StartTime" /> of current process, patched for compatibility with Mono.
+	/// </summary>
+	/// <returns>
+	///     <see cref="DateTime" /> containing current process starting time.
+	/// </returns>
+	[MadnessType(EMadnessType.Extension)]
+	public static DateTime ProcessStartTime {
+		get {
+			if (IsRunningOnMono) {
+				return SavedProcessStartTime;
 			}
-		}
 
-		private static readonly DateTime SavedProcessStartTime = DateTime.UtcNow;
+			using Process process = Process.GetCurrentProcess();
+
+			return process.StartTime;
+		}
 	}
+
+	private static readonly DateTime SavedProcessStartTime = DateTime.UtcNow;
 }
