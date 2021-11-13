@@ -52,6 +52,47 @@ If you're targetting multiple frameworks out of which only one is .NET Framework
 
 Usage depends on where you need to go *mad*. It'll require from you to add appropriate `using` clause in the affected source files.
 
+## Hint
+
+Instead of adding `using` clause to each file, you can instead decide to do it once in the `csproj` (or appropriate project declaration) file. This way you won't need to add `#if NETFRAMEWORK` only for `using JustArchiNET.Madness(...);` clauses.
+
+Example:
+
+```csproj
+<ItemGroup Condition="'$(TargetFramework)' == 'net48'">
+	<PackageReference Include="JustArchiNET.Madness" />
+
+	<Using Include="JustArchiNET.Madness" />
+	<Using Include="JustArchiNET.Madness.EnvironmentMadness.Environment" Alias="Environment" />
+	<Using Include="JustArchiNET.Madness.FileMadness.File" Alias="File" />
+	<Using Include="JustArchiNET.Madness.HashCodeMadness.HashCode" Alias="HashCode" />
+	<Using Include="JustArchiNET.Madness.HMACSHA1Madness.HMACSHA1" Alias="HMACSHA1" />
+	<Using Include="JustArchiNET.Madness.OperatingSystemMadness.OperatingSystem" Alias="OperatingSystem" />
+	<Using Include="JustArchiNET.Madness.PathMadness.Path" Alias="Path" />
+	<Using Include="JustArchiNET.Madness.RandomMadness.Random" Alias="Random" />
+	<Using Include="JustArchiNET.Madness.SHA256Madness.SHA256" Alias="SHA256" />
+	<Using Include="JustArchiNET.Madness.StringMadness.String" Alias="String" />
+</ItemGroup>
+```
+
+We recommend to add `<Using>` clauses only for parts that you actually require/want to use from Madness.
+
+Because of the `File` using declared above, you're now able to write this very nice ifdef-free code for both `net48` and newer platform target.
+
+```csharp
+using System.IO;
+using System.Threading.Tasks;
+
+namespace ThisIsMadness {
+	public static class ThisIsSparta {
+		public static async Task Scream() {
+			// This compiles for both .NET Framework and other targets without any #if clauses, nice
+			await File.WriteAllTextAsync("example.txt", "example").ConfigureAwait(false);
+		}
+	}
+}
+```
+
 ### Static extensions
 
 Static extensions include useful stuff that you'll usually stumble upon with newer language syntax and/or .NET platform.
