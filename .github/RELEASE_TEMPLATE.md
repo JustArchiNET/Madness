@@ -1,9 +1,3 @@
-### Notice
-
-**Pre-releases are experimental versions that often contain unpatched bugs, work-in-progress features or rewritten implementations. If you don't consider yourself advanced user, please download **[latest stable release](https://github.com/JustArchiNET/Madness/releases/latest)** instead.**
-
----
-
 ### Changelog
 
 This is automated GitHub deployment, human-readable changelog should be available soon. In the meantime please refer to **[GitHub commits](https://github.com/JustArchiNET/Madness/commits/main)**.
