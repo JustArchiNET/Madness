@@ -309,10 +309,12 @@ For best results you should include exact classes, methods, properties and every
 We're also open for so-called "proxy" features in static classes that we already provide, to decrease burden of putting `#if` clauses everywhere. We've included all of those we require ourselves, such as:
 
 ```csharp
-public static bool Exists(string? path) => System.IO.File.Exists(path);
+public static class File {
+	public static bool Exists(string? path) => System.IO.File.Exists(path);
+}
 ```
 
-Feel free to send a PR for those as well. If it helps you in any way to increase code quality and sanity for your original projects, `Madness` doesn't mind to take a hit for justified reason ☠️.
+This allows consumers to alias `File` to our implementation without additional burden - feel free to send a PR for those as well. If it helps you in any way to increase code quality and sanity for your original projects, `Madness` doesn't mind to take a hit for justified reason ☠️.
 
 ---
 
