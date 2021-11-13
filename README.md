@@ -54,7 +54,7 @@ Usage depends on where you need to go *mad*. It'll require from you to add appro
 
 ## Hint
 
-Instead of adding `using` clause to each file, you can instead decide to do it once in the `csproj` (or appropriate project declaration) file. This way you won't need to add `#if NETFRAMEWORK` only for `using JustArchiNET.Madness(...);` clauses.
+Instead of adding `using` clause to each file, you can instead decide to do it once in the `csproj` (or appropriate project declaration) file. This way you won't need to add `#if NETFRAMEWORK` only for `using JustArchiNET.Madness(...)` clauses.
 
 Example:
 
@@ -77,7 +77,7 @@ Example:
 
 We recommend to add `<Using>` clauses only for parts that you actually require/want to use from Madness.
 
-Because of the `File` using declared above, you're now able to write this very nice ifdef-free code for both `net48` and newer platform target.
+Because of the `File` using declared above, you're now able to write this very nice ifdef-free code for both `net48` and newer platform target:
 
 ```csharp
 using System.IO;
