@@ -29,7 +29,7 @@ namespace JustArchiNET.Madness.ConvertMadness;
 [PublicAPI]
 public static class Convert {
 	[MadnessType(EMadnessType.Proxy)]
-	public static object ChangeType(object value, Type conversionType, IFormatProvider provider) => System.Convert.ChangeType(value, conversionType, provider);
+	public static object ChangeType(object? value, Type conversionType, IFormatProvider? provider) => System.Convert.ChangeType(value, conversionType, provider);
 
 	[MadnessType(EMadnessType.Proxy)]
 	public static byte[] FromBase64String(string s) => System.Convert.FromBase64String(s);
