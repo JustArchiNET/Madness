@@ -52,10 +52,14 @@ public static class String {
 		return new string(buffer);
 	}
 
+	[ContractAnnotation("null=>true", true)]
 	[MadnessType(EMadnessType.Proxy)]
+	[Pure]
 	public static bool IsNullOrEmpty(string value) => string.IsNullOrEmpty(value);
 
+	[ContractAnnotation("null=>true", true)]
 	[MadnessType(EMadnessType.Proxy)]
+	[Pure]
 	public static bool IsNullOrWhiteSpace(string value) => string.IsNullOrWhiteSpace(value);
 }
 #pragma warning restore CA1716, CA1720 // That's exactly our intention

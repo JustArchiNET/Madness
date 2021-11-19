@@ -40,10 +40,12 @@ public static class Environment {
 		}
 	}
 
+	[ContractAnnotation("=>halt")]
 	[MadnessType(EMadnessType.Proxy)]
 	public static void Exit(int exitCode) => System.Environment.Exit(exitCode);
 
 	[MadnessType(EMadnessType.Proxy)]
+	[Pure]
 	public static string[] GetCommandLineArgs() => System.Environment.GetCommandLineArgs();
 
 	[MadnessType(EMadnessType.Proxy)]

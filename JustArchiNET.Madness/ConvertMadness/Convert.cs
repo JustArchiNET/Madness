@@ -29,15 +29,19 @@ namespace JustArchiNET.Madness.ConvertMadness;
 [PublicAPI]
 public static class Convert {
 	[MadnessType(EMadnessType.Proxy)]
+	[Pure]
 	public static object ChangeType(object? value, Type conversionType, IFormatProvider? provider) => System.Convert.ChangeType(value, conversionType, provider);
 
 	[MadnessType(EMadnessType.Proxy)]
+	[Pure]
 	public static byte[] FromBase64String(string s) => System.Convert.FromBase64String(s);
 
 	[MadnessType(EMadnessType.Proxy)]
+	[Pure]
 	public static string ToBase64String(byte[] inArray) => System.Convert.ToBase64String(inArray);
 
 	[MadnessType(EMadnessType.Implementation)]
+	[Pure]
 	public static string ToHexString(byte[] inArray) {
 		if (inArray == null) {
 			throw new ArgumentNullException(nameof(inArray));

@@ -39,19 +39,28 @@ public static class Path {
 	[MadnessType(EMadnessType.Proxy)]
 	public static string Combine(params string[] paths) => System.IO.Path.Combine(paths);
 
+	[ContractAnnotation("null=>null")]
 	[MadnessType(EMadnessType.Proxy)]
+	[Pure]
 	public static string? GetDirectoryName(string? path) => System.IO.Path.GetDirectoryName(path);
 
+	[ContractAnnotation("null=>null;notnull=>notnull")]
 	[MadnessType(EMadnessType.Proxy)]
+	[Pure]
 	public static string? GetExtension(string? path) => System.IO.Path.GetExtension(path);
 
+	[ContractAnnotation("null=>null;notnull=>notnull")]
 	[MadnessType(EMadnessType.Proxy)]
+	[Pure]
 	public static string? GetFileName(string? path) => System.IO.Path.GetFileName(path);
 
+	[ContractAnnotation("null=>null;notnull=>notnull")]
 	[MadnessType(EMadnessType.Proxy)]
+	[Pure]
 	public static string? GetFileNameWithoutExtension(string? path) => System.IO.Path.GetFileNameWithoutExtension(path);
 
 	[MadnessType(EMadnessType.Proxy)]
+	[Pure]
 	public static string GetFullPath(string path) => System.IO.Path.GetFullPath(path);
 
 	[MadnessType(EMadnessType.Implementation)]
