@@ -43,13 +43,13 @@ public static class Path {
 	public static string? GetDirectoryName(string? path) => System.IO.Path.GetDirectoryName(path);
 
 	[MadnessType(EMadnessType.Proxy)]
-	public static string GetExtension(string? path) => System.IO.Path.GetExtension(path);
+	public static string? GetExtension(string? path) => System.IO.Path.GetExtension(path);
 
 	[MadnessType(EMadnessType.Proxy)]
-	public static string GetFileName(string? path) => System.IO.Path.GetFileName(path);
+	public static string? GetFileName(string? path) => System.IO.Path.GetFileName(path);
 
 	[MadnessType(EMadnessType.Proxy)]
-	public static string GetFileNameWithoutExtension(string? path) => System.IO.Path.GetFileNameWithoutExtension(path);
+	public static string? GetFileNameWithoutExtension(string? path) => System.IO.Path.GetFileNameWithoutExtension(path);
 
 	[MadnessType(EMadnessType.Proxy)]
 	public static string GetFullPath(string path) => System.IO.Path.GetFullPath(path);
