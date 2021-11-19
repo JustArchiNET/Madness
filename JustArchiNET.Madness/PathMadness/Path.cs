@@ -47,17 +47,17 @@ public static class Path {
 	[ContractAnnotation("null=>null;notnull=>notnull")]
 	[MadnessType(EMadnessType.Proxy)]
 	[Pure]
-	public static string? GetExtension(string? path) => System.IO.Path.GetExtension(path);
+	public static string GetExtension(string? path) => System.IO.Path.GetExtension(path)!;
 
 	[ContractAnnotation("null=>null;notnull=>notnull")]
 	[MadnessType(EMadnessType.Proxy)]
 	[Pure]
-	public static string? GetFileName(string? path) => System.IO.Path.GetFileName(path);
+	public static string GetFileName(string? path) => System.IO.Path.GetFileName(path)!;
 
 	[ContractAnnotation("null=>null;notnull=>notnull")]
 	[MadnessType(EMadnessType.Proxy)]
 	[Pure]
-	public static string? GetFileNameWithoutExtension(string? path) => System.IO.Path.GetFileNameWithoutExtension(path);
+	public static string GetFileNameWithoutExtension(string? path) => System.IO.Path.GetFileNameWithoutExtension(path)!;
 
 	[MadnessType(EMadnessType.Proxy)]
 	[Pure]
