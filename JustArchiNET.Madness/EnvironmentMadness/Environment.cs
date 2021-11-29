@@ -50,4 +50,7 @@ public static class Environment {
 
 	[MadnessType(EMadnessType.Proxy)]
 	public static string? GetEnvironmentVariable(string variable) => System.Environment.GetEnvironmentVariable(variable);
+
+	[MadnessType(EMadnessType.Proxy)]
+	public static string GetFolderPath(System.Environment.SpecialFolder folder, System.Environment.SpecialFolderOption option) => System.Environment.GetFolderPath(folder, option);
 }
