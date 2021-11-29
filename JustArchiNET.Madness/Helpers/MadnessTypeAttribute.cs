@@ -29,7 +29,7 @@ namespace JustArchiNET.Madness.Helpers;
 /// <summary>
 ///     Madness type attribute, which annotates what kind of the functionality is provided.
 /// </summary>
-[AttributeUsage(AttributeTargets.Class | AttributeTargets.Constructor | AttributeTargets.Delegate | AttributeTargets.Event | AttributeTargets.Field | AttributeTargets.Method | AttributeTargets.Property)]
+[AttributeUsage(AttributeTargets.Class | AttributeTargets.Constructor | AttributeTargets.Delegate | AttributeTargets.Enum | AttributeTargets.Event | AttributeTargets.Field | AttributeTargets.Method | AttributeTargets.Property)]
 [PublicAPI]
 public sealed class MadnessTypeAttribute : Attribute {
 	/// <summary>
