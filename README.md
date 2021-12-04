@@ -30,11 +30,11 @@
 
 ## Description
 
-Madness embraces your project by including compatibility layer for selected APIs normally not available on .NET Framework target.
+Madness embraces your project by including compatibility layer for selected APIs normally not available on .NET Framework (and alike) platforms.
 
 ## Installation
 
-We support `netstandard2.0`, so .NET Framework 4.6.1 and newer.
+We support `netstandard2.0`, so .NET Framework 4.6.1 and newer. There is also a `netstandard2.1` package that can be used e.g. on Xamarin.
 
 ```
 dotnet add package JustArchiNET.Madness
