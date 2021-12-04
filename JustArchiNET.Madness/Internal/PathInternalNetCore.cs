@@ -19,6 +19,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#if !NETSTANDARD2_1_OR_GREATER
 using System;
 using System.IO;
 using System.Runtime.CompilerServices;
@@ -167,3 +168,4 @@ internal static class PathInternalNetCore {
 		return i;
 	}
 }
+#endif

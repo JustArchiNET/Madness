@@ -27,6 +27,16 @@ namespace JustArchiNET.Madness.HashCodeMadness;
 [MadnessType(EMadnessType.Implementation)]
 [PublicAPI]
 public static class HashCode {
+#if NETSTANDARD2_1_OR_GREATER
+	[MadnessType(EMadnessType.Proxy)]
+	public static int Combine<T1, T2>(T1 value1, T2 value2) => System.HashCode.Combine(value1, value2);
+
+	[MadnessType(EMadnessType.Proxy)]
+	public static int Combine<T1, T2, T3>(T1 value1, T2 value2, T3 value3) => System.HashCode.Combine(value1, value2, value3);
+
+	[MadnessType(EMadnessType.Proxy)]
+	public static int Combine<T1, T2, T3, T4>(T1 value1, T2 value2, T3 value3, T4 value4) => System.HashCode.Combine(value1, value2, value3, value4);
+#else
 	[MadnessType(EMadnessType.Implementation)]
 	public static int Combine<T1, T2>(T1 value1, T2 value2) => (value1, value2).GetHashCode();
 
@@ -35,4 +45,5 @@ public static class HashCode {
 
 	[MadnessType(EMadnessType.Implementation)]
 	public static int Combine<T1, T2, T3, T4>(T1 value1, T2 value2, T3 value3, T4 value4) => (value1, value2, value3, value4).GetHashCode();
+#endif
 }

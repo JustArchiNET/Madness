@@ -19,7 +19,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#if NETSTANDARD2_1_OR_GREATER
+using System.Buffers;
+#else
 using System;
+#endif
 using JetBrains.Annotations;
 using JustArchiNET.Madness.Helpers;
 
@@ -29,6 +33,10 @@ namespace JustArchiNET.Madness.StringMadness;
 [MadnessType(EMadnessType.Replacement)]
 [PublicAPI]
 public static class String {
+#if NETSTANDARD2_1_OR_GREATER
+	[MadnessType(EMadnessType.Proxy)]
+	public static string Create<TState>(int length, TState state, SpanAction<char, TState> action) => string.Create(length, state, action);
+#else
 	[MadnessType(EMadnessType.Implementation)]
 	public delegate void SpanAction<T, in TArg>(Span<T> span, TArg arg);
 
@@ -51,6 +59,7 @@ public static class String {
 
 		return new string(buffer);
 	}
+#endif
 
 	[ContractAnnotation("null=>true", true)]
 	[MadnessType(EMadnessType.Proxy)]

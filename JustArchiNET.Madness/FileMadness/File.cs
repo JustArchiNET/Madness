@@ -32,12 +32,17 @@ public static class File {
 	[MadnessType(EMadnessType.Proxy)]
 	public static void AppendAllText(string path, string? contents) => System.IO.File.AppendAllText(path, contents);
 
+#if NETSTANDARD2_1_OR_GREATER
+	[MadnessType(EMadnessType.Proxy)]
+	public static Task AppendAllTextAsync(string path, string? contents) => System.IO.File.AppendAllTextAsync(path, contents);
+#else
 	[MadnessType(EMadnessType.Implementation)]
 	public static Task AppendAllTextAsync(string path, string? contents) {
 		AppendAllText(path, contents);
 
 		return Task.CompletedTask;
 	}
+#endif
 
 	[MadnessType(EMadnessType.Proxy)]
 	public static void Delete(string path) => System.IO.File.Delete(path);
@@ -63,14 +68,24 @@ public static class File {
 	[MadnessType(EMadnessType.Proxy)]
 	public static byte[] ReadAllBytes(string path) => System.IO.File.ReadAllBytes(path);
 
+#if NETSTANDARD2_1_OR_GREATER
+	[MadnessType(EMadnessType.Proxy)]
+	public static Task<byte[]> ReadAllBytesAsync(string path) => System.IO.File.ReadAllBytesAsync(path);
+#else
 	[MadnessType(EMadnessType.Implementation)]
 	public static Task<byte[]> ReadAllBytesAsync(string path) => Task.FromResult(ReadAllBytes(path));
+#endif
 
 	[MadnessType(EMadnessType.Proxy)]
 	public static string ReadAllText(string path) => System.IO.File.ReadAllText(path);
 
+#if NETSTANDARD2_1_OR_GREATER
+	[MadnessType(EMadnessType.Proxy)]
+	public static Task<string> ReadAllTextAsync(string path) => System.IO.File.ReadAllTextAsync(path);
+#else
 	[MadnessType(EMadnessType.Implementation)]
 	public static Task<string> ReadAllTextAsync(string path) => Task.FromResult(ReadAllText(path));
+#endif
 
 	[MadnessType(EMadnessType.Proxy)]
 	public static void Replace(string sourceFileName, string destinationFileName, string? destinationBackupFileName) => System.IO.File.Replace(sourceFileName, destinationFileName, destinationBackupFileName);
@@ -78,10 +93,15 @@ public static class File {
 	[MadnessType(EMadnessType.Proxy)]
 	public static void WriteAllText(string path, string? contents) => System.IO.File.WriteAllText(path, contents);
 
+#if NETSTANDARD2_1_OR_GREATER
+	[MadnessType(EMadnessType.Proxy)]
+	public static Task WriteAllTextAsync(string path, string? contents) => System.IO.File.WriteAllTextAsync(path, contents);
+#else
 	[MadnessType(EMadnessType.Implementation)]
 	public static Task WriteAllTextAsync(string path, string? contents) {
 		WriteAllText(path, contents);
 
 		return Task.CompletedTask;
 	}
+#endif
 }

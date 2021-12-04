@@ -19,17 +19,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
+#if !NETSTANDARD2_1_OR_GREATER
 using System.Collections.Generic;
-using System.IO;
 using System.Net.WebSockets;
+using System.Threading;
+using JustArchiNET.Madness.Internal;
+#endif
+using System;
+using System.IO;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 using JustArchiNET.Madness.Helpers;
-using JustArchiNET.Madness.Internal;
 using Microsoft.AspNetCore.Hosting;
 
 namespace JustArchiNET.Madness;
@@ -59,6 +61,7 @@ public static class StaticExtensions {
 		return Task.FromResult(hashAlgorithm.ComputeHash(inputStream));
 	}
 
+#if !NETSTANDARD2_1_OR_GREATER
 	[MadnessType(EMadnessType.Implementation)]
 	public static IAsyncDisposable ConfigureAwait(this IDisposable source, bool continueOnCapturedContext) {
 		if (source == null) {
@@ -67,33 +70,8 @@ public static class StaticExtensions {
 
 		return new AsyncDisposableWrapper(source, continueOnCapturedContext);
 	}
+#endif
 
-	/// <summary>
-	///     Configures a <see cref="IWebHostBuilder" /> with defaults for hosting a web app.
-	/// </summary>
-	/// <remarks>
-	///     The following defaults are applied to the <see cref="IWebHostBuilder" />:
-	///     <list type="bullet">
-	///         <item>
-	///             <description>use Kestrel as the web server and configure it using the application's configuration providers</description>
-	///         </item>
-	///         <item>
-	///             <description>configure <see cref="IHostingEnvironment.WebRootFileProvider" /> to include static web assets from projects referenced by the entry assembly during development</description>
-	///         </item>
-	///         <item>
-	///             <description>adds the HostFiltering middleware</description>
-	///         </item>
-	///         <item>
-	///             <description>adds the ForwardedHeaders middleware if ASPNETCORE_FORWARDEDHEADERS_ENABLED=true,</description>
-	///         </item>
-	///         <item>
-	///             <description>enable IIS integration</description>
-	///         </item>
-	///     </list>
-	/// </remarks>
-	/// <param name="builder">The <see cref="IWebHostBuilder" /> instance to configure.</param>
-	/// <param name="configure">The configure callback</param>
-	/// <returns>A reference to the <paramref name="builder" /> after the operation has completed.</returns>
 	[MadnessType(EMadnessType.Implementation)]
 	public static IWebHostBuilder ConfigureWebHostDefaults(this IWebHostBuilder builder, Action<IWebHostBuilder> configure) {
 		if (configure == null) {
@@ -105,6 +83,7 @@ public static class StaticExtensions {
 		return builder;
 	}
 
+#if !NETSTANDARD2_1_OR_GREATER
 	[MadnessType(EMadnessType.Implementation)]
 	public static bool Contains(this string input, char value) {
 		if (input == null) {
@@ -238,16 +217,6 @@ public static class StaticExtensions {
 		return text.Split(new[] { separator }, options);
 	}
 
-	/// <summary>
-	///     Sets the capacity of this dictionary to what it would be if it had been originally initialized with all its entries
-	/// </summary>
-	/// <remarks>
-	///     This method can be used to minimize the memory overhead
-	///     once it is known that no new elements will be added.
-	///     To allocate minimum size storage array, execute the following statements:
-	///     dictionary.Clear();
-	///     dictionary.TrimExcess();
-	/// </remarks>
 	[MadnessType(EMadnessType.Implementation)]
 	public static void TrimExcess<TKey, TValue>(this Dictionary<TKey, TValue> _) { } // no-op
 
@@ -271,4 +240,5 @@ public static class StaticExtensions {
 
 		return default(ValueTask);
 	}
+#endif
 }

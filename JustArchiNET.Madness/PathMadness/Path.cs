@@ -19,11 +19,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#if !NETSTANDARD2_1_OR_GREATER
 using System;
 using System.Text;
+using JustArchiNET.Madness.Internal;
+#endif
 using JetBrains.Annotations;
 using JustArchiNET.Madness.Helpers;
-using JustArchiNET.Madness.Internal;
 
 namespace JustArchiNET.Madness.PathMadness;
 
@@ -63,6 +65,10 @@ public static class Path {
 	[Pure]
 	public static string GetFullPath(string path) => System.IO.Path.GetFullPath(path);
 
+#if NETSTANDARD2_1_OR_GREATER
+	[MadnessType(EMadnessType.Proxy)]
+	public static string GetRelativePath(string relativeTo, string path) => System.IO.Path.GetRelativePath(relativeTo, path);
+#else
 	[MadnessType(EMadnessType.Implementation)]
 	public static string GetRelativePath(string relativeTo, string path) {
 		if (string.IsNullOrEmpty(relativeTo)) {
@@ -157,6 +163,7 @@ public static class Path {
 
 		return sb.ToString(); //StringBuilderCache.GetStringAndRelease(sb);
 	}
+#endif
 
 	[MadnessType(EMadnessType.Proxy)]
 	public static string GetTempPath() => System.IO.Path.GetTempPath();
