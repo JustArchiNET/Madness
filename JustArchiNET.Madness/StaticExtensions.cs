@@ -59,6 +59,7 @@ public static class StaticExtensions {
 		return Task.FromResult(hashAlgorithm.ComputeHash(inputStream));
 	}
 
+#if !NETSTANDARD2_1_OR_GREATER
 	[MadnessType(EMadnessType.Implementation)]
 	public static IAsyncDisposable ConfigureAwait(this IDisposable source, bool continueOnCapturedContext) {
 		if (source == null) {
@@ -67,6 +68,7 @@ public static class StaticExtensions {
 
 		return new AsyncDisposableWrapper(source, continueOnCapturedContext);
 	}
+#endif
 
 	/// <summary>
 	///     Configures a <see cref="IWebHostBuilder" /> with defaults for hosting a web app.

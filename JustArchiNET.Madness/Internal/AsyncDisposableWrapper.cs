@@ -19,6 +19,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#if !NETSTANDARD2_1_OR_GREATER
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
@@ -37,3 +38,4 @@ internal sealed class AsyncDisposableWrapper : IAsyncDisposable {
 		return default(ValueTask);
 	}
 }
+#endif
