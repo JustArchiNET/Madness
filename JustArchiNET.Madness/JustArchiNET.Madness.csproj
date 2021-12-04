@@ -1,8 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="ConfigureAwaitChecker.Analyzer" PrivateAssets="all" />
