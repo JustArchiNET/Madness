@@ -83,14 +83,14 @@ jobs:
 
     - name: Upload Madness.nupkg
       continue-on-error: true
-      uses: actions/upload-artifact@v2.2.4
+      uses: actions/upload-artifact@v2.3.0
       with:
         name: ${{ matrix.os }}_Madness.nupkg
         path: out/JustArchiNET.Madness.nupkg
 
     - name: Upload Madness.snupkg
       continue-on-error: true
-      uses: actions/upload-artifact@v2.2.4
+      uses: actions/upload-artifact@v2.3.0
       with:
         name: ${{ matrix.os }}_Madness.snupkg
         path: out/JustArchiNET.Madness.snupkg
@@ -143,14 +143,14 @@ jobs:
 
     - name: Upload SHA512SUMS
       continue-on-error: true
-      uses: actions/upload-artifact@v2.2.4
+      uses: actions/upload-artifact@v2.3.0
       with:
         name: SHA512SUMS
         path: out/SHA512SUMS
 
     - name: Upload SHA512SUMS.sign
       continue-on-error: true
-      uses: actions/upload-artifact@v2.2.4
+      uses: actions/upload-artifact@v2.3.0
       with:
         name: SHA512SUMS.sign
         path: out/SHA512SUMS.sign
