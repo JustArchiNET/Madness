@@ -22,6 +22,7 @@
 using System;
 using JetBrains.Annotations;
 using JustArchiNET.Madness.Helpers;
+using JustArchiNET.Madness.Internal;
 
 namespace JustArchiNET.Madness.ArgumentNullExceptionMadness;
 
@@ -38,14 +39,30 @@ public class ArgumentNullException : System.ArgumentNullException {
 	public ArgumentNullException() { }
 
 	[MadnessType(EMadnessType.Implementation)]
-	public static void ThrowIfNull<T>(T? argument, string? paramName = null) {
+	public static void ThrowIfNull<T>(
+		[ValidatedNotNull]
+
+#if NETSTANDARD2_1_OR_GREATER
+		[System.Diagnostics.CodeAnalysis.NotNull]
+#endif
+
+		T? argument, string? paramName = null
+	) {
 		if (argument is null) {
 			throw new ArgumentNullException(paramName ?? typeof(T).ToString());
 		}
 	}
 
 	[MadnessType(EMadnessType.Implementation)]
-	public static void ThrowIfNull(object? argument, string? paramName = null) {
+	public static void ThrowIfNull(
+		[ValidatedNotNull]
+
+#if NETSTANDARD2_1_OR_GREATER
+		[System.Diagnostics.CodeAnalysis.NotNull]
+#endif
+
+		object? argument, string? paramName = null
+	) {
 		if (argument is not null) {
 			return;
 		}
