@@ -1,0 +1,56 @@
+//                             _         __  __
+//  ___  ___   ___  _ __    __| |  __ _ |  \/  |
+// / __|/ __| / _ \| '_ \  / _` | / _` || |\/| |
+// \__ \\__ \|  __/| | | || (_| || (_| || |  | |
+// |___/|___/ \___||_| |_| \__,_| \__,_||_|  |_|
+// |
+// Copyright 2021-2022 Łukasz "JustArchi" Domeradzki
+// Contact: JustArchi@JustArchi.net
+// |
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// |
+// http://www.apache.org/licenses/LICENSE-2.0
+// |
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+using System;
+using JetBrains.Annotations;
+using JustArchiNET.Madness.Helpers;
+
+namespace JustArchiNET.Madness.EnumMadness;
+
+[MadnessType(EMadnessType.Replacement)]
+[PublicAPI]
+#pragma warning disable CA1711, CA1716 // We require this class to be named Enum
+public static class Enum {
+	[MadnessType(EMadnessType.Proxy)]
+	public static string? GetName(Type enumType, object value) => System.Enum.GetName(enumType, value);
+
+	[MadnessType(EMadnessType.Proxy)]
+	public static string[] GetNames(Type enumType) => System.Enum.GetNames(enumType);
+
+	[MadnessType(EMadnessType.Proxy)]
+	public static Type GetUnderlyingType(Type enumType) => System.Enum.GetUnderlyingType(enumType);
+
+	[MadnessType(EMadnessType.Proxy)]
+	public static Array GetValues(Type enumType) => System.Enum.GetValues(enumType);
+
+	[MadnessType(EMadnessType.Implementation)]
+	public static bool IsDefined<TEnum>(TEnum value) where TEnum : struct, System.Enum => IsDefined(value.GetType(), value);
+
+	[MadnessType(EMadnessType.Proxy)]
+	public static bool IsDefined(Type enumType, object value) => System.Enum.IsDefined(enumType, value);
+
+	[MadnessType(EMadnessType.Proxy)]
+	public static bool TryParse<TEnum>(string value, out TEnum result) where TEnum : struct => System.Enum.TryParse(value, out result);
+
+	[MadnessType(EMadnessType.Proxy)]
+	public static bool TryParse<TEnum>(string value, bool ignoreCase, out TEnum result) where TEnum : struct => System.Enum.TryParse(value, ignoreCase, out result);
+}
+#pragma warning restore CA1711, CA1716 // We require this class to be named Enum

@@ -65,7 +65,4 @@ public static class StaticExtensions21 {
 
 		return builder;
 	}
-
-	[MadnessType(EMadnessType.Implementation)]
-	public static bool IsDefined<TEnum>(TEnum value) where TEnum : struct, Enum => Enum.IsDefined(value.GetType(), value);
 }
