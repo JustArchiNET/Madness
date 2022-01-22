@@ -4,7 +4,7 @@
 // \__ \\__ \|  __/| | | || (_| || (_| || |  | |
 // |___/|___/ \___||_| |_| \__,_| \__,_||_|  |_|
 // |
-// Copyright 2021-2021 Łukasz "JustArchi" Domeradzki
+// Copyright 2021-2022 Łukasz "JustArchi" Domeradzki
 // Contact: JustArchi@JustArchi.net
 // |
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,48 +20,21 @@
 // limitations under the License.
 
 #if !NETSTANDARD2_1_OR_GREATER
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net.WebSockets;
 using System.Threading;
-using JustArchiNET.Madness.Internal;
-#endif
-using System;
-using System.IO;
-using System.Security.Cryptography;
-using System.Text;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 using JustArchiNET.Madness.Helpers;
-using Microsoft.AspNetCore.Hosting;
+using JustArchiNET.Madness.Internal;
 
 namespace JustArchiNET.Madness;
 
 [MadnessType(EMadnessType.Extension)]
 [PublicAPI]
-public static class StaticExtensions {
-	[MadnessType(EMadnessType.Implementation)]
-	public static StringBuilder Append(this StringBuilder stringBuilder, IFormatProvider? provider, string text) {
-		if (stringBuilder == null) {
-			throw new ArgumentNullException(nameof(stringBuilder));
-		}
-
-		if (text == null) {
-			throw new ArgumentNullException(nameof(text));
-		}
-
-		return stringBuilder.Append(text.ToString(provider));
-	}
-
-	[MadnessType(EMadnessType.Implementation)]
-	public static Task<byte[]> ComputeHashAsync(this HashAlgorithm hashAlgorithm, Stream inputStream) {
-		if (hashAlgorithm == null) {
-			throw new ArgumentNullException(nameof(hashAlgorithm));
-		}
-
-		return Task.FromResult(hashAlgorithm.ComputeHash(inputStream));
-	}
-
-#if !NETSTANDARD2_1_OR_GREATER
+public static class StaticExtensions20 {
 	[MadnessType(EMadnessType.Implementation)]
 	public static IAsyncDisposable ConfigureAwait(this IDisposable source, bool continueOnCapturedContext) {
 		if (source == null) {
@@ -70,20 +43,7 @@ public static class StaticExtensions {
 
 		return new AsyncDisposableWrapper(source, continueOnCapturedContext);
 	}
-#endif
 
-	[MadnessType(EMadnessType.Implementation)]
-	public static IWebHostBuilder ConfigureWebHostDefaults(this IWebHostBuilder builder, Action<IWebHostBuilder> configure) {
-		if (configure == null) {
-			throw new ArgumentNullException(nameof(configure));
-		}
-
-		configure(builder);
-
-		return builder;
-	}
-
-#if !NETSTANDARD2_1_OR_GREATER
 	[MadnessType(EMadnessType.Implementation)]
 	public static bool Contains(this string input, char value) {
 		if (input == null) {
@@ -240,5 +200,5 @@ public static class StaticExtensions {
 
 		return default(ValueTask);
 	}
-#endif
 }
+#endif
