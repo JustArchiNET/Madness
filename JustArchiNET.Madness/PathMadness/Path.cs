@@ -4,7 +4,7 @@
 // \__ \\__ \|  __/| | | || (_| || (_| || |  | |
 // |___/|___/ \___||_| |_| \__,_| \__,_||_|  |_|
 // |
-// Copyright 2021-2021 Łukasz "JustArchi" Domeradzki
+// Copyright 2021-2022 Łukasz "JustArchi" Domeradzki
 // Contact: JustArchi@JustArchi.net
 // |
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,10 +22,10 @@
 #if !NETSTANDARD2_1_OR_GREATER
 using System;
 using System.Text;
-using JustArchiNET.Madness.Internal;
-#endif
 using JetBrains.Annotations;
 using JustArchiNET.Madness.Helpers;
+using JustArchiNET.Madness.Internal;
+#endif
 
 namespace JustArchiNET.Madness.PathMadness;
 
