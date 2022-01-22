@@ -22,10 +22,10 @@
 #if !NETSTANDARD2_1_OR_GREATER
 using System;
 using System.Text;
-using JetBrains.Annotations;
-using JustArchiNET.Madness.Helpers;
 using JustArchiNET.Madness.Internal;
 #endif
+using JetBrains.Annotations;
+using JustArchiNET.Madness.Helpers;
 
 namespace JustArchiNET.Madness.PathMadness;
 
