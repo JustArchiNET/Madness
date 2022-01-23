@@ -25,9 +25,9 @@ using JustArchiNET.Madness.Helpers;
 
 namespace JustArchiNET.Madness.EnumMadness;
 
+#pragma warning disable CA1711, CA1716 // That's exactly our intention
 [MadnessType(EMadnessType.Replacement)]
 [PublicAPI]
-#pragma warning disable CA1711, CA1716 // We require this class to be named Enum
 public static class Enum {
 	[MadnessType(EMadnessType.Proxy)]
 	public static string? GetName(Type enumType, object value) => System.Enum.GetName(enumType, value);
@@ -53,4 +53,4 @@ public static class Enum {
 	[MadnessType(EMadnessType.Proxy)]
 	public static bool TryParse<TEnum>(string value, bool ignoreCase, out TEnum result) where TEnum : struct => System.Enum.TryParse(value, ignoreCase, out result);
 }
-#pragma warning restore CA1711, CA1716 // We require this class to be named Enum
+#pragma warning restore CA1711, CA1716 // That's exactly our intention
