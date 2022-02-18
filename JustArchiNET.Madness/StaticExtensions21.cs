@@ -20,7 +20,9 @@
 // limitations under the License.
 
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -64,5 +66,31 @@ public static class StaticExtensions21 {
 		configure(builder);
 
 		return builder;
+	}
+
+	[MadnessType(EMadnessType.Implementation)]
+	public static TSource? MaxBy<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, IComparer<TKey>? comparer = null) {
+		if (source == null) {
+			throw new ArgumentNullException(nameof(source));
+		}
+
+		if (keySelector == null) {
+			throw new ArgumentNullException(nameof(keySelector));
+		}
+
+		return source.OrderByDescending(keySelector, comparer).FirstOrDefault();
+	}
+
+	[MadnessType(EMadnessType.Implementation)]
+	public static TSource? MinBy<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, IComparer<TKey>? comparer = null) {
+		if (source == null) {
+			throw new ArgumentNullException(nameof(source));
+		}
+
+		if (keySelector == null) {
+			throw new ArgumentNullException(nameof(keySelector));
+		}
+
+		return source.OrderBy(keySelector, comparer).FirstOrDefault();
 	}
 }
