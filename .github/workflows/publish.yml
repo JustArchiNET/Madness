@@ -113,13 +113,13 @@ jobs:
       run: dotnet --info
 
     - name: Download Madness.nupkg artifact from windows-latest
-      uses: actions/download-artifact@v2.1.0
+      uses: actions/download-artifact@v3.0.0
       with:
         name: windows-latest_Madness.nupkg
         path: out
 
     - name: Download Madness.snupkg artifact from windows-latest
-      uses: actions/download-artifact@v2.1.0
+      uses: actions/download-artifact@v3.0.0
       with:
         name: windows-latest_Madness.snupkg
         path: out
