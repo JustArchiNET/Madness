@@ -31,7 +31,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Content Include="..\LICENSE-2.0.txt">
+		<Content Include="..\LICENSE.txt">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
 			<Link>%(RecursiveDir)%(Filename)%(Extension)</Link>
