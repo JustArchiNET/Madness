@@ -20,10 +20,10 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2.4.0
+      uses: actions/checkout@v3.0.0
 
     - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1.9.0
+      uses: actions/setup-dotnet@v2.0.0
       with:
         dotnet-version: ${{ env.DOTNET_SDK_VERSION }}
 
@@ -83,14 +83,14 @@ jobs:
 
     - name: Upload Madness.nupkg
       continue-on-error: true
-      uses: actions/upload-artifact@v2.3.1
+      uses: actions/upload-artifact@v3.0.0
       with:
         name: ${{ matrix.os }}_Madness.nupkg
         path: out/JustArchiNET.Madness.nupkg
 
     - name: Upload Madness.snupkg
       continue-on-error: true
-      uses: actions/upload-artifact@v2.3.1
+      uses: actions/upload-artifact@v3.0.0
       with:
         name: ${{ matrix.os }}_Madness.snupkg
         path: out/JustArchiNET.Madness.snupkg
@@ -102,10 +102,10 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2.4.0
+      uses: actions/checkout@v3.0.0
 
     - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1.9.0
+      uses: actions/setup-dotnet@v2.0.0
       with:
         dotnet-version: ${{ env.DOTNET_SDK_VERSION }}
 
@@ -113,19 +113,19 @@ jobs:
       run: dotnet --info
 
     - name: Download Madness.nupkg artifact from windows-latest
-      uses: actions/download-artifact@v2.1.0
+      uses: actions/download-artifact@v3.0.0
       with:
         name: windows-latest_Madness.nupkg
         path: out
 
     - name: Download Madness.snupkg artifact from windows-latest
-      uses: actions/download-artifact@v2.1.0
+      uses: actions/download-artifact@v3.0.0
       with:
         name: windows-latest_Madness.snupkg
         path: out
 
     - name: Import GPG key for signing
-      uses: crazy-max/ghaction-import-gpg@v4.1.0
+      uses: crazy-max/ghaction-import-gpg@v4.3.0
       with:
         gpg_private_key: ${{ secrets.ARCHIBOT_GPG_PRIVATE_KEY }}
 
@@ -143,14 +143,14 @@ jobs:
 
     - name: Upload SHA512SUMS
       continue-on-error: true
-      uses: actions/upload-artifact@v2.3.1
+      uses: actions/upload-artifact@v3.0.0
       with:
         name: SHA512SUMS
         path: out/SHA512SUMS
 
     - name: Upload SHA512SUMS.sign
       continue-on-error: true
-      uses: actions/upload-artifact@v2.3.1
+      uses: actions/upload-artifact@v3.0.0
       with:
         name: SHA512SUMS.sign
         path: out/SHA512SUMS.sign
