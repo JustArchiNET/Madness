@@ -64,6 +64,7 @@ Example:
 
 	<Using Include="JustArchiNET.Madness" />
 	<Using Include="JustArchiNET.Madness.ArgumentNullExceptionMadness.ArgumentNullException" Alias="ArgumentNullException" />
+	<Using Include="JustArchiNET.Madness.ArrayMadness.Array" Alias="Array" />
 	<Using Include="JustArchiNET.Madness.ConvertMadness.Convert" Alias="Convert" />
 	<Using Include="JustArchiNET.Madness.EnumMadness.Enum" Alias="Enum" />
 	<Using Include="JustArchiNET.Madness.EnvironmentMadness.Environment" Alias="Environment" />
