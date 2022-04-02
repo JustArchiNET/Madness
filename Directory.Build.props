@@ -1,12 +1,13 @@
 <Project>
 	<PropertyGroup>
-		<Version>3.3.0</Version>
+		<Version>3.4.0</Version>
 	</PropertyGroup>
 
 	<PropertyGroup>
 		<AnalysisMode>AllEnabledByDefault</AnalysisMode>
 		<ApplicationIcon>../resources/Madness.ico</ApplicationIcon>
 		<Authors>JustArchi</Authors>
+		<CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
 		<Company>JustArchiNET</Company>
 		<Copyright>Copyright © 2021-$([System.DateTime]::UtcNow.Year) JustArchiNET</Copyright>
 		<Description>Madness embraces your project by including compatibility layer for selected APIs normally not available on .NET Framework target.</Description>
@@ -38,6 +39,7 @@
 	<!-- Default configuration for release builds -->
 	<PropertyGroup Condition="'$(Configuration)' == 'Release'">
 		<AssemblyOriginatorKeyFile>../resources/Madness.snk.pub</AssemblyOriginatorKeyFile>
+		<CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
 		<DebugSymbols>false</DebugSymbols>
 		<DebugType>none</DebugType>
 		<PublicSign>true</PublicSign>
