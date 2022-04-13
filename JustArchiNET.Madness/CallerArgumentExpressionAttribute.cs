@@ -37,9 +37,7 @@ public sealed class CallerArgumentExpressionAttribute : Attribute {
 	///     Gets the target parameter name of the CallerArgumentExpression.
 	/// </summary>
 	/// <returns>The name of the targeted parameter of the CallerArgumentExpression</returns>
-	public string ParameterName {
-		get;
-	}
+	public string ParameterName { get; }
 
 	/// <inheritdoc />
 	/// <summary>
