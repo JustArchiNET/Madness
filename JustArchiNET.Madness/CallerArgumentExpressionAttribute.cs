@@ -19,10 +19,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
 using JetBrains.Annotations;
 using JustArchiNET.Madness.Helpers;
 
+// ReSharper disable once CheckNamespace - we intentionally declare this namespace
 namespace System.Runtime.CompilerServices;
 
 /// <inheritdoc />
