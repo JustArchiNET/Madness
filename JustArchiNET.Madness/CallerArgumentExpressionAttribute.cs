@@ -23,7 +23,7 @@ using System;
 using JetBrains.Annotations;
 using JustArchiNET.Madness.Helpers;
 
-namespace JustArchiNET.Madness;
+namespace System.Runtime.CompilerServices;
 
 /// <inheritdoc />
 /// <summary>
