@@ -19,7 +19,7 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3.0.0
+      uses: actions/checkout@v3.0.1
 
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v2.0.0
