@@ -1,4 +1,4 @@
-﻿//                             _         __  __
+//                             _         __  __
 //  ___  ___   ___  _ __    __| |  __ _ |  \/  |
 // / __|/ __| / _ \| '_ \  / _` | / _` || |\/| |
 // \__ \\__ \|  __/| | | || (_| || (_| || |  | |
@@ -53,15 +53,20 @@ public static class RuntimeMadness {
 	[MadnessType(EMadnessType.Extension)]
 	public static DateTime ProcessStartTime {
 		get {
-			if (IsRunningOnMono) {
-				return SavedProcessStartTime;
+			if (!UseSavedProcessStartTime) {
+				try {
+					using Process process = Process.GetCurrentProcess();
+
+					return process.StartTime;
+				} catch {
+					UseSavedProcessStartTime = true;
+				}
 			}
 
-			using Process process = Process.GetCurrentProcess();
-
-			return process.StartTime;
+			return SavedProcessStartTime;
 		}
 	}
 
+	private static bool UseSavedProcessStartTime;
 	private static readonly DateTime SavedProcessStartTime = DateTime.UtcNow;
 }
