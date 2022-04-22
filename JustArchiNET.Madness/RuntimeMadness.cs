@@ -21,6 +21,7 @@
 
 using System;
 using System.Diagnostics;
+using System.IO;
 using JetBrains.Annotations;
 using JustArchiNET.Madness.Helpers;
 
@@ -53,15 +54,23 @@ public static class RuntimeMadness {
 	[MadnessType(EMadnessType.Extension)]
 	public static DateTime ProcessStartTime {
 		get {
-			if (IsRunningOnMono) {
+			if (ForceSavedProcesStartTime || IsRunningOnMono) {
 				return SavedProcessStartTime;
 			}
 
-			using Process process = Process.GetCurrentProcess();
+			try {
+				using Process process = Process.GetCurrentProcess();
 
-			return process.StartTime;
+				return process.StartTime;
+			} catch {
+				ForceSavedProcesStartTime = true;
+
+				return SavedProcessStartTime;
+			}
 		}
 	}
 
 	private static readonly DateTime SavedProcessStartTime = DateTime.UtcNow;
+
+	private static bool ForceSavedProcesStartTime;
 }
