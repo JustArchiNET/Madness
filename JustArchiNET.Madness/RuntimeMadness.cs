@@ -21,7 +21,6 @@
 
 using System;
 using System.Diagnostics;
-using System.IO;
 using JetBrains.Annotations;
 using JustArchiNET.Madness.Helpers;
 
@@ -73,4 +72,12 @@ public static class RuntimeMadness {
 	private static readonly DateTime SavedProcessStartTime = DateTime.UtcNow;
 
 	private static bool ForceSavedProcesStartTime;
+
+	/// <summary>
+	///     Initializes required structures used by Madness, usually this is not needed, but might be useful when you want to initialize stuff before their actual usage.
+	/// </summary>
+	[MadnessType(EMadnessType.Extension)]
+	public static void Initialize() {
+		// This method is intentionally empty on our side, as it exists purely to set SavedProcessStartTime right
+	}
 }
