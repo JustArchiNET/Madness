@@ -16,7 +16,7 @@
 		<LangVersion>latest</LangVersion>
 		<ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
 		<NeutralLanguage>en</NeutralLanguage>
-		<NoWarn>1591</NoWarn>
+		<NoWarn>1591,NU1507</NoWarn>
 		<Nullable>enable</Nullable>
 		<PackageIcon>Madness.png</PackageIcon>
 		<PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
