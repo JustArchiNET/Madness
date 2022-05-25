@@ -1,6 +1,6 @@
 <Project>
 	<ItemGroup>
-		<PackageVersion Include="ConfigureAwaitChecker.Analyzer" Version="5.0.0" />
+		<PackageVersion Include="ConfigureAwaitChecker.Analyzer" Version="5.0.0.1" />
 		<PackageVersion Include="JetBrains.Annotations" Version="2022.1.0" />
 		<PackageVersion Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="1.0.0" />
 		<PackageVersion Include="Microsoft.SourceLink.GitHub" Version="1.1.1" />
