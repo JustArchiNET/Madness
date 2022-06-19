@@ -36,7 +36,25 @@ namespace JustArchiNET.Madness;
 [PublicAPI]
 public static class StaticExtensions20 {
 	[MadnessType(EMadnessType.Implementation)]
-	public static IAsyncDisposable ConfigureAwait(this IDisposable source, bool continueOnCapturedContext) {
+	public static IAsyncDisposable ConfigureAwait(this Stream source, bool continueOnCapturedContext) {
+		if (source == null) {
+			throw new ArgumentNullException(nameof(source));
+		}
+
+		return new AsyncDisposableWrapper(source, continueOnCapturedContext);
+	}
+
+	[MadnessType(EMadnessType.Implementation)]
+	public static IAsyncDisposable ConfigureAwait(this TextWriter source, bool continueOnCapturedContext) {
+		if (source == null) {
+			throw new ArgumentNullException(nameof(source));
+		}
+
+		return new AsyncDisposableWrapper(source, continueOnCapturedContext);
+	}
+
+	[MadnessType(EMadnessType.Implementation)]
+	public static IAsyncDisposable ConfigureAwait(this Timer source, bool continueOnCapturedContext) {
 		if (source == null) {
 			throw new ArgumentNullException(nameof(source));
 		}
