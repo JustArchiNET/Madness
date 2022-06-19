@@ -36,31 +36,13 @@ namespace JustArchiNET.Madness;
 [PublicAPI]
 public static class StaticExtensions20 {
 	[MadnessType(EMadnessType.Implementation)]
-	public static IAsyncDisposable ConfigureAwait(this Stream source, bool continueOnCapturedContext) {
-		if (source == null) {
-			throw new ArgumentNullException(nameof(source));
-		}
-
-		return new AsyncDisposableWrapper(source, continueOnCapturedContext);
-	}
+	public static IAsyncDisposable ConfigureAwait(this Stream source, bool continueOnCapturedContext) => ConfigureAwait<Stream>(source, continueOnCapturedContext);
 
 	[MadnessType(EMadnessType.Implementation)]
-	public static IAsyncDisposable ConfigureAwait(this TextWriter source, bool continueOnCapturedContext) {
-		if (source == null) {
-			throw new ArgumentNullException(nameof(source));
-		}
-
-		return new AsyncDisposableWrapper(source, continueOnCapturedContext);
-	}
+	public static IAsyncDisposable ConfigureAwait(this TextWriter source, bool continueOnCapturedContext) => ConfigureAwait<TextWriter>(source, continueOnCapturedContext);
 
 	[MadnessType(EMadnessType.Implementation)]
-	public static IAsyncDisposable ConfigureAwait(this Timer source, bool continueOnCapturedContext) {
-		if (source == null) {
-			throw new ArgumentNullException(nameof(source));
-		}
-
-		return new AsyncDisposableWrapper(source, continueOnCapturedContext);
-	}
+	public static IAsyncDisposable ConfigureAwait(this Timer source, bool continueOnCapturedContext) => ConfigureAwait<Timer>(source, continueOnCapturedContext);
 
 	[MadnessType(EMadnessType.Implementation)]
 	public static bool Contains(this string input, char value) {
@@ -207,6 +189,14 @@ public static class StaticExtensions20 {
 		byte[] byteArray = buffer.ToArray();
 
 		await stream.WriteAsync(byteArray, 0, byteArray.Length).ConfigureAwait(false);
+	}
+
+	private static IAsyncDisposable ConfigureAwait<T>(T source, bool continueOnCapturedContext) where T : IDisposable {
+		if (source is null) {
+			throw new ArgumentNullException(nameof(source));
+		}
+
+		return new AsyncDisposableWrapper(source, continueOnCapturedContext);
 	}
 
 	private static ValueTask FakeDisposeAsync(IDisposable? disposable) {
