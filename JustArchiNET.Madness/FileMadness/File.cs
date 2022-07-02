@@ -77,6 +77,17 @@ public static class File {
 #endif
 
 	[MadnessType(EMadnessType.Proxy)]
+	public static string[] ReadAllLines(string path) => System.IO.File.ReadAllLines(path);
+
+#if NETSTANDARD2_1_OR_GREATER
+	[MadnessType(EMadnessType.Proxy)]
+	public static Task<string[]> ReadAllLinesAsync(string path) => System.IO.File.ReadAllLinesAsync(path);
+#else
+	[MadnessType(EMadnessType.Implementation)]
+	public static Task<string[]> ReadAllLinesAsync(string path) => Task.FromResult(ReadAllLines(path));
+#endif
+
+	[MadnessType(EMadnessType.Proxy)]
 	public static string ReadAllText(string path) => System.IO.File.ReadAllText(path);
 
 #if NETSTANDARD2_1_OR_GREATER
