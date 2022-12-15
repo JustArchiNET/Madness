@@ -1,6 +1,6 @@
 # ☠️ Madness
 
-[![Build status (GitHub)](https://img.shields.io/github/workflow/status/JustArchiNET/Madness/Madness-ci/main?label=GitHub&logo=github&cacheSeconds=600)](https://github.com/JustArchiNET/Madness/actions?query=workflow%3AMadness-ci+branch%3Amain)
+[![Build status (GitHub)](https://img.shields.io/github/actions/workflow/status/JustArchiNET/Madness/ci.yml?branch=main&label=GitHub&logo=github&cacheSeconds=600)](https://github.com/JustArchiNET/Madness/actions?query=workflow%3AMadness-ci+branch%3Amain)
 [![Github last commit date](https://img.shields.io/github/last-commit/JustArchiNET/Madness.svg?label=Updated&logo=github&cacheSeconds=600)](https://github.com/JustArchiNET/Madness/commits)
 [![NuGet Total downloads](https://img.shields.io/nuget/dt/JustArchiNET.Madness.svg?label=Downloads&logo=nuget&cacheSeconds=600)](https://www.nuget.org/packages/JustArchiNET.Madness)
 [![License](https://img.shields.io/github/license/JustArchiNET/Madness.svg?label=License&logo=apache&cacheSeconds=2592000)](https://github.com/JustArchiNET/Madness/blob/main/LICENSE.txt)
