@@ -29,12 +29,19 @@ using System.Threading.Tasks;
 using JetBrains.Annotations;
 using JustArchiNET.Madness.Helpers;
 using JustArchiNET.Madness.Internal;
+using Newtonsoft.Json;
 
 namespace JustArchiNET.Madness;
 
 [MadnessType(EMadnessType.Extension)]
 [PublicAPI]
 public static class StaticExtensions20 {
+	[MadnessType(EMadnessType.Implementation)]
+	public static IAsyncDisposable ConfigureAwait(this JsonReader source, bool continueOnCapturedContext) => ConfigureAwait<JsonReader>(source, continueOnCapturedContext);
+
+	[MadnessType(EMadnessType.Implementation)]
+	public static IAsyncDisposable ConfigureAwait(this JsonWriter source, bool continueOnCapturedContext) => ConfigureAwait<JsonWriter>(source, continueOnCapturedContext);
+
 	[MadnessType(EMadnessType.Implementation)]
 	public static IAsyncDisposable ConfigureAwait(this Stream source, bool continueOnCapturedContext) => ConfigureAwait<Stream>(source, continueOnCapturedContext);
 
