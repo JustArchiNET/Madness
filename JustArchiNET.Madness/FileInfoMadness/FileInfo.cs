@@ -36,7 +36,7 @@ public sealed class FileInfo {
 
 	[MadnessType(EMadnessType.Implementation)]
 	public UnixFileMode UnixFileMode {
-		get => UnixFileMode.None;
+		get => UnixFileMode.None; // TODO
 		set => NativeMethods.Chmod(UnderlyingFileInfo.FullName, value);
 	}
 
