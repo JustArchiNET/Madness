@@ -38,10 +38,10 @@ We support `netstandard2.0`, so .NET Framework 4.6.1 and newer. There is also a 
 dotnet add package JustArchiNET.Madness
 ```
 
-If you're targetting multiple frameworks out of which only one is .NET Framework (e.g. `net5.0` and `net48`), it's *usually* a good idea to not pull it for the others.
+If you're targetting multiple frameworks out of which only one is .NET Framework (e.g. `net7.0` and `net481`), it's *usually* a good idea to not pull it for the others.
 
 ```csproj
-<ItemGroup Condition="'$(TargetFramework)' == 'net48'">
+<ItemGroup Condition="'$(TargetFramework)' == 'net481'">
 	<PackageReference Include="JustArchiNET.Madness" />
 </ItemGroup>
 ```
@@ -57,19 +57,25 @@ Instead of adding `using` clause to each file, you can instead decide to do it o
 Example:
 
 ```csproj
-<ItemGroup Condition="'$(TargetFramework)' == 'net48'">
+<ItemGroup Condition="'$(TargetFramework)' == 'net481'">
 	<PackageReference Include="JustArchiNET.Madness" />
 
 	<Using Include="JustArchiNET.Madness" />
 	<Using Include="JustArchiNET.Madness.ArgumentNullExceptionMadness.ArgumentNullException" Alias="ArgumentNullException" />
 	<Using Include="JustArchiNET.Madness.ArrayMadness.Array" Alias="Array" />
 	<Using Include="JustArchiNET.Madness.ConvertMadness.Convert" Alias="Convert" />
+	<Using Include="JustArchiNET.Madness.DirectoryInfoMadness.DirectoryInfo" Alias="DirectoryInfo" />
+	<Using Include="JustArchiNET.Madness.DirectoryMadness.Directory" Alias="Directory" />
 	<Using Include="JustArchiNET.Madness.EnumMadness.Enum" Alias="Enum" />
 	<Using Include="JustArchiNET.Madness.EnvironmentMadness.Environment" Alias="Environment" />
+	<Using Include="JustArchiNET.Madness.FileInfoMadness.FileInfo" Alias="FileInfo" />
 	<Using Include="JustArchiNET.Madness.FileMadness.File" Alias="File" />
+	<Using Include="JustArchiNET.Madness.FileMadness.UnixFileMode" Alias="UnixFileMode" />
 	<Using Include="JustArchiNET.Madness.HashCodeMadness.HashCode" Alias="HashCode" />
 	<Using Include="JustArchiNET.Madness.HMACSHA1Madness.HMACSHA1" Alias="HMACSHA1" />
 	<Using Include="JustArchiNET.Madness.HttpRequestExceptionMadness.HttpRequestException" Alias="HttpRequestException" />
+	<Using Include="JustArchiNET.Madness.NewtonsoftJsonMadness.JsonTextReader" Alias="JsonTextReader" />
+	<Using Include="JustArchiNET.Madness.NewtonsoftJsonMadness.JsonTextWriter" Alias="JsonTextWriter" />
 	<Using Include="JustArchiNET.Madness.OperatingSystemMadness.OperatingSystem" Alias="OperatingSystem" />
 	<Using Include="JustArchiNET.Madness.PathMadness.Path" Alias="Path" />
 	<Using Include="JustArchiNET.Madness.QuicExceptionMadness.QuicException" Alias="QuicException" />
@@ -82,7 +88,7 @@ Example:
 
 We recommend to add `<Using>` clauses only for parts that you actually require/want to use from Madness.
 
-Because of the `File` using declared above, you're now able to write this very nice ifdef-free code for both `net48` and newer platform target:
+Because of the `File` using declared above, you're now able to write this very nice ifdef-free code for both `net481` and newer platform target:
 
 ```csharp
 using System.IO;
@@ -260,7 +266,7 @@ namespace ThisIsMadness {
 
 If you're building only for .NET Framework exclusively, no, it's not required and actually quite useless code verbosity for you.
 
-However, if you're targetting multiple frameworks out of which only one is .NET Framework (e.g. `net5.0` and `net48`), then `#if` clause guarantees that madness won't embrace your other targets.
+However, if you're targetting multiple frameworks out of which only one is .NET Framework (e.g. `net7.0` and `net481`), then `#if` clause guarantees that madness won't embrace your other targets.
 
 You don't want madness to embrace your other targets, do you?
 

@@ -12,12 +12,13 @@
 		<PackageReference Include="JetBrains.Annotations" PrivateAssets="all" />
 		<PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" />
 		<PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="all" />
+		<PackageReference Include="Newtonsoft.Json" />
+		<PackageReference Include="System.IO.FileSystem.AccessControl" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
 		<PackageReference Include="IndexRange" />
 		<PackageReference Include="Microsoft.Bcl.AsyncInterfaces" />
-		<PackageReference Include="Newtonsoft.Json" />
 		<PackageReference Include="System.Memory" />
 	</ItemGroup>
 
