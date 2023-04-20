@@ -4,7 +4,7 @@
 // \__ \\__ \|  __/| | | || (_| || (_| || |  | |
 // |___/|___/ \___||_| |_| \__,_| \__,_||_|  |_|
 // |
-// Copyright 2021-2022 Łukasz "JustArchi" Domeradzki
+// Copyright 2021-2023 Łukasz "JustArchi" Domeradzki
 // Contact: JustArchi@JustArchi.net
 // |
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -167,4 +167,8 @@ public static class Path {
 
 	[MadnessType(EMadnessType.Proxy)]
 	public static string GetTempPath() => System.IO.Path.GetTempPath();
+
+	[MadnessType(EMadnessType.Proxy)]
+	[Pure]
+	public static bool IsPathRooted(string? path) => System.IO.Path.IsPathRooted(path);
 }
