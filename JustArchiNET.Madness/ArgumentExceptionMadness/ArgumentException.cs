@@ -52,9 +52,7 @@ public class ArgumentException : System.ArgumentException {
 		[System.Diagnostics.CodeAnalysis.NotNull]
 #endif
 
-		string? argument, 
-		[CallerArgumentExpression("argument")]
-		string? paramName = null
+		string? argument, string? paramName = null
 	) {
 		if (string.IsNullOrEmpty(argument)) {
 			ArgumentNullException.ThrowIfNull(argument, paramName);
@@ -62,4 +60,3 @@ public class ArgumentException : System.ArgumentException {
 		}
 	}
 }
-
