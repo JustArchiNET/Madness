@@ -55,7 +55,7 @@ public class ArgumentException : System.ArgumentException {
 		string? argument, string? paramName = null
 	) {
 		if (string.IsNullOrEmpty(argument)) {
-			ArgumentNullException.ThrowIfNull(argument, paramName);
+			JustArchiNET.Madness.ArgumentNullExceptionMadness.ArgumentNullException.ThrowIfNull(argument, paramName);
 			throw new ArgumentException(string.Empty, paramName);
 		}
 	}
