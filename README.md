@@ -75,6 +75,7 @@ Example:
 	<Using Include="JustArchiNET.Madness.HashCodeMadness.HashCode" Alias="HashCode" />
 	<Using Include="JustArchiNET.Madness.HMACSHA1Madness.HMACSHA1" Alias="HMACSHA1" />
 	<Using Include="JustArchiNET.Madness.HttpRequestExceptionMadness.HttpRequestException" Alias="HttpRequestException" />
+	<Using Include="JustArchiNET.Madness.MemberNotNullWhenAttributeMadness.MemberNotNullWhenAttribute" Alias="MemberNotNullWhenAttribute" />
 	<Using Include="JustArchiNET.Madness.NewtonsoftJsonMadness.JsonTextReader" Alias="JsonTextReader" />
 	<Using Include="JustArchiNET.Madness.NewtonsoftJsonMadness.JsonTextWriter" Alias="JsonTextWriter" />
 	<Using Include="JustArchiNET.Madness.OperatingSystemMadness.OperatingSystem" Alias="OperatingSystem" />
