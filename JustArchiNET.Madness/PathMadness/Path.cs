@@ -168,6 +168,10 @@ public static class Path {
 	[MadnessType(EMadnessType.Proxy)]
 	public static string GetTempPath() => System.IO.Path.GetTempPath();
 
+#if NETSTANDARD2_1_OR_GREATER
+	[MadnessType(EMadnessType.Proxy)]
+	public static string ChangeExtension(string? path, string? extension) => System.IO.Path.ChangeExtension(path, extension);
+#else
 	[MadnessType(EMadnessType.Implementation)]
 	[Pure]
 	public static string? ChangeExtension(string? path, string? extension)
@@ -203,6 +207,7 @@ public static class Path {
 			string.Concat(subpath, extension) :
 			string.Concat(subpath, ".", extension);
 	}
+#endif
 
 	[MadnessType(EMadnessType.Proxy)]
 	[Pure]
