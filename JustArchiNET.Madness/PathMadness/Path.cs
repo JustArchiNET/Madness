@@ -168,6 +168,47 @@ public static class Path {
 	[MadnessType(EMadnessType.Proxy)]
 	public static string GetTempPath() => System.IO.Path.GetTempPath();
 
+#if NETSTANDARD2_1_OR_GREATER
+	[MadnessType(EMadnessType.Proxy)]
+	public static string ChangeExtension(string? path, string? extension) => System.IO.Path.ChangeExtension(path, extension);
+#else
+	[MadnessType(EMadnessType.Implementation)]
+	[Pure]
+	public static string? ChangeExtension(string? path, string? extension)
+	{
+		if (path == null) {
+			return null;
+		}
+
+		int subLength = path.Length;
+		if (subLength == 0) {
+			return string.Empty;
+		}
+
+		for (int i = path.Length - 1; i >= 0; i--) {
+			char ch = path[i];
+
+			if (ch == '.') {
+				subLength = i;
+				break;
+			}
+
+			if (PathInternalNetCore.IsDirectorySeparator(ch)) {
+				break;
+			}
+		}
+
+		if (extension == null) {
+			return path.Substring(0, subLength);
+		}
+
+		string subpath = path.Substring(0, subLength);
+		return extension.StartsWith(".") ?
+			string.Concat(subpath, extension) :
+			string.Concat(subpath, ".", extension);
+	}
+#endif
+
 	[MadnessType(EMadnessType.Proxy)]
 	[Pure]
 	public static bool IsPathRooted(string? path) => System.IO.Path.IsPathRooted(path);
