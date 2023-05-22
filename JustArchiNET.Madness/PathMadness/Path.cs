@@ -203,7 +203,7 @@ public static class Path {
 		}
 
 		ReadOnlySpan<char> subpath = path.AsSpan(0, subLength);
-		return extension.StartsWith('.') ?
+		return extension.StartsWith(".") ?
 			string.Concat(subpath, extension) :
 			string.Concat(subpath, ".", extension);
 	}
