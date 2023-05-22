@@ -152,55 +152,13 @@ jobs:
         path: out/SHA512SUMS.sign
 
     - name: Create Madness GitHub release
-      id: github_release
-      uses: actions/create-release@v1.1.4
-      env:
-        GITHUB_TOKEN: ${{ secrets.ARCHIBOT_GITHUB_TOKEN }}
+      uses: ncipollo/release-action@v1.12.0
       with:
-        tag_name: ${{ github.ref }}
-        release_name: Madness V${{ github.ref }}
-        body_path: .github/RELEASE_TEMPLATE.md
-        prerelease: ${{ contains(github.ref, '-') }}
-
-    - name: Upload Madness.nupkg to GitHub release
-      uses: actions/upload-release-asset@v1.0.2
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.github_release.outputs.upload_url }}
-        asset_path: out/JustArchiNET.Madness.nupkg
-        asset_name: JustArchiNET.Madness.nupkg
-        asset_content_type: application/zip
-
-    - name: Upload Madness.snupkg to GitHub release
-      uses: actions/upload-release-asset@v1.0.2
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.github_release.outputs.upload_url }}
-        asset_path: out/JustArchiNET.Madness.snupkg
-        asset_name: JustArchiNET.Madness.snupkg
-        asset_content_type: application/zip
-
-    - name: Upload SHA512SUMS to GitHub release
-      uses: actions/upload-release-asset@v1.0.2
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.github_release.outputs.upload_url }}
-        asset_path: out/SHA512SUMS
-        asset_name: SHA512SUMS
-        asset_content_type: text/plain
-
-    - name: Upload SHA512SUMS.sign to GitHub release
-      uses: actions/upload-release-asset@v1.0.2
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.github_release.outputs.upload_url }}
-        asset_path: out/SHA512SUMS.sign
-        asset_name: SHA512SUMS.sign
-        asset_content_type: text/plain
+        artifacts: "out/*"
+        bodyFile: .github/RELEASE_TEMPLATE.md
+        makeLatest: true
+        name: Madness V${{ github.ref_name }}
+        token: ${{ secrets.ARCHIBOT_GITHUB_TOKEN }}
 
     - name: Create Madness NuGet release
       run: dotnet nuget push "out/JustArchiNET.Madness.nupkg" -k "${{ secrets.MADNESS_NUGET_API_KEY }}" -s "https://api.nuget.org/v3/index.json"
