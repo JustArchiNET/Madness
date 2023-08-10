@@ -174,13 +174,13 @@ public static class Path {
 #else
 	[MadnessType(EMadnessType.Implementation)]
 	[Pure]
-	public static string? ChangeExtension(string? path, string? extension)
-	{
+	public static string? ChangeExtension(string? path, string? extension) {
 		if (path == null) {
 			return null;
 		}
 
 		int subLength = path.Length;
+
 		if (subLength == 0) {
 			return string.Empty;
 		}
@@ -190,6 +190,7 @@ public static class Path {
 
 			if (ch == '.') {
 				subLength = i;
+
 				break;
 			}
 
@@ -199,13 +200,12 @@ public static class Path {
 		}
 
 		if (extension == null) {
-			return path.Substring(0, subLength);
+			return path[..subLength];
 		}
 
-		string subpath = path.Substring(0, subLength);
-		return extension.StartsWith(".") ?
-			string.Concat(subpath, extension) :
-			string.Concat(subpath, ".", extension);
+		string subpath = path[..subLength];
+
+		return extension.StartsWith(".", StringComparison.Ordinal) ? string.Concat(subpath, extension) : string.Concat(subpath, ".", extension);
 	}
 #endif
 

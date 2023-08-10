@@ -37,6 +37,7 @@ public sealed class MemberNotNullWhenAttribute : Attribute {
 	[MadnessType(EMadnessType.Implementation)]
 	public string[] Members { get; }
 
+	/// <inheritdoc />
 	/// <summary>Initializes the attribute with the specified return value condition and a field or property member.</summary>
 	/// <param name="returnValue">
 	/// The return value condition. If the method returns this value, the associated parameter will not be null.
@@ -45,12 +46,12 @@ public sealed class MemberNotNullWhenAttribute : Attribute {
 	/// The field or property member that is promised to be not-null.
 	/// </param>
 	[MadnessType(EMadnessType.Implementation)]
-	public MemberNotNullWhenAttribute(bool returnValue, string member)
-	{
+	public MemberNotNullWhenAttribute(bool returnValue, string member) {
 		ReturnValue = returnValue;
 		Members = new[] { member };
 	}
 
+	/// <inheritdoc />
 	/// <summary>Initializes the attribute with the specified return value condition and list of field and property members.</summary>
 	/// <param name="returnValue">
 	/// The return value condition. If the method returns this value, the associated parameter will not be null.
@@ -59,8 +60,7 @@ public sealed class MemberNotNullWhenAttribute : Attribute {
 	/// The list of field and property members that are promised to be not-null.
 	/// </param>
 	[MadnessType(EMadnessType.Implementation)]
-	public MemberNotNullWhenAttribute(bool returnValue, params string[] members)
-	{
+	public MemberNotNullWhenAttribute(bool returnValue, params string[] members) {
 		ReturnValue = returnValue;
 		Members = members;
 	}
