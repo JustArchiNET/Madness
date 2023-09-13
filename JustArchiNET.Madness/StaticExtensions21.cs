@@ -4,7 +4,7 @@
 // \__ \\__ \|  __/| | | || (_| || (_| || |  | |
 // |___/|___/ \___||_| |_| \__,_| \__,_||_|  |_|
 // |
-// Copyright 2021-2022 Łukasz "JustArchi" Domeradzki
+// Copyright 2021-2023 Łukasz "JustArchi" Domeradzki
 // Contact: JustArchi@JustArchi.net
 // |
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -66,6 +66,13 @@ public static class StaticExtensions21 {
 		configure(builder);
 
 		return builder;
+	}
+
+	[MadnessType(EMadnessType.Implementation)]
+	public static void Deconstruct(this DateTime dateTime, out int year, out int month, out int day) {
+		year = dateTime.Year;
+		month = dateTime.Month;
+		day = dateTime.Day;
 	}
 
 	[MadnessType(EMadnessType.Implementation)]
