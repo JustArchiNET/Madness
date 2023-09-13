@@ -30,10 +30,10 @@ namespace JustArchiNET.Madness.ArgumentExceptionMadness;
 [PublicAPI]
 public class ArgumentException : System.ArgumentException {
 	[MadnessType(EMadnessType.Proxy)]
-	public ArgumentException(string message, string paramName) : base(message, paramName) { }
+	public ArgumentException(string message, [InvokerParameterName] string paramName) : base(message, paramName) { }
 
 	[MadnessType(EMadnessType.Proxy)]
-	public ArgumentException(string message, string paramName, Exception innerException) : base(message, paramName, innerException) { }
+	public ArgumentException(string message, [InvokerParameterName] string paramName, Exception innerException) : base(message, paramName, innerException) { }
 
 	[MadnessType(EMadnessType.Proxy)]
 	public ArgumentException(string message, Exception innerException) : base(message, innerException) { }
@@ -52,7 +52,7 @@ public class ArgumentException : System.ArgumentException {
 		[System.Diagnostics.CodeAnalysis.NotNull]
 #endif
 
-		string? argument, string? paramName = null
+		string? argument, [InvokerParameterName] string? paramName = null
 	) {
 		if (string.IsNullOrEmpty(argument)) {
 			ArgumentNullExceptionMadness.ArgumentNullException.ThrowIfNull(argument, paramName);

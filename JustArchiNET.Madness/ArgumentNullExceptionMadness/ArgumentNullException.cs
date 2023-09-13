@@ -46,7 +46,7 @@ public class ArgumentNullException : System.ArgumentNullException {
 		[System.Diagnostics.CodeAnalysis.NotNull]
 #endif
 
-		T? argument, string? paramName = null
+		T? argument, [InvokerParameterName] string? paramName = null
 	) {
 		if (argument is null) {
 			throw new ArgumentNullException(paramName ?? typeof(T).ToString());
@@ -61,7 +61,7 @@ public class ArgumentNullException : System.ArgumentNullException {
 		[System.Diagnostics.CodeAnalysis.NotNull]
 #endif
 
-		object? argument, string? paramName = null
+		object? argument, [InvokerParameterName] string? paramName = null
 	) {
 		if (argument is not null) {
 			return;
