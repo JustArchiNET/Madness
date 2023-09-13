@@ -65,6 +65,7 @@ Example:
 	<Using Include="JustArchiNET.Madness.ArgumentNullExceptionMadness.ArgumentNullException" Alias="ArgumentNullException" />
 	<Using Include="JustArchiNET.Madness.ArgumentOutOfRangeExceptionMadness.ArgumentOutOfRangeException" Alias="ArgumentOutOfRangeException" />
 	<Using Include="JustArchiNET.Madness.ArrayMadness.Array" Alias="Array" />
+	<Using Include="JustArchiNET.Madness.CancellationTokenSourceMadness.CancellationTokenSource" Alias="CancellationTokenSource" />
 	<Using Include="JustArchiNET.Madness.ConvertMadness.Convert" Alias="Convert" />
 	<Using Include="JustArchiNET.Madness.DirectoryInfoMadness.DirectoryInfo" Alias="DirectoryInfo" />
 	<Using Include="JustArchiNET.Madness.DirectoryMadness.Directory" Alias="Directory" />
