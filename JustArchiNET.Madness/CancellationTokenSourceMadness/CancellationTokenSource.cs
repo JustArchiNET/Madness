@@ -27,7 +27,7 @@ namespace JustArchiNET.Madness.CancellationTokenSourceMadness;
 
 [MadnessType(EMadnessType.Replacement)]
 [PublicAPI]
-public sealed class CancellationTokenSource : System.Threading.CancellationTokenSource {
+public class CancellationTokenSource : System.Threading.CancellationTokenSource {
 	[MadnessType(EMadnessType.Implementation)]
 	public Task CancelAsync() {
 		Cancel();
