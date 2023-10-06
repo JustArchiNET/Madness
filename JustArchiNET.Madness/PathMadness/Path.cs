@@ -65,6 +65,10 @@ public static class Path {
 	[Pure]
 	public static string GetFullPath(string path) => System.IO.Path.GetFullPath(path);
 
+	[ContractAnnotation("=>notnull")]
+	[MadnessType(EMadnessType.Proxy)]
+	public static string GetRandomFileName() => System.IO.Path.GetRandomFileName();
+
 #if NETSTANDARD2_1_OR_GREATER
 	[MadnessType(EMadnessType.Proxy)]
 	public static string GetRelativePath(string relativeTo, string path) => System.IO.Path.GetRelativePath(relativeTo, path);
