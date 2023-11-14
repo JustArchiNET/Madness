@@ -38,7 +38,7 @@ We support `netstandard2.0`, so .NET Framework 4.6.1 and newer. There is also a 
 dotnet add package JustArchiNET.Madness
 ```
 
-If you're targetting multiple frameworks out of which only one is .NET Framework (e.g. `net7.0` and `net481`), it's *usually* a good idea to not pull it for the others.
+If you're targetting multiple frameworks out of which only one is .NET Framework (e.g. `net8.0` and `net481`), it's *usually* a good idea to not pull it for the others.
 
 ```csproj
 <ItemGroup Condition="'$(TargetFramework)' == 'net481'">
@@ -270,7 +270,7 @@ namespace ThisIsMadness {
 
 If you're building only for .NET Framework exclusively, no, it's not required and actually quite useless code verbosity for you.
 
-However, if you're targetting multiple frameworks out of which only one is .NET Framework (e.g. `net7.0` and `net481`), then `#if` clause guarantees that madness won't embrace your other targets.
+However, if you're targetting multiple frameworks out of which only one is .NET Framework (e.g. `net8.0` and `net481`), then `#if` clause guarantees that madness won't embrace your other targets.
 
 You don't want madness to embrace your other targets, do you?
 
