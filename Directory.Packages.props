@@ -3,7 +3,7 @@
 		<PackageVersion Include="ConfigureAwaitChecker.Analyzer" Version="5.0.0.1" />
 		<PackageVersion Include="JetBrains.Annotations" Version="2023.3.0" />
 		<PackageVersion Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="2.2.0" />
-		<PackageVersion Include="Microsoft.SourceLink.GitHub" Version="1.1.1" />
+		<PackageVersion Include="Microsoft.SourceLink.GitHub" Version="8.0.0" />
 		<PackageVersion Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageVersion Include="System.IO.FileSystem.AccessControl" Version="5.0.0" />
 	</ItemGroup>
