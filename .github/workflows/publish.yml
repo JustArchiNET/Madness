@@ -86,13 +86,13 @@ jobs:
         Move-Item -Path out\JustArchiNET.Madness.*.snupkg "out\JustArchiNET.Madness.snupkg"
 
     - name: Upload Madness.nupkg
-      uses: actions/upload-artifact@v3.1.3
+      uses: actions/upload-artifact@v4.0.0
       with:
         name: ${{ matrix.os }}_Madness.nupkg
         path: out/JustArchiNET.Madness.nupkg
 
     - name: Upload Madness.snupkg
-      uses: actions/upload-artifact@v3.1.3
+      uses: actions/upload-artifact@v4.0.0
       with:
         name: ${{ matrix.os }}_Madness.snupkg
         path: out/JustArchiNET.Madness.snupkg
@@ -149,13 +149,13 @@ jobs:
         )
 
     - name: Upload SHA512SUMS
-      uses: actions/upload-artifact@v3.1.3
+      uses: actions/upload-artifact@v4.0.0
       with:
         name: SHA512SUMS
         path: out/SHA512SUMS
 
     - name: Upload SHA512SUMS.sign
-      uses: actions/upload-artifact@v3.1.3
+      uses: actions/upload-artifact@v4.0.0
       with:
         name: SHA512SUMS.sign
         path: out/SHA512SUMS.sign
