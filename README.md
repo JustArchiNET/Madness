@@ -26,6 +26,12 @@
 
 ---
 
+## Deprecation notice
+
+Due to the fact that we've dropped support for .NET Framework in our other projects, we don't intend to develop Madness further. You're free to fork or re-use Madness components if you find them useful!
+
+---
+
 ## Description
 
 Madness embraces your project by including compatibility layer for selected APIs normally not available on .NET Framework (and alike) platforms.
